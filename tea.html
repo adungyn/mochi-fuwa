@@ -4,7 +4,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Mochi Fuwa | Our Menu</title>
-   <link rel="stylesheet" href="style.css?v=37">
+   <link rel="stylesheet" href="style.css?v=38">
    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
    <style>
        /* === SINGLE MENU PAGE === */
@@ -20,14 +20,15 @@
        }
 
        .menu-full {
-           max-width: 1100px;
-           margin: 0 auto;
-           padding: 60px 20px 80px;
+           padding: 60px 0 80px;
        }
 
        /* Accordion Section */
        .menu-accordion {
            border-top: 1px dotted #9F0031;
+           max-width: 1100px;
+           margin: 0 auto;
+           padding: 0 20px;
        }
        .menu-accordion:last-child {
            border-bottom: 1px dotted #9F0031;
@@ -43,7 +44,7 @@
        }
        .accordion-header h2 {
            font-family: 'Cormorant Garamond', serif;
-           font-size: 2.4rem;
+           font-size: 2.8rem;
            font-weight: 400;
            color: #9F0031;
            letter-spacing: 2px;
@@ -51,20 +52,18 @@
        }
        .accordion-toggle {
            font-family: 'Cormorant Garamond', serif;
-           font-size: 2.2rem;
+           font-size: 2.6rem;
            color: #9F0031;
            background: none;
            border: none;
            cursor: pointer;
-           width: 40px;
-           height: 40px;
+           width: 44px;
+           height: 44px;
            display: flex;
            align-items: center;
            justify-content: center;
            transition: transform 0.3s ease;
-       }
-       .accordion-toggle.open {
-           transform: rotate(45deg);
+           line-height: 1;
        }
 
        .accordion-content {
@@ -74,81 +73,110 @@
        }
        .accordion-content.open {
            max-height: 4000px;
+           overflow: visible;
        }
 
-       /* Product Grid */
-       .product-grid {
-           display: grid;
-           grid-template-columns: repeat(3, 1fr);
-           gap: 24px;
-           padding-bottom: 40px;
+       /* Horizontal Scroll Row */
+       .product-row {
+           display: flex;
+           gap: 20px;
+           overflow-x: auto;
+           overflow-y: hidden;
+           padding: 10px 0 40px;
+           scroll-snap-type: x mandatory;
+           -webkit-overflow-scrolling: touch;
+           cursor: grab;
+           margin: 0 -20px;
+           padding-left: 20px;
+           padding-right: 20px;
+       }
+       .product-row:active {
+           cursor: grabbing;
+       }
+       /* Hide scrollbar */
+       .product-row::-webkit-scrollbar {
+           display: none;
+       }
+       .product-row {
+           -ms-overflow-style: none;
+           scrollbar-width: none;
        }
 
        .product-card {
-           border: 1px solid rgba(159, 0, 49, 0.35);
+           flex: 0 0 280px;
+           border: 0.5px solid rgba(159, 0, 49, 0.7);
            border-radius: 1.25rem;
            overflow: hidden;
            background: #fff;
-           transition: transform 0.3s ease, box-shadow 0.3s ease;
+           scroll-snap-align: start;
+           transition: transform 0.3s ease;
        }
        .product-card:hover {
            transform: translateY(-4px);
-           box-shadow: 0 8px 24px rgba(159, 0, 49, 0.1);
        }
 
        .product-card-img {
            width: 100%;
-           aspect-ratio: 1 / 1;
            overflow: hidden;
        }
        .product-card-img img {
            width: 100%;
-           height: 100%;
+           height: 320px;
            object-fit: cover;
            display: block;
+           border-radius: 1.25rem 1.25rem 0 0;
        }
 
        .product-card-info {
-           padding: 16px 18px 20px;
+           padding: 20px 16px 24px;
            text-align: center;
        }
        .product-card-info h3 {
            font-family: 'Cormorant Garamond', serif;
-           font-size: 1.25rem;
-           font-weight: 500;
+           font-size: 1.5rem;
+           font-weight: 400;
            color: #9F0031;
-           margin: 0 0 6px;
+           margin: 0 0 8px;
+       }
+       .product-card-info .product-dash {
+           display: block;
+           width: 20px;
+           height: 1px;
+           background: #9F0031;
+           margin: 0 auto 8px;
        }
        .product-card-info .product-price {
            font-family: 'Quicksand', sans-serif;
-           font-size: 0.9rem;
-           color: #666;
+           font-size: 0.95rem;
+           color: #9F0031;
            font-weight: 500;
+           margin: 0;
        }
 
        /* Responsive */
        @media (max-width: 768px) {
-           .product-grid {
-               grid-template-columns: repeat(2, 1fr);
-               gap: 16px;
-           }
            .accordion-header h2 {
-               font-size: 1.8rem;
+               font-size: 2rem;
+           }
+           .product-card {
+               flex: 0 0 240px;
+           }
+           .product-card-img img {
+               height: 260px;
            }
        }
        @media (max-width: 480px) {
-           .product-grid {
-               grid-template-columns: repeat(2, 1fr);
-               gap: 12px;
+           .accordion-header h2 {
+               font-size: 1.6rem;
            }
-           .product-card-info {
-               padding: 12px 12px 16px;
+           .product-card {
+               flex: 0 0 200px;
+           }
+           .product-card-img img {
+               height: 220px;
            }
            .product-card-info h3 {
-               font-size: 1.05rem;
-           }
-           .accordion-header h2 {
-               font-size: 1.5rem;
+               font-size: 1.2rem;
            }
        }
    </style>
@@ -196,13 +224,14 @@
                <button class="accordion-toggle" aria-label="Toggle">+</button>
            </div>
            <div class="accordion-content open">
-               <div class="product-grid">
+               <div class="product-row">
                    <div class="product-card">
                        <div class="product-card-img">
                            <img src="Image 1.jpeg" alt="Hồng Sắc">
                        </div>
                        <div class="product-card-info">
                            <h3>Hồng Sắc</h3>
+                           <span class="product-dash"></span>
                            <p class="product-price">45.000 VND</p>
                        </div>
                    </div>
@@ -212,6 +241,7 @@
                        </div>
                        <div class="product-card-info">
                            <h3>Xích Sắc</h3>
+                           <span class="product-dash"></span>
                            <p class="product-price">38.000 VND</p>
                        </div>
                    </div>
@@ -221,6 +251,7 @@
                        </div>
                        <div class="product-card-info">
                            <h3>Ngọc Sắc</h3>
+                           <span class="product-dash"></span>
                            <p class="product-price">48.000 VND</p>
                        </div>
                    </div>
@@ -230,6 +261,7 @@
                        </div>
                        <div class="product-card-info">
                            <h3>Tử Sắc</h3>
+                           <span class="product-dash"></span>
                            <p class="product-price">46.000 VND</p>
                        </div>
                    </div>
@@ -244,13 +276,14 @@
                <button class="accordion-toggle" aria-label="Toggle">+</button>
            </div>
            <div class="accordion-content open">
-               <div class="product-grid">
+               <div class="product-row">
                    <div class="product-card">
                        <div class="product-card-img">
                            <img src="Image 2.jpeg" alt="Lục Nguyệt">
                        </div>
                        <div class="product-card-info">
                            <h3>Lục Nguyệt</h3>
+                           <span class="product-dash"></span>
                            <p class="product-price">42.000 VND</p>
                        </div>
                    </div>
@@ -260,6 +293,7 @@
                        </div>
                        <div class="product-card-info">
                            <h3>Hắc Nguyệt</h3>
+                           <span class="product-dash"></span>
                            <p class="product-price">35.000 VND</p>
                        </div>
                    </div>
@@ -269,6 +303,7 @@
                        </div>
                        <div class="product-card-info">
                            <h3>Nồng Nguyệt</h3>
+                           <span class="product-dash"></span>
                            <p class="product-price">45.000 VND</p>
                        </div>
                    </div>
@@ -278,6 +313,7 @@
                        </div>
                        <div class="product-card-info">
                            <h3>Ngọc Nguyệt</h3>
+                           <span class="product-dash"></span>
                            <p class="product-price">38.000 VND</p>
                        </div>
                    </div>
@@ -292,13 +328,14 @@
                <button class="accordion-toggle" aria-label="Toggle">+</button>
            </div>
            <div class="accordion-content open">
-               <div class="product-grid">
+               <div class="product-row">
                    <div class="product-card">
                        <div class="product-card-img">
                            <img src="Image 9.jpeg" alt="Lục Duyên">
                        </div>
                        <div class="product-card-info">
                            <h3>Lục Duyên</h3>
+                           <span class="product-dash"></span>
                            <p class="product-price">55.000 VND</p>
                        </div>
                    </div>
@@ -308,6 +345,7 @@
                        </div>
                        <div class="product-card-info">
                            <h3>Tử Duyên</h3>
+                           <span class="product-dash"></span>
                            <p class="product-price">50.000 VND</p>
                        </div>
                    </div>
@@ -317,6 +355,7 @@
                        </div>
                        <div class="product-card-info">
                            <h3>Trầm Duyên</h3>
+                           <span class="product-dash"></span>
                            <p class="product-price">55.000 VND</p>
                        </div>
                    </div>
@@ -326,6 +365,7 @@
                        </div>
                        <div class="product-card-info">
                            <h3>Ngọc Duyên</h3>
+                           <span class="product-dash"></span>
                            <p class="product-price">52.000 VND</p>
                        </div>
                    </div>
@@ -335,6 +375,7 @@
                        </div>
                        <div class="product-card-info">
                            <h3>Thai Mango Juice</h3>
+                           <span class="product-dash"></span>
                            <p class="product-price">48.000 VND</p>
                        </div>
                    </div>
@@ -344,6 +385,7 @@
                        </div>
                        <div class="product-card-info">
                            <h3>Matcha Frappe</h3>
+                           <span class="product-dash"></span>
                            <p class="product-price">58.000 VND</p>
                        </div>
                    </div>
@@ -353,6 +395,7 @@
                        </div>
                        <div class="product-card-info">
                            <h3>Fresh Orange Americano</h3>
+                           <span class="product-dash"></span>
                            <p class="product-price">55.000 VND</p>
                        </div>
                    </div>
@@ -362,6 +405,7 @@
                        </div>
                        <div class="product-card-info">
                            <h3>Caramel Coffee Frappe</h3>
+                           <span class="product-dash"></span>
                            <p class="product-price">58.000 VND</p>
                        </div>
                    </div>
@@ -421,15 +465,43 @@
        function toggleAccordion(header) {
            const content = header.nextElementSibling;
            const toggle = header.querySelector('.accordion-toggle');
+           const isOpen = content.classList.contains('open');
 
            content.classList.toggle('open');
-           toggle.classList.toggle('open');
+
+           if (isOpen) {
+               toggle.textContent = '+';
+           } else {
+               toggle.textContent = '-';
+           }
        }
 
-       // Set initial state: all sections open with rotated toggle
+       // Set initial state: all sections open
        document.querySelectorAll('.accordion-content.open').forEach(content => {
            const toggle = content.previousElementSibling.querySelector('.accordion-toggle');
-           toggle.classList.add('open');
+           toggle.textContent = '-';
+       });
+
+       // Drag to scroll for product rows
+       document.querySelectorAll('.product-row').forEach(row => {
+           let isDown = false;
+           let startX;
+           let scrollLeft;
+
+           row.addEventListener('mousedown', (e) => {
+               isDown = true;
+               startX = e.pageX - row.offsetLeft;
+               scrollLeft = row.scrollLeft;
+           });
+           row.addEventListener('mouseleave', () => { isDown = false; });
+           row.addEventListener('mouseup', () => { isDown = false; });
+           row.addEventListener('mousemove', (e) => {
+               if (!isDown) return;
+               e.preventDefault();
+               const x = e.pageX - row.offsetLeft;
+               const walk = (x - startX) * 2;
+               row.scrollLeft = scrollLeft - walk;
+           });
        });
    </script>
 </body>
