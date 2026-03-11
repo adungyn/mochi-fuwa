@@ -769,7 +769,7 @@ header.scrolled .logo {
 .mochi-shape-video {
    width: 380px;
    height: 380px;
-   border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+   border-radius: 20px;
    overflow: hidden;
    box-shadow: 0 10px 40px rgba(163, 29, 55, 0.15);
    flex-shrink: 0;
