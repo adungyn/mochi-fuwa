@@ -82,11 +82,11 @@ header.scrolled {
 }
 
 .logo-flower {
-   width: 55px;
-   height: 55px;
+   width: 62px;
+   height: 62px;
    border-radius: 50%;
    object-fit: cover;
-   border: 2.5px solid #f5c518;
+   border: 1.5px solid #f5c518;
    transition: transform 0.4s ease;
 }
 .logo:hover .logo-flower {
@@ -94,11 +94,11 @@ header.scrolled {
 }
 
 .footer-logo-flower {
-   width: 60px;
-   height: 60px;
+   width: 68px;
+   height: 68px;
    border-radius: 50%;
    object-fit: cover;
-   border: 2.5px solid #f5c518;
+   border: 1.5px solid #f5c518;
    display: inline-block;
    vertical-align: middle;
    margin-right: 10px;
