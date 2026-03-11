@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Mochi Fuwa | Giỏ Hàng</title>
+   <link rel="stylesheet" href="style.css?v=44">
+   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+   <style>
+       .order-page {
+           padding-top: 120px;
+           padding-bottom: 80px;
+           min-height: 70vh;
+           max-width: 800px;
+           margin: 0 auto;
+           padding-left: 20px;
+           padding-right: 20px;
+       }
+
+       .order-title {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 2.8rem;
+           font-weight: 400;
+           color: #9F0031;
+           text-align: center;
+           margin-bottom: 40px;
+           letter-spacing: 2px;
+       }
+
+       .cart-empty {
+           text-align: center;
+           padding: 60px 20px;
+       }
+       .cart-empty p {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 1.1rem;
+           color: #666;
+           margin-bottom: 20px;
+       }
+       .cart-empty a {
+           display: inline-block;
+           padding: 12px 30px;
+           background: #9F0031;
+           color: #fff;
+           text-decoration: none;
+           border-radius: 25px;
+           font-family: 'Quicksand', sans-serif;
+           font-weight: 600;
+           transition: background 0.3s;
+       }
+       .cart-empty a:hover {
+           background: #7a0026;
+       }
+
+       .cart-item {
+           display: flex;
+           align-items: center;
+           gap: 20px;
+           padding: 20px 0;
+           border-bottom: 1px solid rgba(159, 0, 49, 0.15);
+       }
+
+       .cart-item-img {
+           width: 80px;
+           height: 80px;
+           border-radius: 12px;
+           object-fit: cover;
+           flex-shrink: 0;
+       }
+
+       .cart-item-details {
+           flex: 1;
+       }
+       .cart-item-details h3 {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 1.3rem;
+           font-weight: 400;
+           color: #9F0031;
+           margin: 0 0 4px;
+       }
+       .cart-item-details .item-price {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.9rem;
+           color: #9F0031;
+           font-weight: 500;
+       }
+
+       .cart-item-qty {
+           display: flex;
+           align-items: center;
+           gap: 10px;
+       }
+       .qty-btn {
+           width: 32px;
+           height: 32px;
+           border-radius: 50%;
+           border: 1px solid #9F0031;
+           background: #fff;
+           color: #9F0031;
+           font-size: 1.1rem;
+           cursor: pointer;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           transition: all 0.2s;
+           font-family: 'Quicksand', sans-serif;
+           font-weight: 700;
+       }
+       .qty-btn:hover {
+           background: #9F0031;
+           color: #fff;
+       }
+       .qty-num {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 1rem;
+           font-weight: 600;
+           color: #333;
+           min-width: 20px;
+           text-align: center;
+       }
+
+       .cart-item-remove {
+           background: none;
+           border: none;
+           color: #999;
+           font-size: 1.4rem;
+           cursor: pointer;
+           padding: 5px;
+           transition: color 0.2s;
+       }
+       .cart-item-remove:hover {
+           color: #9F0031;
+       }
+
+       .cart-summary {
+           margin-top: 30px;
+           padding: 25px;
+           background: #fdf0f2;
+           border-radius: 16px;
+       }
+       .cart-summary-row {
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           margin-bottom: 12px;
+           font-family: 'Quicksand', sans-serif;
+           color: #333;
+       }
+       .cart-summary-row.total {
+           border-top: 1px solid rgba(159, 0, 49, 0.2);
+           padding-top: 12px;
+           margin-bottom: 0;
+           font-weight: 700;
+           font-size: 1.15rem;
+           color: #9F0031;
+       }
+
+       .order-form {
+           margin-top: 40px;
+       }
+       .order-form h2 {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 2rem;
+           font-weight: 400;
+           color: #9F0031;
+           margin-bottom: 24px;
+           letter-spacing: 1px;
+       }
+
+       .form-group {
+           margin-bottom: 18px;
+       }
+       .form-group label {
+           display: block;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.9rem;
+           font-weight: 600;
+           color: #333;
+           margin-bottom: 6px;
+       }
+       .form-group input,
+       .form-group textarea {
+           width: 100%;
+           padding: 12px 16px;
+           border: 1px solid rgba(159, 0, 49, 0.3);
+           border-radius: 10px;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.95rem;
+           outline: none;
+           transition: border-color 0.3s;
+           box-sizing: border-box;
+       }
+       .form-group input:focus,
+       .form-group textarea:focus {
+           border-color: #9F0031;
+       }
+       .form-group textarea {
+           resize: vertical;
+           min-height: 80px;
+       }
+
+       .place-order-btn {
+           display: block;
+           width: 100%;
+           padding: 16px;
+           background: #9F0031;
+           color: #fff;
+           border: none;
+           border-radius: 25px;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 1.05rem;
+           font-weight: 700;
+           cursor: pointer;
+           transition: background 0.3s;
+           margin-top: 10px;
+           letter-spacing: 0.5px;
+       }
+       .place-order-btn:hover {
+           background: #7a0026;
+       }
+
+       .back-to-menu {
+           display: inline-block;
+           margin-bottom: 30px;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.95rem;
+           color: #9F0031;
+           text-decoration: none;
+           font-weight: 500;
+       }
+       .back-to-menu:hover {
+           text-decoration: underline;
+       }
+
+       .order-success {
+           display: none;
+           text-align: center;
+           padding: 60px 20px;
+       }
+       .order-success h2 {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 2.4rem;
+           color: #9F0031;
+           margin-bottom: 16px;
+       }
+       .order-success p {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 1.05rem;
+           color: #555;
+           margin-bottom: 24px;
+       }
+       .order-success a {
+           display: inline-block;
+           padding: 12px 30px;
+           background: #9F0031;
+           color: #fff;
+           text-decoration: none;
+           border-radius: 25px;
+           font-family: 'Quicksand', sans-serif;
+           font-weight: 600;
+       }
+
+       @media (max-width: 480px) {
+           .order-title { font-size: 2rem; }
+           .cart-item { gap: 12px; }
+           .cart-item-img { width: 60px; height: 60px; }
+           .cart-item-details h3 { font-size: 1.1rem; }
+       }
+   </style>
+</head>
+<body>
+
+   <header>
+       <div class="header-content">
+           <a href="idex.html" class="logo">MOCHI FUWA</a>
+           <button class="mochi-menu-btn" id="mochiMenuBtn" aria-label="Menu">
+               <span class="mochi-menu-line"></span>
+               <span class="mochi-menu-line"></span>
+               <span class="mochi-menu-line"></span>
+           </button>
+       </div>
+   </header>
+
+   <div class="menu-overlay" id="menuOverlay">
+       <button class="menu-close-btn" id="menuCloseBtn" aria-label="Close menu">&times;</button>
+       <nav class="menu-overlay-nav">
+           <ul>
+               <li><a href="idex.html" class="menu-link">HOME</a></li>
+               <li><a href="about.html" class="menu-link">ABOUT</a></li>
+               <li><a href="tea.html" class="menu-link">OUR MENU</a></li>
+               <li><a href="contact.html" class="menu-link">CONTACT</a></li>
+           </ul>
+       </nav>
+       <div class="menu-overlay-footer">
+           <p>Mochi Fuwa</p>
+       </div>
+   </div>
+
+   <div class="order-page">
+       <a href="tea.html" class="back-to-menu">&larr; Quay lại thực đơn</a>
+       <h1 class="order-title">Giỏ Hàng</h1>
+
+       <div id="cartItems"></div>
+
+       <div id="cartSummary" style="display:none;">
+           <div class="cart-summary">
+               <div class="cart-summary-row">
+                   <span>Tạm tính</span>
+                   <span id="subtotal">0 VND</span>
+               </div>
+               <div class="cart-summary-row total">
+                   <span>Tổng cộng</span>
+                   <span id="totalPrice">0 VND</span>
+               </div>
+           </div>
+
+           <div class="order-form" id="orderForm">
+               <h2>Thông tin đặt hàng</h2>
+               <div class="form-group">
+                   <label>Họ và tên</label>
+                   <input type="text" id="custName" placeholder="Nguyễn Văn A" required>
+               </div>
+               <div class="form-group">
+                   <label>Số điện thoại</label>
+                   <input type="tel" id="custPhone" placeholder="090 xxx xxxx" required>
+               </div>
+               <div class="form-group">
+                   <label>Địa chỉ giao hàng</label>
+                   <input type="text" id="custAddress" placeholder="Số nhà, đường, quận...">
+               </div>
+               <div class="form-group">
+                   <label>Ghi chú</label>
+                   <textarea id="custNote" placeholder="Ghi chú thêm (tuỳ chọn)"></textarea>
+               </div>
+               <button class="place-order-btn" onclick="placeOrder()">Đặt Hàng</button>
+           </div>
+       </div>
+
+       <div class="cart-empty" id="cartEmpty" style="display:none;">
+           <p>Giỏ hàng của bạn đang trống</p>
+           <a href="tea.html">Xem thực đơn</a>
+       </div>
+
+       <div class="order-success" id="orderSuccess">
+           <h2>Đặt hàng thành công!</h2>
+           <p>Cảm ơn bạn đã đặt hàng tại Mochi Fuwa. Chúng tôi sẽ liên hệ bạn sớm nhất.</p>
+           <a href="tea.html">Tiếp tục mua sắm</a>
+       </div>
+   </div>
+
+   <footer>
+       <div class="footer-container">
+           <div class="footer-brand">
+               <h2>mochi.</h2>
+           </div>
+           <div class="footer-info">
+               <h4>HỆ THỐNG CỬA HÀNG</h4>
+               <p>182 Pasteur, Quận 1, TP.HCM</p>
+               <p>24 Hồ Tùng Mậu, Quận 1, TP.HCM</p>
+               <p>92 Xuân Thủy, Quận 2, TP.HCM</p>
+           </div>
+           <div class="footer-contact">
+               <h4>LIÊN HỆ</h4>
+               <p>Hotline: 090 110 98 80</p>
+               <p>Email: admin@mochifuwa.com</p>
+           </div>
+           <div class="footer-social">
+               <h4>THEO DÕI</h4>
+               <p>Facebook | Instagram | TikTok</p>
+           </div>
+       </div>
+       <div class="footer-copyright">
+           <p>copyright &copy; 2026. all rights reserved.</p>
+       </div>
+   </footer>
+
+   <script>
+       // Menu overlay
+       const menuBtn = document.getElementById('mochiMenuBtn');
+       const closeBtn = document.getElementById('menuCloseBtn');
+       const overlay = document.getElementById('menuOverlay');
+
+       menuBtn.addEventListener('click', () => {
+           overlay.classList.add('active');
+           menuBtn.classList.add('active');
+           document.body.style.overflow = 'hidden';
+       });
+
+       function closeMenu() {
+           overlay.classList.remove('active');
+           menuBtn.classList.remove('active');
+           document.body.style.overflow = '';
+       }
+
+       closeBtn.addEventListener('click', closeMenu);
+
+       // Cart rendering
+       function formatPrice(num) {
+           return num.toLocaleString('vi-VN') + ' VND';
+       }
+
+       function renderCart() {
+           const cart = JSON.parse(localStorage.getItem('mochiCart') || '[]');
+           const itemsEl = document.getElementById('cartItems');
+           const summaryEl = document.getElementById('cartSummary');
+           const emptyEl = document.getElementById('cartEmpty');
+
+           if (cart.length === 0) {
+               itemsEl.innerHTML = '';
+               summaryEl.style.display = 'none';
+               emptyEl.style.display = 'block';
+               return;
+           }
+
+           emptyEl.style.display = 'none';
+           summaryEl.style.display = 'block';
+
+           let html = '';
+           let subtotal = 0;
+
+           cart.forEach((item, index) => {
+               subtotal += item.price * item.qty;
+               html += `
+                   <div class="cart-item">
+                       <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+                       <div class="cart-item-details">
+                           <h3>${item.name}</h3>
+                           <span class="item-price">${formatPrice(item.price)}</span>
+                       </div>
+                       <div class="cart-item-qty">
+                           <button class="qty-btn" onclick="changeQty(${index}, -1)">-</button>
+                           <span class="qty-num">${item.qty}</span>
+                           <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+                       </div>
+                       <button class="cart-item-remove" onclick="removeItem(${index})">&times;</button>
+                   </div>
+               `;
+           });
+
+           itemsEl.innerHTML = html;
+           document.getElementById('subtotal').textContent = formatPrice(subtotal);
+           document.getElementById('totalPrice').textContent = formatPrice(subtotal);
+       }
+
+       function changeQty(index, delta) {
+           let cart = JSON.parse(localStorage.getItem('mochiCart') || '[]');
+           cart[index].qty += delta;
+           if (cart[index].qty <= 0) {
+               cart.splice(index, 1);
+           }
+           localStorage.setItem('mochiCart', JSON.stringify(cart));
+           renderCart();
+       }
+
+       function removeItem(index) {
+           let cart = JSON.parse(localStorage.getItem('mochiCart') || '[]');
+           cart.splice(index, 1);
+           localStorage.setItem('mochiCart', JSON.stringify(cart));
+           renderCart();
+       }
+
+       function placeOrder() {
+           const name = document.getElementById('custName').value.trim();
+           const phone = document.getElementById('custPhone').value.trim();
+
+           if (!name || !phone) {
+               alert('Vui lòng nhập họ tên và số điện thoại');
+               return;
+           }
+
+           localStorage.removeItem('mochiCart');
+           document.getElementById('cartItems').style.display = 'none';
+           document.getElementById('cartSummary').style.display = 'none';
+           document.getElementById('orderSuccess').style.display = 'block';
+           document.querySelector('.order-title').style.display = 'none';
+           document.querySelector('.back-to-menu').style.display = 'none';
+       }
+
+       renderCart();
+   </script>
+</body>
+</html>

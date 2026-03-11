@@ -4,7 +4,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Mochi Fuwa | Our Menu</title>
-   <link rel="stylesheet" href="style.css?v=43">
+   <link rel="stylesheet" href="style.css?v=44">
    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
    <style>
        /* === SINGLE MENU PAGE === */
@@ -153,6 +153,79 @@
            margin: 0;
        }
 
+       .add-to-cart-btn {
+           display: block;
+           width: calc(100% - 32px);
+           margin: 0 16px 16px;
+           padding: 10px 0;
+           background: #9F0031;
+           color: #fff;
+           border: none;
+           border-radius: 25px;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.85rem;
+           font-weight: 600;
+           cursor: pointer;
+           transition: all 0.3s ease;
+           letter-spacing: 0.5px;
+       }
+       .add-to-cart-btn:hover {
+           background: #7a0026;
+           transform: scale(1.03);
+       }
+       .add-to-cart-btn.added {
+           background: #4a8c5c;
+       }
+
+       /* Floating Cart */
+       .floating-cart {
+           position: fixed;
+           bottom: 30px;
+           right: 30px;
+           width: 56px;
+           height: 56px;
+           background: #9F0031;
+           border-radius: 50%;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           cursor: pointer;
+           z-index: 999;
+           box-shadow: 0 4px 15px rgba(159, 0, 49, 0.4);
+           transition: transform 0.3s ease;
+           text-decoration: none;
+       }
+       .floating-cart:hover {
+           transform: scale(1.1);
+       }
+       .floating-cart svg {
+           width: 26px;
+           height: 26px;
+           fill: #fff;
+       }
+       .cart-count {
+           position: absolute;
+           top: -4px;
+           right: -4px;
+           background: #fff;
+           color: #9F0031;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.75rem;
+           font-weight: 700;
+           width: 22px;
+           height: 22px;
+           border-radius: 50%;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           border: 2px solid #9F0031;
+           opacity: 0;
+           transition: opacity 0.3s ease;
+       }
+       .cart-count.show {
+           opacity: 1;
+       }
+
        /* Responsive */
        @media (max-width: 768px) {
            .accordion-header h2 {
@@ -234,6 +307,7 @@
                            <span class="product-dash"></span>
                            <p class="product-price">45.000 VND</p>
                        </div>
+                       <button class="add-to-cart-btn" onclick="addToCart('Hồng Sắc', 45000, 'mochi-2.jpeg', this)">Thêm vào giỏ hàng</button>
                    </div>
                    <div class="product-card">
                        <div class="product-card-img">
@@ -244,6 +318,7 @@
                            <span class="product-dash"></span>
                            <p class="product-price">38.000 VND</p>
                        </div>
+                       <button class="add-to-cart-btn" onclick="addToCart('Xích Sắc', 38000, 'mochi-5.jpeg', this)">Thêm vào giỏ hàng</button>
                    </div>
                    <div class="product-card">
                        <div class="product-card-img">
@@ -254,6 +329,7 @@
                            <span class="product-dash"></span>
                            <p class="product-price">48.000 VND</p>
                        </div>
+                       <button class="add-to-cart-btn" onclick="addToCart('Ngọc Sắc', 48000, 'mochi-3.jpeg', this)">Thêm vào giỏ hàng</button>
                    </div>
                    <div class="product-card">
                        <div class="product-card-img">
@@ -264,6 +340,7 @@
                            <span class="product-dash"></span>
                            <p class="product-price">46.000 VND</p>
                        </div>
+                       <button class="add-to-cart-btn" onclick="addToCart('Tử Sắc', 46000, 'mochi-7.jpeg', this)">Thêm vào giỏ hàng</button>
                    </div>
                </div>
            </div>
@@ -286,6 +363,7 @@
                            <span class="product-dash"></span>
                            <p class="product-price">42.000 VND</p>
                        </div>
+                       <button class="add-to-cart-btn" onclick="addToCart('Lục Nguyệt', 42000, 'mochi-1.jpeg', this)">Thêm vào giỏ hàng</button>
                    </div>
                    <div class="product-card">
                        <div class="product-card-img">
@@ -296,6 +374,7 @@
                            <span class="product-dash"></span>
                            <p class="product-price">35.000 VND</p>
                        </div>
+                       <button class="add-to-cart-btn" onclick="addToCart('Hắc Nguyệt', 35000, 'mochi-4.jpeg', this)">Thêm vào giỏ hàng</button>
                    </div>
                    <div class="product-card">
                        <div class="product-card-img">
@@ -306,6 +385,7 @@
                            <span class="product-dash"></span>
                            <p class="product-price">45.000 VND</p>
                        </div>
+                       <button class="add-to-cart-btn" onclick="addToCart('Nồng Nguyệt', 45000, 'mochi-8.jpeg', this)">Thêm vào giỏ hàng</button>
                    </div>
                    <div class="product-card">
                        <div class="product-card-img">
@@ -316,6 +396,7 @@
                            <span class="product-dash"></span>
                            <p class="product-price">38.000 VND</p>
                        </div>
+                       <button class="add-to-cart-btn" onclick="addToCart('Ngọc Nguyệt', 38000, 'mochi-6.jpeg', this)">Thêm vào giỏ hàng</button>
                    </div>
                </div>
            </div>
@@ -338,6 +419,7 @@
                            <span class="product-dash"></span>
                            <p class="product-price">55.000 VND</p>
                        </div>
+                       <button class="add-to-cart-btn" onclick="addToCart('Lục Duyên', 55000, 'drink-5.jpeg', this)">Thêm vào giỏ hàng</button>
                    </div>
                    <div class="product-card">
                        <div class="product-card-img">
@@ -348,6 +430,7 @@
                            <span class="product-dash"></span>
                            <p class="product-price">50.000 VND</p>
                        </div>
+                       <button class="add-to-cart-btn" onclick="addToCart('Tử Duyên', 50000, 'drink-1.jpeg', this)">Thêm vào giỏ hàng</button>
                    </div>
                    <div class="product-card">
                        <div class="product-card-img">
@@ -358,6 +441,7 @@
                            <span class="product-dash"></span>
                            <p class="product-price">55.000 VND</p>
                        </div>
+                       <button class="add-to-cart-btn" onclick="addToCart('Trầm Duyên', 55000, 'drink-2.jpeg', this)">Thêm vào giỏ hàng</button>
                    </div>
                    <div class="product-card">
                        <div class="product-card-img">
@@ -368,6 +452,7 @@
                            <span class="product-dash"></span>
                            <p class="product-price">52.000 VND</p>
                        </div>
+                       <button class="add-to-cart-btn" onclick="addToCart('Ngọc Duyên', 52000, 'drink-6.jpeg', this)">Thêm vào giỏ hàng</button>
                    </div>
                    <div class="product-card">
                        <div class="product-card-img">
@@ -378,6 +463,7 @@
                            <span class="product-dash"></span>
                            <p class="product-price">48.000 VND</p>
                        </div>
+                       <button class="add-to-cart-btn" onclick="addToCart('Thai Mango Juice', 48000, 'drink-8.jpeg', this)">Thêm vào giỏ hàng</button>
                    </div>
                    <div class="product-card">
                        <div class="product-card-img">
@@ -388,6 +474,7 @@
                            <span class="product-dash"></span>
                            <p class="product-price">58.000 VND</p>
                        </div>
+                       <button class="add-to-cart-btn" onclick="addToCart('Matcha Frappe', 58000, 'drink-3.jpeg', this)">Thêm vào giỏ hàng</button>
                    </div>
                    <div class="product-card">
                        <div class="product-card-img">
@@ -398,6 +485,7 @@
                            <span class="product-dash"></span>
                            <p class="product-price">55.000 VND</p>
                        </div>
+                       <button class="add-to-cart-btn" onclick="addToCart('Fresh Orange Americano', 55000, 'drink-4.jpeg', this)">Thêm vào giỏ hàng</button>
                    </div>
                    <div class="product-card">
                        <div class="product-card-img">
@@ -408,6 +496,7 @@
                            <span class="product-dash"></span>
                            <p class="product-price">58.000 VND</p>
                        </div>
+                       <button class="add-to-cart-btn" onclick="addToCart('Caramel Coffee Frappe', 58000, 'drink-7.jpeg', this)">Thêm vào giỏ hàng</button>
                    </div>
                </div>
            </div>
@@ -440,6 +529,12 @@
            <p>copyright &copy; 2026. all rights reserved.</p>
        </div>
    </footer>
+
+   <!-- Floating Cart Button -->
+   <a href="order.html" class="floating-cart" id="floatingCart">
+       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1.003 1.003 0 0 0 20 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+       <span class="cart-count" id="cartCount">0</span>
+   </a>
 
    <script>
        // Menu overlay
@@ -481,6 +576,40 @@
            const toggle = content.previousElementSibling.querySelector('.accordion-toggle');
            toggle.textContent = '-';
        });
+
+       // Cart functionality
+       function addToCart(name, price, image, btn) {
+           let cart = JSON.parse(localStorage.getItem('mochiCart') || '[]');
+           const existing = cart.find(item => item.name === name);
+           if (existing) {
+               existing.qty += 1;
+           } else {
+               cart.push({ name, price, image, qty: 1 });
+           }
+           localStorage.setItem('mochiCart', JSON.stringify(cart));
+           updateCartCount();
+
+           btn.textContent = 'Da them!';
+           btn.classList.add('added');
+           setTimeout(() => {
+               btn.textContent = 'Them vao gio hang';
+               btn.classList.remove('added');
+           }, 1200);
+       }
+
+       function updateCartCount() {
+           const cart = JSON.parse(localStorage.getItem('mochiCart') || '[]');
+           const total = cart.reduce((sum, item) => sum + item.qty, 0);
+           const countEl = document.getElementById('cartCount');
+           countEl.textContent = total;
+           if (total > 0) {
+               countEl.classList.add('show');
+           } else {
+               countEl.classList.remove('show');
+           }
+       }
+
+       updateCartCount();
 
        // Drag to scroll for product rows
        document.querySelectorAll('.product-row').forEach(row => {
