@@ -4,7 +4,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Mochi Fuwa | Our Menu</title>
-   <link rel="stylesheet" href="style.css?v=48">
+   <link rel="stylesheet" href="style.css?v=49">
    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
    <style>
        /* === SINGLE MENU PAGE === */
@@ -587,10 +587,10 @@
            localStorage.setItem('mochiCart', JSON.stringify(cart));
            updateCartCount();
 
-           btn.textContent = 'Da them!';
+           btn.textContent = 'Đã thêm!';
            btn.classList.add('added');
            setTimeout(() => {
-               btn.textContent = 'Them vao gio hang';
+               btn.textContent = 'Thêm vào giỏ hàng';
                btn.classList.remove('added');
            }, 1200);
        }
