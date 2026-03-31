@@ -4,7 +4,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Mochi Fuwa | Chi Tiết Sản Phẩm</title>
-   <link rel="stylesheet" href="style.css?v=53">
+   <link rel="stylesheet" href="style.css?v=55">
    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
    <style>
        .product-page {
@@ -642,22 +642,17 @@
            setTimeout(() => { btn.textContent = 'Thêm vào giỏ hàng'; btn.classList.remove('added'); }, 2000);
        }
 
-       // ── Load product (updates URL + re-renders) ───────────────────────
-       function loadProduct(id) {
-           history.pushState(null, '', 'product.html?id=' + id);
-           renderProduct(id);
+       // ── Load & render a product ───────────────────────────────────────
+       function loadProduct(pid) {
+           history.pushState(null, '', 'product.html?id=' + pid);
+           renderProduct(pid);
            window.scrollTo({ top: 0, behavior: 'smooth' });
        }
 
-       // ── Render Product ────────────────────────────────────────────────
-       function renderProduct(id) {
-           const p = products[id];
-           if (!p) {
-               document.querySelector('.product-page').innerHTML = '<div style="text-align:center;padding:80px 20px;"><h2 style="font-family:\'Cormorant Garamond\',serif;color:#9F0031;">Sản phẩm không tồn tại</h2><a href="shop.html" style="display:inline-block;margin-top:20px;padding:12px 30px;background:#9F0031;color:#fff;border-radius:25px;text-decoration:none;font-family:\'Quicksand\',sans-serif;">Quay lại Shop</a></div>';
-               return;
-           }
+       function renderProduct(pid) {
+           const p = products[pid];
+           if (!p) return;
            currentProduct = p;
-           currentId = id;
            qty = 1;
            document.getElementById('qtyDisplay').textContent = 1;
 
@@ -666,15 +661,15 @@
            document.getElementById('mainImg').src = p.images[0];
            document.getElementById('mainImg').alt = p.name;
 
-           // Sidebar thumbs = siblings in same collection
-           const colKey = productCollection[id];
-           const siblings = colKey ? collections[colKey] : [id];
+           // Sidebar thumbs — all products in same collection
+           const colKey = productCollection[pid];
+           const siblings = colKey ? collections[colKey] : [pid];
            const thumbsEl = document.getElementById('thumbsContainer');
-           thumbsEl.innerHTML = siblings.map(sid => {
+           thumbsEl.innerHTML = siblings.map(function(sid) {
                const s = products[sid];
                if (!s) return '';
-               const isActive = sid === id ? ' active' : '';
-               return `<div class="product-thumb${isActive}" onclick="loadProduct('${sid}')" title="${s.name}"><img src="${s.images[0]}" alt="${s.name}"></div>`;
+               const active = sid === pid ? ' active' : '';
+               return '<div class="product-thumb' + active + '" data-pid="' + sid + '" title="' + s.name + '"><img src="' + s.images[0] + '" alt="' + s.name + '"></div>';
            }).join('');
 
            document.getElementById('productCategory').textContent = p.category;
@@ -682,42 +677,51 @@
            document.getElementById('productSubtitle').textContent = p.subtitle;
            document.getElementById('productPrice').textContent = formatPrice(p.price);
            document.getElementById('productDesc').textContent = p.desc;
-
-           document.getElementById('productTags').innerHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
-
+           document.getElementById('productTags').innerHTML = p.tags.map(function(t) { return '<span class="tag">' + t + '</span>'; }).join('');
            document.getElementById('metaType').textContent = p.type;
            document.getElementById('metaFlavor').textContent = p.flavor;
            document.getElementById('metaStorage').textContent = p.storage;
 
-           // Reset tabs to first tab
-           document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-           document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+           // Reset to first tab
+           document.querySelectorAll('.tab-content').forEach(function(t) { t.classList.remove('active'); });
+           document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
            document.getElementById('tab-desc').classList.add('active');
-           document.querySelector('.tab-btn').classList.add('active');
+           document.querySelectorAll('.tab-btn')[0].classList.add('active');
 
            document.getElementById('tabDesc').textContent = p.longDesc;
-           document.getElementById('tabIngr').innerHTML = p.ingr.map(([label, val]) =>
-               `<li><span>${label}</span><span>${val}</span></li>`).join('');
-           document.getElementById('tabNutri').innerHTML = p.nutri.map(([label, val]) =>
-               `<li><span>${label}</span><span>${val}</span></li>`).join('');
+           document.getElementById('tabIngr').innerHTML = p.ingr.map(function(row) {
+               return '<li><span>' + row[0] + '</span><span>' + row[1] + '</span></li>';
+           }).join('');
+           document.getElementById('tabNutri').innerHTML = p.nutri.map(function(row) {
+               return '<li><span>' + row[0] + '</span><span>' + row[1] + '</span></li>';
+           }).join('');
 
            // Related products
-           const relatedEl = document.getElementById('relatedGrid');
-           relatedEl.innerHTML = p.related.map(rid => {
+           document.getElementById('relatedGrid').innerHTML = p.related.map(function(rid) {
                const r = products[rid];
                if (!r) return '';
-               return `<a href="javascript:void(0)" onclick="loadProduct('${rid}')" class="related-card"><img src="${r.images[0]}" alt="${r.name}"><div class="related-card-info"><h4>${r.name}</h4><p>${formatPrice(r.price)}</p></div></a>`;
+               return '<div class="related-card" data-pid="' + rid + '" style="cursor:pointer"><img src="' + r.images[0] + '" alt="' + r.name + '"><div class="related-card-info"><h4>' + r.name + '</h4><p>' + formatPrice(r.price) + '</p></div></div>';
            }).join('');
        }
 
-       // ── Init ──────────────────────────────────────────────────────────
-       const id = new URLSearchParams(window.location.search).get('id') || 'hong-sac';
-       renderProduct(id);
+       // ── Event delegation for thumbs & related cards ───────────────────
+       document.getElementById('thumbsContainer').addEventListener('click', function(e) {
+           const thumb = e.target.closest('[data-pid]');
+           if (thumb) loadProduct(thumb.dataset.pid);
+       });
 
-       // Handle browser back/forward
-       window.addEventListener('popstate', () => {
-           const newId = new URLSearchParams(window.location.search).get('id') || 'hong-sac';
-           renderProduct(newId);
+       document.getElementById('relatedGrid').addEventListener('click', function(e) {
+           const card = e.target.closest('[data-pid]');
+           if (card) loadProduct(card.dataset.pid);
+       });
+
+       // ── Init ──────────────────────────────────────────────────────────
+       const initId = new URLSearchParams(window.location.search).get('id') || 'hong-sac';
+       renderProduct(initId);
+
+       window.addEventListener('popstate', function() {
+           const pid = new URLSearchParams(window.location.search).get('id') || 'hong-sac';
+           renderProduct(pid);
        });
 
        // Menu
