@@ -3,8 +3,8 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Mochi Fuwa | Hồng Sắc — Chi Tiết Sản Phẩm</title>
-   <link rel="stylesheet" href="style.css?v=52">
+   <title>Mochi Fuwa | Chi Tiết Sản Phẩm</title>
+   <link rel="stylesheet" href="style.css?v=53">
    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
    <style>
        .product-page {
@@ -15,23 +15,16 @@
            padding-left: 24px;
            padding-right: 24px;
        }
-
        .breadcrumb {
            font-family: 'Quicksand', sans-serif;
            font-size: 0.85rem;
            color: #aaa;
            margin-bottom: 32px;
-           letter-spacing: 0.3px;
        }
-       .breadcrumb a {
-           color: #aaa;
-           text-decoration: none;
-           transition: color 0.2s;
-       }
+       .breadcrumb a { color: #aaa; text-decoration: none; transition: color 0.2s; }
        .breadcrumb a:hover { color: #9F0031; }
        .breadcrumb span { color: #9F0031; }
 
-       /* Main Product Layout */
        .product-main {
            display: grid;
            grid-template-columns: 1fr 1fr;
@@ -39,12 +32,7 @@
            align-items: start;
            margin-bottom: 60px;
        }
-
-       /* Image Gallery */
-       .product-gallery {
-           position: sticky;
-           top: 100px;
-       }
+       .product-gallery { position: sticky; top: 100px; }
        .product-main-img {
            width: 100%;
            border-radius: 1.5rem;
@@ -60,10 +48,7 @@
            transition: transform 0.5s ease;
        }
        .product-main-img:hover img { transform: scale(1.04); }
-       .product-thumbs {
-           display: flex;
-           gap: 12px;
-       }
+       .product-thumbs { display: flex; gap: 12px; flex-wrap: wrap; }
        .product-thumb {
            width: 80px;
            height: 80px;
@@ -75,15 +60,8 @@
            flex-shrink: 0;
        }
        .product-thumb.active { border-color: #9F0031; }
-       .product-thumb img {
-           width: 100%;
-           height: 100%;
-           object-fit: cover;
-           display: block;
-       }
+       .product-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-       /* Product Info */
-       .product-info {}
        .product-category-tag {
            display: inline-block;
            font-family: 'Quicksand', sans-serif;
@@ -106,7 +84,7 @@
            margin: 0 0 8px;
            line-height: 1.1;
        }
-       .product-info .product-subtitle {
+       .product-subtitle {
            font-family: 'Cormorant Garamond', serif;
            font-style: italic;
            font-size: 1.2rem;
@@ -120,12 +98,7 @@
            color: #9F0031;
            margin-bottom: 24px;
        }
-       .product-divider {
-           width: 40px;
-           height: 1px;
-           background: rgba(159, 0, 49, 0.4);
-           margin-bottom: 24px;
-       }
+       .product-divider { width: 40px; height: 1px; background: rgba(159,0,49,0.4); margin-bottom: 24px; }
        .product-description {
            font-family: 'Quicksand', sans-serif;
            font-size: 0.95rem;
@@ -133,36 +106,22 @@
            line-height: 1.8;
            margin-bottom: 28px;
        }
-
-       /* Tags */
-       .product-tags {
-           display: flex;
-           flex-wrap: wrap;
-           gap: 8px;
-           margin-bottom: 28px;
-       }
+       .product-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
        .tag {
            font-family: 'Quicksand', sans-serif;
            font-size: 0.75rem;
            font-weight: 600;
            color: #9F0031;
-           border: 1px solid rgba(159, 0, 49, 0.4);
+           border: 1px solid rgba(159,0,49,0.4);
            padding: 5px 14px;
            border-radius: 20px;
        }
-
-       /* Quantity & Add to Cart */
-       .product-qty-row {
-           display: flex;
-           align-items: center;
-           gap: 16px;
-           margin-bottom: 20px;
-       }
+       .product-qty-row { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
        .qty-control {
            display: flex;
            align-items: center;
            gap: 12px;
-           border: 1px solid rgba(159, 0, 49, 0.4);
+           border: 1px solid rgba(159,0,49,0.4);
            border-radius: 30px;
            padding: 6px 16px;
        }
@@ -206,7 +165,6 @@
        }
        .add-to-cart-main:hover { background: #7a0026; }
        .add-to-cart-main.added { background: #4a8c5c; }
-
        .view-cart-btn {
            display: block;
            width: 100%;
@@ -225,38 +183,13 @@
            margin-bottom: 28px;
        }
        .view-cart-btn:hover { background: #fdf0f2; }
+       .product-meta { border-top: 1px solid rgba(159,0,49,0.15); padding-top: 24px; }
+       .meta-row { display: flex; gap: 12px; margin-bottom: 10px; font-family: 'Quicksand', sans-serif; font-size: 0.88rem; }
+       .meta-label { color: #aaa; min-width: 100px; font-weight: 500; }
+       .meta-value { color: #555; font-weight: 600; }
 
-       /* Info list */
-       .product-meta {
-           border-top: 1px solid rgba(159, 0, 49, 0.15);
-           padding-top: 24px;
-       }
-       .meta-row {
-           display: flex;
-           gap: 12px;
-           margin-bottom: 10px;
-           font-family: 'Quicksand', sans-serif;
-           font-size: 0.88rem;
-       }
-       .meta-row .meta-label {
-           color: #aaa;
-           min-width: 100px;
-           font-weight: 500;
-       }
-       .meta-row .meta-value { color: #555; font-weight: 600; }
-
-       /* Details Tabs */
-       .product-details {
-           border-top: 1px solid rgba(159, 0, 49, 0.15);
-           padding-top: 40px;
-           margin-bottom: 60px;
-       }
-       .details-tabs {
-           display: flex;
-           gap: 0;
-           border-bottom: 1px solid rgba(159, 0, 49, 0.2);
-           margin-bottom: 28px;
-       }
+       .product-details { border-top: 1px solid rgba(159,0,49,0.15); padding-top: 40px; margin-bottom: 60px; }
+       .details-tabs { display: flex; gap: 0; border-bottom: 1px solid rgba(159,0,49,0.2); margin-bottom: 28px; }
        .tab-btn {
            padding: 12px 28px;
            font-family: 'Quicksand', sans-serif;
@@ -269,32 +202,18 @@
            border-bottom: 2px solid transparent;
            margin-bottom: -1px;
            transition: all 0.2s;
-           letter-spacing: 0.3px;
        }
-       .tab-btn.active {
-           color: #9F0031;
-           border-bottom-color: #9F0031;
-       }
+       .tab-btn.active { color: #9F0031; border-bottom-color: #9F0031; }
        .tab-content { display: none; }
        .tab-content.active { display: block; }
-       .tab-content p {
-           font-family: 'Quicksand', sans-serif;
-           font-size: 0.95rem;
-           color: #555;
-           line-height: 1.9;
-           margin-bottom: 16px;
-       }
-       .tab-content ul {
-           list-style: none;
-           padding: 0;
-           margin: 0;
-       }
+       .tab-content p { font-family: 'Quicksand', sans-serif; font-size: 0.95rem; color: #555; line-height: 1.9; margin-bottom: 16px; }
+       .tab-content ul { list-style: none; padding: 0; margin: 0; }
        .tab-content ul li {
            font-family: 'Quicksand', sans-serif;
            font-size: 0.9rem;
            color: #555;
            padding: 8px 0;
-           border-bottom: 1px solid rgba(159, 0, 49, 0.08);
+           border-bottom: 1px solid rgba(159,0,49,0.08);
            display: flex;
            justify-content: space-between;
        }
@@ -302,8 +221,6 @@
        .tab-content ul li span:first-child { color: #888; font-weight: 500; }
        .tab-content ul li span:last-child { color: #333; font-weight: 600; }
 
-       /* Related Products */
-       .related-section { margin-top: 0; }
        .related-section h2 {
            font-family: 'Cormorant Garamond', serif;
            font-size: 2rem;
@@ -313,13 +230,9 @@
            margin-bottom: 8px;
        }
        .title-underline { width: 40px; height: 1px; background: #9F0031; margin-bottom: 32px; }
-       .related-grid {
-           display: grid;
-           grid-template-columns: repeat(4, 1fr);
-           gap: 20px;
-       }
+       .related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
        .related-card {
-           border: 0.5px solid rgba(159, 0, 49, 0.4);
+           border: 0.5px solid rgba(159,0,49,0.4);
            border-radius: 1rem;
            overflow: hidden;
            background: #fff;
@@ -328,32 +241,11 @@
            transition: transform 0.3s ease;
        }
        .related-card:hover { transform: translateY(-4px); }
-       .related-card img {
-           width: 100%;
-           height: 180px;
-           object-fit: cover;
-           display: block;
-       }
-       .related-card-info {
-           padding: 14px;
-           text-align: center;
-       }
-       .related-card-info h4 {
-           font-family: 'Cormorant Garamond', serif;
-           font-size: 1.2rem;
-           font-weight: 400;
-           color: #9F0031;
-           margin: 0 0 4px;
-       }
-       .related-card-info p {
-           font-family: 'Quicksand', sans-serif;
-           font-size: 0.85rem;
-           color: #9F0031;
-           margin: 0;
-           font-weight: 500;
-       }
+       .related-card img { width: 100%; height: 180px; object-fit: cover; display: block; }
+       .related-card-info { padding: 14px; text-align: center; }
+       .related-card-info h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; color: #9F0031; margin: 0 0 4px; }
+       .related-card-info p { font-family: 'Quicksand', sans-serif; font-size: 0.85rem; color: #9F0031; margin: 0; font-weight: 500; }
 
-       /* Responsive */
        @media (max-width: 992px) {
            .product-main { grid-template-columns: 1fr; gap: 32px; }
            .product-gallery { position: static; }
@@ -398,62 +290,32 @@
                <li><a href="cart.html" class="menu-link">CART</a></li>
            </ul>
        </nav>
-       <div class="menu-overlay-footer">
-           <p>Mochi Fuwa</p>
-       </div>
+       <div class="menu-overlay-footer"><p>Mochi Fuwa</p></div>
    </div>
 
    <div class="product-page">
-
-       <!-- Breadcrumb -->
        <div class="breadcrumb">
            <a href="index.html">Home</a> &nbsp;/&nbsp;
            <a href="shop.html">Shop</a> &nbsp;/&nbsp;
-           <span>Hồng Sắc</span>
+           <span id="breadcrumbName">Chi Tiết</span>
        </div>
 
-       <!-- Main Product -->
        <div class="product-main">
-
-           <!-- Gallery -->
            <div class="product-gallery">
-               <div class="product-main-img" id="mainImgWrap">
-                   <img src="mochi-1.jpeg" alt="Hồng Sắc" id="mainImg">
+               <div class="product-main-img">
+                   <img id="mainImg" src="" alt="">
                </div>
-               <div class="product-thumbs">
-                   <div class="product-thumb active" onclick="switchImg('mochi-1.jpeg', this)">
-                       <img src="mochi-1.jpeg" alt="Hồng Sắc">
-                   </div>
-                   <div class="product-thumb" onclick="switchImg('mochi-2.jpeg', this)">
-                       <img src="mochi-2.jpeg" alt="Xích Sắc">
-                   </div>
-                   <div class="product-thumb" onclick="switchImg('mochi-3.jpeg', this)">
-                       <img src="mochi-3.jpeg" alt="Ngọc Sắc">
-                   </div>
-                   <div class="product-thumb" onclick="switchImg('mochi-9.jpeg', this)">
-                       <img src="mochi-9.jpeg" alt="Matcha Rose">
-                   </div>
-               </div>
+               <div class="product-thumbs" id="thumbsContainer"></div>
            </div>
 
-           <!-- Info -->
            <div class="product-info">
-               <span class="product-category-tag">Fruit Mochi · Sắc Collection</span>
-               <h1>Hồng Sắc</h1>
-               <p class="product-subtitle">Mochi Dâu Tây Kem Tươi</p>
-               <div class="product-price-tag">45.000 VND</div>
+               <span class="product-category-tag" id="productCategory"></span>
+               <h1 id="productName"></h1>
+               <p class="product-subtitle" id="productSubtitle"></p>
+               <div class="product-price-tag" id="productPrice"></div>
                <div class="product-divider"></div>
-
-               <p class="product-description">
-                   <strong>Hồng Sắc</strong> là tinh hoa của dòng Fruit Mochi — chiếc bánh mochi vỏ hồng mềm mại bọc lấy lớp kem tươi nguyên chất và trái dâu tây Đà Lạt mọng nước nguyên trái bên trong. Mỗi miếng cắn là sự hòa quyện hoàn hảo giữa vị ngọt thanh của kem và vị chua nhẹ tươi mát của dâu tây — cảm giác "fuwa fuwa" tan chảy trên đầu lưỡi.
-               </p>
-
-               <div class="product-tags">
-                   <span class="tag">Vị Dâu Tây</span>
-                   <span class="tag">Kem Tươi</span>
-                   <span class="tag">Không Gluten</span>
-                   <span class="tag">Làm Thủ Công</span>
-               </div>
+               <p class="product-description" id="productDesc"></p>
+               <div class="product-tags" id="productTags"></div>
 
                <div class="product-qty-row">
                    <div class="qty-control">
@@ -466,105 +328,36 @@
                <a href="cart.html" class="view-cart-btn">Xem Giỏ Hàng</a>
 
                <div class="product-meta">
-                   <div class="meta-row">
-                       <span class="meta-label">Loại bánh</span>
-                       <span class="meta-value">Mochi Trái Cây Tươi</span>
-                   </div>
-                   <div class="meta-row">
-                       <span class="meta-label">Hương vị</span>
-                       <span class="meta-value">Dâu Tây Đà Lạt</span>
-                   </div>
-                   <div class="meta-row">
-                       <span class="meta-label">Bảo quản</span>
-                       <span class="meta-value">0–5°C, dùng trong 24 giờ</span>
-                   </div>
-                   <div class="meta-row">
-                       <span class="meta-label">Giao hàng</span>
-                       <span class="meta-value">Hỏa tốc 2 giờ TP.HCM</span>
-                   </div>
+                   <div class="meta-row"><span class="meta-label">Loại</span><span class="meta-value" id="metaType"></span></div>
+                   <div class="meta-row"><span class="meta-label">Hương vị</span><span class="meta-value" id="metaFlavor"></span></div>
+                   <div class="meta-row"><span class="meta-label">Bảo quản</span><span class="meta-value" id="metaStorage"></span></div>
+                   <div class="meta-row"><span class="meta-label">Giao hàng</span><span class="meta-value">Hỏa tốc 2 giờ TP.HCM</span></div>
                </div>
            </div>
        </div>
 
-       <!-- Details Tabs -->
        <div class="product-details">
            <div class="details-tabs">
                <button class="tab-btn active" onclick="switchTab('desc', this)">Mô Tả</button>
                <button class="tab-btn" onclick="switchTab('ingr', this)">Thành Phần</button>
                <button class="tab-btn" onclick="switchTab('nutri', this)">Dinh Dưỡng</button>
            </div>
-
-           <div class="tab-content active" id="tab-desc">
-               <p>
-                   <strong>Hồng Sắc</strong> thuộc dòng <em>Sắc Collection</em> — bộ sưu tập Fruit Mochi đặc biệt của Mochi Fuwa, lấy cảm hứng từ màu sắc rực rỡ của các loại trái cây tươi ngon.
-               </p>
-               <p>
-                   Vỏ bánh được làm từ bột gạo nếp Nhật Bản hảo hạng, nhào nặn kỳ công và hấp cách thủy đúng kỹ thuật truyền thống. Lớp kem bên trong sử dụng whipping cream tươi nguyên chất, đánh bông mượt mà và được phối cùng trái dâu tây Đà Lạt chọn lọc, mọng nước, không thêm chất bảo quản.
-               </p>
-               <p>
-                   Bánh được đặt trong hộp quà sang trọng, thiết kế tinh tế — phù hợp làm quà tặng cho mọi dịp: sinh nhật, kỷ niệm, hoặc đơn giản là một phần thưởng ngọt ngào cho bản thân.
-               </p>
-           </div>
-
+           <div class="tab-content active" id="tab-desc"><p id="tabDesc"></p></div>
            <div class="tab-content" id="tab-ingr">
-               <p>Tất cả nguyên liệu được chọn lọc kỹ càng từ các nguồn uy tín, không dùng chất bảo quản nhân tạo.</p>
-               <ul>
-                   <li><span>Vỏ mochi</span><span>Bột gạo nếp Nhật, đường, nước tinh khiết</span></li>
-                   <li><span>Nhân kem</span><span>Whipping cream tươi 35% fat, đường mía</span></li>
-                   <li><span>Trái cây</span><span>Dâu tây Đà Lạt nguyên trái, không qua xử lý</span></li>
-                   <li><span>Màu sắc</span><span>Màu thực phẩm tự nhiên từ dâu tây</span></li>
-               </ul>
+               <p>Tất cả nguyên liệu được chọn lọc kỹ càng, không dùng chất bảo quản nhân tạo.</p>
+               <ul id="tabIngr"></ul>
            </div>
-
            <div class="tab-content" id="tab-nutri">
-               <p>Thông tin dinh dưỡng ước tính cho 1 chiếc bánh (khoảng 65g):</p>
-               <ul>
-                   <li><span>Năng lượng</span><span>~180 kcal</span></li>
-                   <li><span>Chất béo</span><span>~8g</span></li>
-                   <li><span>Carbohydrate</span><span>~24g</span></li>
-                   <li><span>Đường</span><span>~14g</span></li>
-                   <li><span>Protein</span><span>~2g</span></li>
-                   <li><span>Natri</span><span>~20mg</span></li>
-               </ul>
+               <p>Thông tin dinh dưỡng ước tính cho 1 khẩu phần:</p>
+               <ul id="tabNutri"></ul>
            </div>
        </div>
 
-       <!-- Related Products -->
        <div class="related-section">
            <h2>Sản Phẩm Liên Quan</h2>
            <div class="title-underline"></div>
-           <div class="related-grid">
-               <a href="product.html" class="related-card">
-                   <img src="mochi-2.jpeg" alt="Xích Sắc">
-                   <div class="related-card-info">
-                       <h4>Xích Sắc</h4>
-                       <p>38.000 VND</p>
-                   </div>
-               </a>
-               <a href="product.html" class="related-card">
-                   <img src="mochi-5.jpeg" alt="Lục Nguyệt">
-                   <div class="related-card-info">
-                       <h4>Lục Nguyệt</h4>
-                       <p>42.000 VND</p>
-                   </div>
-               </a>
-               <a href="product.html" class="related-card">
-                   <img src="mochi-9.jpeg" alt="Matcha Rose">
-                   <div class="related-card-info">
-                       <h4>Matcha Rose</h4>
-                       <p>52.000 VND</p>
-                   </div>
-               </a>
-               <a href="product.html" class="related-card">
-                   <img src="mochi-4.jpeg" alt="Tử Sắc">
-                   <div class="related-card-info">
-                       <h4>Tử Sắc</h4>
-                       <p>46.000 VND</p>
-                   </div>
-               </a>
-           </div>
+           <div class="related-grid" id="relatedGrid"></div>
        </div>
-
    </div>
 
    <footer>
@@ -586,12 +379,312 @@
                <p>Facebook | Instagram | TikTok</p>
            </div>
        </div>
-       <div class="footer-copyright">
-           <p>copyright &copy; 2026. all rights reserved.</p>
-       </div>
+       <div class="footer-copyright"><p>copyright &copy; 2026. all rights reserved.</p></div>
    </footer>
 
    <script>
+       // ── Product Database ──────────────────────────────────────────────
+       const products = {
+           'hong-sac': {
+               name: 'Hồng Sắc', subtitle: 'Mochi Dâu Tây Kem Tươi',
+               category: 'Fruit Mochi · Sắc Collection', price: 45000,
+               images: ['mochi-1.jpeg','mochi-2.jpeg','mochi-3.jpeg','mochi-9.jpeg'],
+               tags: ['Vị Dâu Tây','Kem Tươi','Không Gluten','Làm Thủ Công'],
+               desc: 'Hồng Sắc là tinh hoa của dòng Fruit Mochi — chiếc bánh mochi vỏ hồng mềm mại bọc lấy lớp kem tươi nguyên chất và trái dâu tây Đà Lạt mọng nước nguyên trái bên trong. Mỗi miếng cắn là sự hòa quyện hoàn hảo giữa vị ngọt thanh của kem và vị chua nhẹ tươi mát của dâu tây.',
+               longDesc: 'Hồng Sắc thuộc dòng Sắc Collection — bộ sưu tập Fruit Mochi lấy cảm hứng từ màu sắc rực rỡ của các loại trái cây tươi. Vỏ bánh từ bột gạo nếp Nhật Bản hảo hạng, kem tươi nguyên chất đánh bông mượt mà, phối cùng trái dâu tây Đà Lạt chọn lọc, mọng nước, không chất bảo quản.',
+               type: 'Mochi Trái Cây Tươi', flavor: 'Dâu Tây Đà Lạt',
+               storage: '0–5°C, dùng trong 24 giờ',
+               ingr: [['Vỏ mochi','Bột gạo nếp Nhật, đường, nước tinh khiết'],['Nhân kem','Whipping cream tươi 35% fat, đường mía'],['Trái cây','Dâu tây Đà Lạt nguyên trái'],['Màu sắc','Màu thực phẩm tự nhiên từ dâu tây']],
+               nutri: [['Năng lượng','~180 kcal'],['Chất béo','~8g'],['Carbohydrate','~24g'],['Đường','~14g'],['Protein','~2g']],
+               related: ['xich-sac','luc-nguyet','matcha-rose','tu-sac']
+           },
+           'xich-sac': {
+               name: 'Xích Sắc', subtitle: 'Mochi Đậu Đỏ Truyền Thống',
+               category: 'Fruit Mochi · Sắc Collection', price: 38000,
+               images: ['mochi-2.jpeg','mochi-1.jpeg','mochi-3.jpeg','mochi-4.jpeg'],
+               tags: ['Vị Đậu Đỏ','Truyền Thống','Không Gluten','Làm Thủ Công'],
+               desc: 'Xích Sắc mang hương vị đậu đỏ thanh tao truyền thống Nhật Bản. Vỏ mochi đỏ thẫm quyến rũ bọc lấy nhân đậu đỏ azuki được hầm kỹ với đường mía, tạo nên vị ngọt dịu, bùi thơm đậm đà không thể quên.',
+               longDesc: 'Lấy cảm hứng từ wagashi truyền thống Nhật Bản, Xích Sắc là lựa chọn hoàn hảo cho những ai yêu thích hương vị thuần khiết, ít ngọt. Đậu đỏ azuki nhập khẩu, hầm nhừ theo phương pháp truyền thống, không thêm hương liệu nhân tạo.',
+               type: 'Mochi Đậu Đỏ Truyền Thống', flavor: 'Đậu Đỏ Azuki',
+               storage: '0–5°C, dùng trong 24 giờ',
+               ingr: [['Vỏ mochi','Bột gạo nếp Nhật, đường, nước'],['Nhân','Đậu đỏ azuki nhập khẩu, đường mía'],['Màu sắc','Màu tự nhiên từ đậu đỏ']],
+               nutri: [['Năng lượng','~160 kcal'],['Chất béo','~2g'],['Carbohydrate','~32g'],['Đường','~18g'],['Protein','~4g']],
+               related: ['hong-sac','ngoc-sac','hac-nguyet','nong-nguyet']
+           },
+           'ngoc-sac': {
+               name: 'Ngọc Sắc', subtitle: 'Mochi Vải Thiều Kem Tươi',
+               category: 'Fruit Mochi · Sắc Collection', price: 48000,
+               images: ['mochi-3.jpeg','mochi-1.jpeg','mochi-2.jpeg','mochi-4.jpeg'],
+               tags: ['Vị Vải Thiều','Kem Tươi','Mùa Hè','Làm Thủ Công'],
+               desc: 'Ngọc Sắc — màu trắng ngần tinh khiết như ngọc, chứa đựng nhân kem tươi phối cùng trái vải thiều mọng ngọt. Hương thơm dịu nhẹ, vị ngọt thanh mát — chiếc bánh của những ngày hè.',
+               longDesc: 'Ngọc Sắc là viên ngọc quý trong bộ sưu tập Sắc Collection. Vỏ mochi trắng tinh, mềm mịn bao bọc lớp kem tươi và vải thiều tươi chọn lọc. Hương vị tinh tế, sang trọng.',
+               type: 'Mochi Trái Cây Tươi', flavor: 'Vải Thiều Tươi',
+               storage: '0–5°C, dùng trong 24 giờ',
+               ingr: [['Vỏ mochi','Bột gạo nếp Nhật, đường, nước'],['Nhân kem','Whipping cream tươi, đường mía'],['Trái cây','Vải thiều tươi nguyên trái']],
+               nutri: [['Năng lượng','~185 kcal'],['Chất béo','~8g'],['Carbohydrate','~26g'],['Đường','~16g'],['Protein','~2g']],
+               related: ['hong-sac','tu-sac','matcha-rose','chocolate-fuwa']
+           },
+           'tu-sac': {
+               name: 'Tử Sắc', subtitle: 'Mochi Việt Quất Kem Tươi',
+               category: 'Fruit Mochi · Sắc Collection', price: 46000,
+               images: ['mochi-4.jpeg','mochi-1.jpeg','mochi-2.jpeg','mochi-3.jpeg'],
+               tags: ['Vị Việt Quất','Kem Tươi','Antioxidant','Làm Thủ Công'],
+               desc: 'Tử Sắc nổi bật với màu tím quyến rũ từ việt quất tươi. Vỏ mochi tím thẫm ôm ấp nhân kem việt quất đậm đà, vừa ngọt vừa chua nhẹ — đặc biệt giàu antioxidant tự nhiên.',
+               longDesc: 'Lấy cảm hứng từ màu tím đặc trưng của việt quất, Tử Sắc là chiếc bánh không chỉ ngon mắt mà còn tốt cho sức khỏe. Việt quất nhập khẩu, kem tươi nguyên chất — kết hợp hoàn hảo.',
+               type: 'Mochi Trái Cây Tươi', flavor: 'Việt Quất Tươi',
+               storage: '0–5°C, dùng trong 24 giờ',
+               ingr: [['Vỏ mochi','Bột gạo nếp Nhật, nước ép việt quất, đường'],['Nhân kem','Whipping cream tươi, việt quất, đường'],['Màu sắc','Tự nhiên từ việt quất']],
+               nutri: [['Năng lượng','~175 kcal'],['Chất béo','~7g'],['Carbohydrate','~25g'],['Đường','~15g'],['Protein','~2g']],
+               related: ['hong-sac','ngoc-sac','matcha-rose','luc-nguyet']
+           },
+           'luc-nguyet': {
+               name: 'Lục Nguyệt', subtitle: 'Mochi Matcha Kem Tươi',
+               category: 'Sweet Mochi · Nguyệt Collection', price: 42000,
+               images: ['mochi-5.jpeg','mochi-6.jpeg','mochi-7.jpeg','mochi-8.jpeg'],
+               tags: ['Vị Matcha','Kem Tươi','Uji Matcha','Làm Thủ Công'],
+               desc: 'Lục Nguyệt mang hương vị matcha Uji đặc trưng của Nhật Bản. Vỏ mochi xanh ngọc thơm mát, bên trong là kem tươi matcha đậm đà — chiếc bánh dành cho những người yêu trà xanh.',
+               longDesc: 'Thuộc dòng Nguyệt Collection, Lục Nguyệt sử dụng matcha Uji grade A từ Kyoto — loại matcha chất lượng cao nhất với màu xanh tươi và vị đắng nhẹ đặc trưng. Kết hợp hoàn hảo với kem tươi nguyên chất.',
+               type: 'Sweet Mochi', flavor: 'Matcha Uji Kyoto',
+               storage: '0–5°C, dùng trong 24 giờ',
+               ingr: [['Vỏ mochi','Bột gạo nếp Nhật, bột matcha Uji, đường'],['Nhân kem','Whipping cream, matcha grade A, đường']],
+               nutri: [['Năng lượng','~170 kcal'],['Chất béo','~7g'],['Carbohydrate','~23g'],['Đường','~13g'],['Protein','~3g']],
+               related: ['hac-nguyet','nong-nguyet','ngoc-nguyet','matcha-rose']
+           },
+           'hac-nguyet': {
+               name: 'Hắc Nguyệt', subtitle: 'Mochi Oreo Kem Tươi',
+               category: 'Sweet Mochi · Nguyệt Collection', price: 35000,
+               images: ['mochi-6.jpeg','mochi-5.jpeg','mochi-7.jpeg','mochi-8.jpeg'],
+               tags: ['Vị Oreo','Kem Tươi','Socola','Làm Thủ Công'],
+               desc: 'Hắc Nguyệt — chiếc bánh đen huyền bí với vỏ mochi than hoạt tính và nhân kem Oreo béo ngậy. Vị ngọt của kem hòa quyện với bánh quy giòn tan — sự kết hợp bất ngờ và gây nghiện.',
+               longDesc: 'Lấy cảm hứng từ xu hướng bánh than hoạt tính, Hắc Nguyệt nổi bật với màu đen sang trọng. Nhân kem Oreo được làm từ bánh quy nghiền mịn và kem tươi — vị béo ngậy, giòn tan thú vị.',
+               type: 'Sweet Mochi', flavor: 'Oreo & Kem Tươi',
+               storage: '0–5°C, dùng trong 24 giờ',
+               ingr: [['Vỏ mochi','Bột gạo nếp Nhật, than hoạt tính thực phẩm, đường'],['Nhân','Kem tươi, bánh quy Oreo nghiền, đường']],
+               nutri: [['Năng lượng','~165 kcal'],['Chất béo','~8g'],['Carbohydrate','~22g'],['Đường','~12g'],['Protein','~2g']],
+               related: ['luc-nguyet','nong-nguyet','ngoc-nguyet','chocolate-fuwa']
+           },
+           'nong-nguyet': {
+               name: 'Nồng Nguyệt', subtitle: 'Mochi Socola Đen Kem Tươi',
+               category: 'Sweet Mochi · Nguyệt Collection', price: 45000,
+               images: ['mochi-7.jpeg','mochi-5.jpeg','mochi-6.jpeg','mochi-8.jpeg'],
+               tags: ['Vị Socola','70% Dark','Kem Tươi','Làm Thủ Công'],
+               desc: 'Nồng Nguyệt — đắm say trong hương socola đen 70% cacao thượng hạng. Vỏ mochi socola nồng nàn ôm ấp nhân ganache kem tươi mịn màng. Dành cho những tâm hồn yêu socola đích thực.',
+               longDesc: 'Sử dụng socola đen 70% cacao từ Bỉ và Pháp, Nồng Nguyệt mang đến trải nghiệm socola đẳng cấp trong một chiếc bánh mochi. Ganache kem tươi mịn, vị đắng nhẹ cân bằng hoàn hảo với vị ngọt của vỏ mochi.',
+               type: 'Sweet Mochi', flavor: 'Dark Chocolate 70%',
+               storage: '0–5°C, dùng trong 24 giờ',
+               ingr: [['Vỏ mochi','Bột gạo nếp Nhật, bột cacao, đường'],['Nhân','Whipping cream, dark chocolate 70%, bơ'],['Socola','Belgium/France origin 70% cacao']],
+               nutri: [['Năng lượng','~190 kcal'],['Chất béo','~10g'],['Carbohydrate','~23g'],['Đường','~13g'],['Protein','~3g']],
+               related: ['luc-nguyet','hac-nguyet','ngoc-nguyet','chocolate-fuwa']
+           },
+           'ngoc-nguyet': {
+               name: 'Ngọc Nguyệt', subtitle: 'Mochi Dubai Pistachio',
+               category: 'Sweet Mochi · Nguyệt Collection', price: 38000,
+               images: ['mochi-8.jpeg','mochi-5.jpeg','mochi-6.jpeg','mochi-7.jpeg'],
+               tags: ['Vị Dubai','Pistachio','Kunafa','Làm Thủ Công'],
+               desc: 'Ngọc Nguyệt lấy cảm hứng từ trào lưu socola Dubai nổi đình đám. Nhân pistachio kết hợp kunafa giòn tan và kem tươi — hương vị Trung Đông xa lạ nhưng quyến rũ không thể cưỡng.',
+               longDesc: 'Inspired by the viral Dubai chocolate trend, Ngọc Nguyệt kết hợp nhân pistachio paste, kunafa giòn tan, và kem tươi nguyên chất trong lớp vỏ mochi vàng nhạt. Trải nghiệm hoàn toàn mới lạ.',
+               type: 'Sweet Mochi', flavor: 'Pistachio & Kunafa',
+               storage: '0–5°C, dùng trong 24 giờ',
+               ingr: [['Vỏ mochi','Bột gạo nếp Nhật, đường'],['Nhân','Pistachio paste, kunafa, kem tươi'],['Phủ','Bột pistachio rang']],
+               nutri: [['Năng lượng','~200 kcal'],['Chất béo','~11g'],['Carbohydrate','~22g'],['Đường','~12g'],['Protein','~4g']],
+               related: ['luc-nguyet','hac-nguyet','nong-nguyet','matcha-rose']
+           },
+           'matcha-rose': {
+               name: 'Matcha Rose', subtitle: 'Mochi Matcha Hoa Hồng — New Arrival',
+               category: 'New Arrival · Limited Edition', price: 52000,
+               images: ['mochi-9.jpeg','mochi-5.jpeg','mochi-10.jpeg','mochi-1.jpeg'],
+               tags: ['Vị Matcha','Hoa Hồng','NEW','Limited Edition'],
+               desc: 'Matcha Rose — sự kết hợp độc đáo giữa matcha Uji xanh mướt và hương hoa hồng dịu dàng. Một chiếc bánh lãng mạn, tinh tế — ra mắt độc quyền mùa xuân 2026.',
+               longDesc: 'Matcha Rose là sản phẩm mới nhất của Mochi Fuwa, lấy cảm hứng từ vườn trà và vườn hoa hồng Đà Lạt. Matcha Uji kết hợp với nước hoa hồng thực phẩm tạo nên hương vị độc đáo, không thể tìm thấy ở bất cứ đâu khác.',
+               type: 'Limited Edition Mochi', flavor: 'Matcha & Hoa Hồng',
+               storage: '0–5°C, dùng trong 24 giờ',
+               ingr: [['Vỏ mochi','Bột gạo nếp Nhật, matcha Uji, nước hoa hồng, đường'],['Nhân','Kem tươi, matcha, chiết xuất hoa hồng'],['Trang trí','Cánh hoa hồng sấy khô']],
+               nutri: [['Năng lượng','~185 kcal'],['Chất béo','~8g'],['Carbohydrate','~25g'],['Đường','~14g'],['Protein','~3g']],
+               related: ['chocolate-fuwa','luc-nguyet','hong-sac','tu-sac']
+           },
+           'chocolate-fuwa': {
+               name: 'Chocolate Fuwa', subtitle: 'Mochi Socola Sữa Fuwa — New Arrival',
+               category: 'New Arrival · Limited Edition', price: 50000,
+               images: ['mochi-10.jpeg','mochi-7.jpeg','mochi-9.jpeg','mochi-6.jpeg'],
+               tags: ['Vị Socola','Milk Choco','NEW','Limited Edition'],
+               desc: 'Chocolate Fuwa — chiếc bánh mochi mang linh hồn của "fuwa fuwa" (bồng bềnh) với nhân socola sữa mịn màng, tan chảy trong miệng. Ngọt ngào, béo ngậy, hoàn hảo cho mọi tâm trạng.',
+               longDesc: 'Chocolate Fuwa là phiên bản giới hạn kết hợp kỹ thuật mochi truyền thống với nhân socola sữa Bỉ cao cấp. Lớp ganache mịn lụa bên trong tan chảy ngay khi vào miệng — trải nghiệm "fuwa fuwa" hoàn hảo.',
+               type: 'Limited Edition Mochi', flavor: 'Milk Chocolate Bỉ',
+               storage: '0–5°C, dùng trong 24 giờ',
+               ingr: [['Vỏ mochi','Bột gạo nếp Nhật, bột cacao nhạt, đường'],['Nhân','Socola sữa Bỉ, whipping cream, bơ'],['Phủ','Bột cacao'],],
+               nutri: [['Năng lượng','~195 kcal'],['Chất béo','~10g'],['Carbohydrate','~24g'],['Đường','~14g'],['Protein','~3g']],
+               related: ['matcha-rose','nong-nguyet','hac-nguyet','ngoc-nguyet']
+           },
+           'luc-duyen': {
+               name: 'Lục Duyên', subtitle: 'Matcha Latte Nhật Bản',
+               category: 'Thức Uống · Duyên Collection', price: 55000,
+               images: ['drink-1.jpeg','drink-2.jpeg','drink-3.jpeg','drink-4.jpeg'],
+               tags: ['Matcha','Latte','Uji Kyoto','Không Đường Nhân Tạo'],
+               desc: 'Lục Duyên — matcha latte đỉnh cao với matcha Uji Kyoto pha cùng sữa tươi nguyên chất. Vị đắng nhẹ của matcha cân bằng hoàn hảo với sự béo ngậy của sữa — thức uống tinh tế cho buổi sáng.',
+               longDesc: 'Sử dụng matcha Uji grade A từ Kyoto, Lục Duyên được pha chế theo phong cách café Nhật Bản — matcha được đánh bọt kỹ trước khi kết hợp với sữa tươi ấm. Không chất bảo quản, không hương liệu nhân tạo.',
+               type: 'Matcha Latte', flavor: 'Matcha Uji Kyoto',
+               storage: 'Dùng ngay, không để quá 4 giờ',
+               ingr: [['Matcha','Uji Kyoto grade A'],['Sữa','Sữa tươi nguyên chất 100%'],['Đường','Đường mía tự nhiên']],
+               nutri: [['Năng lượng','~150 kcal'],['Chất béo','~6g'],['Carbohydrate','~18g'],['Đường','~14g'],['Protein','~5g']],
+               related: ['tu-duyen','tram-duyen','ngoc-duyen','thai-mango']
+           },
+           'tu-duyen': {
+               name: 'Tử Duyên', subtitle: 'Black Grape Soda',
+               category: 'Thức Uống · Duyên Collection', price: 50000,
+               images: ['drink-2.jpeg','drink-1.jpeg','drink-3.jpeg','drink-5.jpeg'],
+               tags: ['Nho Đen','Soda','Không Cồn','Refreshing'],
+               desc: 'Tử Duyên — nước ép nho đen Mỹ kết hợp soda tươi, sủi tăm mát lạnh. Màu tím quyến rũ, vị ngọt chua tự nhiên của nho đen — thức uống giải khát hoàn hảo.',
+               longDesc: 'Tử Duyên sử dụng nước ép nho đen Mỹ nguyên chất, không thêm màu nhân tạo. Kết hợp với soda tươi tạo nên thức uống sủi bọt mát lạnh, sang trọng và tươi sáng.',
+               type: 'Soda Trái Cây', flavor: 'Nho Đen Mỹ',
+               storage: 'Dùng ngay khi nhận',
+               ingr: [['Nước ép','Nho đen Mỹ nguyên chất'],['Soda','Soda tươi có ga'],['Đường','Syrup đường mía']],
+               nutri: [['Năng lượng','~130 kcal'],['Chất béo','~0g'],['Carbohydrate','~32g'],['Đường','~28g'],['Protein','~0g']],
+               related: ['luc-duyen','tram-duyen','ngoc-duyen','thai-mango']
+           },
+           'tram-duyen': {
+               name: 'Trầm Duyên', subtitle: 'Hojicha Latte',
+               category: 'Thức Uống · Duyên Collection', price: 55000,
+               images: ['drink-3.jpeg','drink-1.jpeg','drink-2.jpeg','drink-4.jpeg'],
+               tags: ['Hojicha','Latte','Rang Mộc','Ấm Áp'],
+               desc: 'Trầm Duyên — hojicha latte với hương trà rang mộc đặc trưng của Nhật Bản. Vị ấm áp, ngọt nhẹ, ít caffeine — thức uống lý tưởng cho buổi chiều tối thư giãn.',
+               longDesc: 'Hojicha (ほうじ茶) là loại trà xanh được rang ở nhiệt độ cao, tạo ra hương vị caramel ấm áp và màu nâu đặc trưng. Lục Duyên kết hợp hojicha rang mộc với sữa tươi nguyên chất — thức uống ít caffeine nhưng đầy phong vị.',
+               type: 'Hojicha Latte', flavor: 'Hojicha Rang Mộc',
+               storage: 'Dùng ngay, không để quá 4 giờ',
+               ingr: [['Hojicha','Trà xanh rang mộc Nhật Bản'],['Sữa','Sữa tươi nguyên chất 100%'],['Đường','Đường mía tự nhiên']],
+               nutri: [['Năng lượng','~140 kcal'],['Chất béo','~5g'],['Carbohydrate','~18g'],['Đường','~14g'],['Protein','~5g']],
+               related: ['luc-duyen','tu-duyen','ngoc-duyen','matcha-frappe']
+           },
+           'ngoc-duyen': {
+               name: 'Ngọc Duyên', subtitle: 'Bubble Tea Trân Châu',
+               category: 'Thức Uống · Duyên Collection', price: 52000,
+               images: ['drink-4.jpeg','drink-1.jpeg','drink-2.jpeg','drink-3.jpeg'],
+               tags: ['Bubble Tea','Trân Châu','Sữa Tươi','Đài Loan Style'],
+               desc: 'Ngọc Duyên — bubble tea trân châu đen với trà sữa Đài Loan chính thống. Trân châu được nấu mềm dai, hòa cùng trà sữa ngọt béo — thức uống "tuổi thơ" của cả thế hệ.',
+               longDesc: 'Ngọc Duyên sử dụng trà ô long Đài Loan pha với sữa tươi và trân châu đen tự làm mỗi ngày. Trân châu được nấu đủ 4 tiếng để đạt độ dai hoàn hảo — không dùng trân châu đóng gói sẵn.',
+               type: 'Bubble Tea', flavor: 'Trà Sữa Ô Long',
+               storage: 'Dùng ngay khi nhận',
+               ingr: [['Trà','Ô long Đài Loan'],['Sữa','Sữa tươi & kem sữa'],['Trân châu','Tự làm từ bột năng & đường đen']],
+               nutri: [['Năng lượng','~220 kcal'],['Chất béo','~5g'],['Carbohydrate','~42g'],['Đường','~28g'],['Protein','~4g']],
+               related: ['luc-duyen','tu-duyen','tram-duyen','thai-mango']
+           },
+           'thai-mango': {
+               name: 'Thai Mango Juice', subtitle: 'Nước Ép Xoài Thái Tươi',
+               category: 'Thức Uống · Duyên Collection', price: 48000,
+               images: ['drink-5.jpeg','drink-4.jpeg','drink-6.jpeg','drink-1.jpeg'],
+               tags: ['Xoài Thái','100% Tươi','Không Đường','Tropical'],
+               desc: 'Thai Mango Juice — nước ép xoài Thái Lan 100% tươi, không thêm nước, không thêm đường. Vị ngọt tự nhiên, thơm nồng đặc trưng của xoài chín cây — giải khát tức thì.',
+               longDesc: 'Sử dụng xoài Nam Dok Mai Thái Lan — giống xoài nổi tiếng nhất Đông Nam Á với thịt vàng mịn, ngọt lịm và thơm nức. Ép tươi ngay khi order, không tồn trữ, không phụ gia.',
+               type: 'Nước Ép Trái Cây Tươi', flavor: 'Xoài Nam Dok Mai',
+               storage: 'Dùng ngay khi nhận',
+               ingr: [['Xoài','Xoài Nam Dok Mai Thái Lan 100%'],['Đá','Đá viên tinh khiết'],['Phụ gia','Không có']],
+               nutri: [['Năng lượng','~120 kcal'],['Chất béo','~0g'],['Carbohydrate','~29g'],['Đường','~26g'],['Protein','~1g']],
+               related: ['luc-duyen','tu-duyen','ngoc-duyen','matcha-frappe']
+           },
+           'matcha-frappe': {
+               name: 'Matcha Frappe', subtitle: 'Matcha Đá Xay Kem Tươi',
+               category: 'Thức Uống · Duyên Collection', price: 58000,
+               images: ['drink-6.jpeg','drink-1.jpeg','drink-3.jpeg','drink-5.jpeg'],
+               tags: ['Matcha','Frappe','Kem Tươi','Iced'],
+               desc: 'Matcha Frappe — đá xay matcha Uji béo ngậy với lớp kem tươi đánh bông phủ trên. Vị mát lạnh, đắng nhẹ của matcha hòa quyện với kem ngọt ngào — thức uống hoàn hảo cho mùa hè.',
+               longDesc: 'Matcha Frappe được làm từ matcha Uji grade A xay cùng đá viên tinh khiết và sữa tươi, sau đó phủ whipped cream tươi đánh bông tại chỗ. Không dùng kem công nghiệp — tất cả đều tươi.',
+               type: 'Matcha Frappe', flavor: 'Matcha Uji Đá Xay',
+               storage: 'Dùng ngay khi nhận',
+               ingr: [['Matcha','Uji Kyoto grade A'],['Đá','Đá viên tinh khiết'],['Kem','Whipped cream tươi đánh bông tại chỗ'],['Sữa','Sữa tươi nguyên chất']],
+               nutri: [['Năng lượng','~200 kcal'],['Chất béo','~9g'],['Carbohydrate','~26g'],['Đường','~20g'],['Protein','~4g']],
+               related: ['luc-duyen','tram-duyen','thai-mango','tu-duyen']
+           }
+       };
+
+       // ── Helpers ───────────────────────────────────────────────────────
+       function formatPrice(n) { return n.toLocaleString('vi-VN') + ' VND'; }
+
+       function switchImg(src, thumb) {
+           document.getElementById('mainImg').src = src;
+           document.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active'));
+           thumb.classList.add('active');
+       }
+
+       let qty = 1;
+       function changeQty(delta) {
+           qty = Math.max(1, qty + delta);
+           document.getElementById('qtyDisplay').textContent = qty;
+       }
+
+       function switchTab(id, btn) {
+           document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+           document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+           document.getElementById('tab-' + id).classList.add('active');
+           btn.classList.add('active');
+       }
+
+       let currentProduct = null;
+
+       function addToCartFromPage() {
+           if (!currentProduct) return;
+           let cart = JSON.parse(localStorage.getItem('mochiCart') || '[]');
+           const existing = cart.find(i => i.name === currentProduct.name);
+           if (existing) { existing.qty += qty; }
+           else { cart.push({ name: currentProduct.name, price: currentProduct.price, image: currentProduct.images[0], qty }); }
+           localStorage.setItem('mochiCart', JSON.stringify(cart));
+           const btn = document.getElementById('addBtn');
+           btn.textContent = 'Đã thêm vào giỏ ✓';
+           btn.classList.add('added');
+           setTimeout(() => { btn.textContent = 'Thêm vào giỏ hàng'; btn.classList.remove('added'); }, 2000);
+       }
+
+       // ── Render Product ────────────────────────────────────────────────
+       function renderProduct(id) {
+           const p = products[id];
+           if (!p) {
+               document.querySelector('.product-page').innerHTML = '<div style="text-align:center;padding:80px 20px;"><h2 style="font-family:\'Cormorant Garamond\',serif;color:#9F0031;">Sản phẩm không tồn tại</h2><a href="shop.html" style="display:inline-block;margin-top:20px;padding:12px 30px;background:#9F0031;color:#fff;border-radius:25px;text-decoration:none;font-family:\'Quicksand\',sans-serif;">Quay lại Shop</a></div>';
+               return;
+           }
+           currentProduct = p;
+
+           document.title = 'Mochi Fuwa | ' + p.name;
+           document.getElementById('breadcrumbName').textContent = p.name;
+           document.getElementById('mainImg').src = p.images[0];
+           document.getElementById('mainImg').alt = p.name;
+
+           // Thumbs
+           const thumbsEl = document.getElementById('thumbsContainer');
+           thumbsEl.innerHTML = p.images.map((img, i) =>
+               `<div class="product-thumb${i===0?' active':''}" onclick="switchImg('${img}', this)"><img src="${img}" alt="${p.name}"></div>`
+           ).join('');
+
+           document.getElementById('productCategory').textContent = p.category;
+           document.getElementById('productName').textContent = p.name;
+           document.getElementById('productSubtitle').textContent = p.subtitle;
+           document.getElementById('productPrice').textContent = formatPrice(p.price);
+           document.getElementById('productDesc').textContent = p.desc;
+
+           // Tags
+           document.getElementById('productTags').innerHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
+
+           document.getElementById('metaType').textContent = p.type;
+           document.getElementById('metaFlavor').textContent = p.flavor;
+           document.getElementById('metaStorage').textContent = p.storage;
+
+           // Tabs
+           document.getElementById('tabDesc').textContent = p.longDesc;
+           document.getElementById('tabIngr').innerHTML = p.ingr.map(([label, val]) =>
+               `<li><span>${label}</span><span>${val}</span></li>`).join('');
+           document.getElementById('tabNutri').innerHTML = p.nutri.map(([label, val]) =>
+               `<li><span>${label}</span><span>${val}</span></li>`).join('');
+
+           // Related
+           const relatedEl = document.getElementById('relatedGrid');
+           relatedEl.innerHTML = p.related.map(rid => {
+               const r = products[rid];
+               if (!r) return '';
+               return `<a href="product.html?id=${rid}" class="related-card"><img src="${r.images[0]}" alt="${r.name}"><div class="related-card-info"><h4>${r.name}</h4><p>${formatPrice(r.price)}</p></div></a>`;
+           }).join('');
+       }
+
+       // ── Init ──────────────────────────────────────────────────────────
+       const id = new URLSearchParams(window.location.search).get('id') || 'hong-sac';
+       renderProduct(id);
+
        // Menu
        const menuBtn = document.getElementById('mochiMenuBtn');
        const closeBtn = document.getElementById('menuCloseBtn');
@@ -615,50 +708,6 @@
        window.addEventListener('scroll', () => {
            header.classList.toggle('scrolled', window.scrollY > 50);
        });
-
-       // Image gallery
-       function switchImg(src, thumb) {
-           document.getElementById('mainImg').src = src;
-           document.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active'));
-           thumb.classList.add('active');
-       }
-
-       // Quantity
-       let qty = 1;
-       function changeQty(delta) {
-           qty = Math.max(1, qty + delta);
-           document.getElementById('qtyDisplay').textContent = qty;
-       }
-
-       // Add to cart
-       function addToCartFromPage() {
-           let cart = JSON.parse(localStorage.getItem('mochiCart') || '[]');
-           const name = 'Hồng Sắc';
-           const price = 45000;
-           const image = 'mochi-1.jpeg';
-           const existing = cart.find(i => i.name === name);
-           if (existing) {
-               existing.qty += qty;
-           } else {
-               cart.push({ name, price, image, qty });
-           }
-           localStorage.setItem('mochiCart', JSON.stringify(cart));
-           const btn = document.getElementById('addBtn');
-           btn.textContent = 'Đã thêm vào giỏ ✓';
-           btn.classList.add('added');
-           setTimeout(() => {
-               btn.textContent = 'Thêm vào giỏ hàng';
-               btn.classList.remove('added');
-           }, 2000);
-       }
-
-       // Tabs
-       function switchTab(id, btn) {
-           document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-           document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-           document.getElementById('tab-' + id).classList.add('active');
-           btn.classList.add('active');
-       }
    </script>
 </body>
 </html>
