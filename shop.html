@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Mochi Fuwa | Shop</title>
+   <link rel="stylesheet" href="style.css?v=52">
+   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+   <style>
+       .shop-banner {
+           width: 100%;
+           padding-top: 80px;
+           background: linear-gradient(135deg, #fdf0f2, #f8c8c8);
+           text-align: center;
+           padding-bottom: 40px;
+       }
+       .shop-banner h1 {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 3.5rem;
+           font-weight: 300;
+           color: #9F0031;
+           letter-spacing: 4px;
+           margin: 40px 0 12px;
+       }
+       .shop-banner p {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 1rem;
+           color: #666;
+           letter-spacing: 1px;
+       }
+
+       /* Filter Bar */
+       .filter-bar {
+           display: flex;
+           justify-content: center;
+           gap: 12px;
+           flex-wrap: wrap;
+           padding: 36px 20px 20px;
+           max-width: 900px;
+           margin: 0 auto;
+       }
+       .filter-btn {
+           padding: 10px 28px;
+           border-radius: 30px;
+           border: 1.5px solid #9F0031;
+           background: transparent;
+           color: #9F0031;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.85rem;
+           font-weight: 600;
+           cursor: pointer;
+           letter-spacing: 0.5px;
+           transition: all 0.3s ease;
+       }
+       .filter-btn:hover,
+       .filter-btn.active {
+           background: #9F0031;
+           color: #fff;
+       }
+
+       /* Product Grid */
+       .shop-section {
+           padding: 20px 20px 80px;
+           max-width: 1200px;
+           margin: 0 auto;
+       }
+       .products-grid {
+           display: grid;
+           grid-template-columns: repeat(4, 1fr);
+           gap: 24px;
+       }
+       .shop-card {
+           border: 0.5px solid rgba(159, 0, 49, 0.5);
+           border-radius: 1.25rem;
+           overflow: hidden;
+           background: #fff;
+           transition: transform 0.3s ease, box-shadow 0.3s ease;
+       }
+       .shop-card:hover {
+           transform: translateY(-6px);
+           box-shadow: 0 12px 30px rgba(159, 0, 49, 0.12);
+       }
+       .shop-card-img {
+           width: 100%;
+           overflow: hidden;
+           position: relative;
+       }
+       .shop-card-img img {
+           width: 100%;
+           height: 240px;
+           object-fit: cover;
+           display: block;
+           transition: transform 0.4s ease;
+       }
+       .shop-card:hover .shop-card-img img {
+           transform: scale(1.05);
+       }
+       .new-badge {
+           position: absolute;
+           top: 12px;
+           left: 12px;
+           background: #f5c518;
+           color: #9F0031;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.6rem;
+           font-weight: 700;
+           padding: 3px 10px;
+           border-radius: 20px;
+           letter-spacing: 1.5px;
+           z-index: 2;
+       }
+       .shop-card-info {
+           padding: 18px 16px 8px;
+           text-align: center;
+       }
+       .shop-card-info h3 {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 1.3rem;
+           font-weight: 400;
+           color: #9F0031;
+           margin: 0 0 4px;
+       }
+       .shop-card-info .card-category {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.75rem;
+           color: #aaa;
+           letter-spacing: 1px;
+           text-transform: uppercase;
+           margin-bottom: 6px;
+       }
+       .shop-card-info .card-price {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.95rem;
+           color: #9F0031;
+           font-weight: 600;
+       }
+       .shop-card-actions {
+           display: flex;
+           gap: 8px;
+           padding: 12px 16px 16px;
+       }
+       .btn-detail {
+           flex: 1;
+           padding: 9px 0;
+           border-radius: 25px;
+           border: 1.5px solid #9F0031;
+           background: transparent;
+           color: #9F0031;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.8rem;
+           font-weight: 600;
+           cursor: pointer;
+           text-align: center;
+           text-decoration: none;
+           transition: all 0.3s ease;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+       }
+       .btn-detail:hover {
+           background: #fdf0f2;
+       }
+       .btn-cart {
+           flex: 1;
+           padding: 9px 0;
+           border-radius: 25px;
+           border: none;
+           background: #9F0031;
+           color: #fff;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.8rem;
+           font-weight: 600;
+           cursor: pointer;
+           transition: all 0.3s ease;
+       }
+       .btn-cart:hover {
+           background: #7a0026;
+           transform: scale(1.03);
+       }
+       .btn-cart.added {
+           background: #4a8c5c;
+       }
+
+       /* Floating Cart */
+       .floating-cart {
+           position: fixed;
+           bottom: 30px;
+           right: 30px;
+           width: 56px;
+           height: 56px;
+           background: #9F0031;
+           border-radius: 50%;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           cursor: pointer;
+           z-index: 999;
+           box-shadow: 0 4px 15px rgba(159, 0, 49, 0.4);
+           transition: transform 0.3s ease;
+           text-decoration: none;
+       }
+       .floating-cart:hover { transform: scale(1.1); }
+       .floating-cart svg { width: 26px; height: 26px; fill: #fff; }
+       .cart-count {
+           position: absolute;
+           top: -4px;
+           right: -4px;
+           background: #fff;
+           color: #9F0031;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.75rem;
+           font-weight: 700;
+           width: 22px;
+           height: 22px;
+           border-radius: 50%;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           border: 2px solid #9F0031;
+           opacity: 0;
+           transition: opacity 0.3s ease;
+       }
+       .cart-count.show { opacity: 1; }
+
+       /* No results message */
+       .no-results {
+           text-align: center;
+           padding: 60px 20px;
+           font-family: 'Quicksand', sans-serif;
+           color: #999;
+           font-size: 1rem;
+           display: none;
+           grid-column: 1 / -1;
+       }
+
+       /* Responsive */
+       @media (max-width: 1024px) {
+           .products-grid { grid-template-columns: repeat(3, 1fr); }
+       }
+       @media (max-width: 768px) {
+           .products-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+           .shop-banner h1 { font-size: 2.6rem; }
+           .shop-card-img img { height: 200px; }
+       }
+       @media (max-width: 480px) {
+           .products-grid { grid-template-columns: 1fr; }
+           .shop-banner h1 { font-size: 2rem; }
+           .shop-card-img img { height: 240px; }
+           .shop-card-actions { flex-direction: column; }
+       }
+   </style>
+</head>
+<body>
+
+   <header>
+       <div class="header-content">
+           <a href="index.html" class="logo"><img src="Gemini_Generated_Image_1439e1439e1439e1.jpeg" alt="Logo" class="logo-flower">MOCHI FUWA</a>
+           <button class="mochi-menu-btn" id="mochiMenuBtn" aria-label="Menu">
+               <span class="mochi-menu-line"></span>
+               <span class="mochi-menu-line"></span>
+               <span class="mochi-menu-line"></span>
+           </button>
+       </div>
+   </header>
+
+   <div class="menu-overlay" id="menuOverlay">
+       <button class="menu-close-btn" id="menuCloseBtn" aria-label="Close menu">&times;</button>
+       <nav class="menu-overlay-nav">
+           <ul>
+               <li><a href="index.html" class="menu-link">HOME</a></li>
+               <li><a href="shop.html" class="menu-link">SHOP</a></li>
+               <li><a href="about.html" class="menu-link">ABOUT</a></li>
+               <li><a href="blog.html" class="menu-link">BLOG</a></li>
+               <li><a href="contact.html" class="menu-link">CONTACT</a></li>
+               <li><a href="cart.html" class="menu-link">CART</a></li>
+           </ul>
+       </nav>
+       <div class="menu-overlay-footer">
+           <p>Mochi Fuwa</p>
+       </div>
+   </div>
+
+   <!-- Banner -->
+   <div class="shop-banner">
+       <h1>Our Shop</h1>
+       <p>Khám phá bộ sưu tập mochi &amp; thức uống của Mochi Fuwa</p>
+   </div>
+
+   <div class="marquee-bar">
+       <div class="marquee-track">
+           <span>MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ </span>
+           <span>MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ </span>
+       </div>
+   </div>
+
+   <!-- Filter Bar -->
+   <div class="filter-bar">
+       <button class="filter-btn active" data-filter="all">Tất Cả</button>
+       <button class="filter-btn" data-filter="mochi">Mochi</button>
+       <button class="filter-btn" data-filter="drinks">Thức Uống</button>
+       <button class="filter-btn" data-filter="new">New Arrivals</button>
+   </div>
+
+   <!-- Products Grid -->
+   <section class="shop-section">
+       <div class="products-grid" id="productsGrid">
+
+           <!-- Mochi Products -->
+           <div class="shop-card" data-category="mochi">
+               <div class="shop-card-img">
+                   <img src="mochi-1.jpeg" alt="Hồng Sắc">
+               </div>
+               <div class="shop-card-info">
+                   <p class="card-category">Fruit Mochi</p>
+                   <h3>Hồng Sắc</h3>
+                   <p class="card-price">45.000 VND</p>
+               </div>
+               <div class="shop-card-actions">
+                   <a href="product.html" class="btn-detail">Chi Tiết</a>
+                   <button class="btn-cart" onclick="addToCart('Hồng Sắc', 45000, 'mochi-1.jpeg', this)">Thêm vào giỏ</button>
+               </div>
+           </div>
+
+           <div class="shop-card" data-category="mochi">
+               <div class="shop-card-img">
+                   <img src="mochi-2.jpeg" alt="Xích Sắc">
+               </div>
+               <div class="shop-card-info">
+                   <p class="card-category">Fruit Mochi</p>
+                   <h3>Xích Sắc</h3>
+                   <p class="card-price">38.000 VND</p>
+               </div>
+               <div class="shop-card-actions">
+                   <a href="product.html" class="btn-detail">Chi Tiết</a>
+                   <button class="btn-cart" onclick="addToCart('Xích Sắc', 38000, 'mochi-2.jpeg', this)">Thêm vào giỏ</button>
+               </div>
+           </div>
+
+           <div class="shop-card" data-category="mochi">
+               <div class="shop-card-img">
+                   <img src="mochi-3.jpeg" alt="Ngọc Sắc">
+               </div>
+               <div class="shop-card-info">
+                   <p class="card-category">Fruit Mochi</p>
+                   <h3>Ngọc Sắc</h3>
+                   <p class="card-price">48.000 VND</p>
+               </div>
+               <div class="shop-card-actions">
+                   <a href="product.html" class="btn-detail">Chi Tiết</a>
+                   <button class="btn-cart" onclick="addToCart('Ngọc Sắc', 48000, 'mochi-3.jpeg', this)">Thêm vào giỏ</button>
+               </div>
+           </div>
+
+           <div class="shop-card" data-category="mochi">
+               <div class="shop-card-img">
+                   <img src="mochi-4.jpeg" alt="Tử Sắc">
+               </div>
+               <div class="shop-card-info">
+                   <p class="card-category">Fruit Mochi</p>
+                   <h3>Tử Sắc</h3>
+                   <p class="card-price">46.000 VND</p>
+               </div>
+               <div class="shop-card-actions">
+                   <a href="product.html" class="btn-detail">Chi Tiết</a>
+                   <button class="btn-cart" onclick="addToCart('Tử Sắc', 46000, 'mochi-4.jpeg', this)">Thêm vào giỏ</button>
+               </div>
+           </div>
+
+           <div class="shop-card" data-category="mochi">
+               <div class="shop-card-img">
+                   <img src="mochi-5.jpeg" alt="Lục Nguyệt">
+               </div>
+               <div class="shop-card-info">
+                   <p class="card-category">Sweet Mochi</p>
+                   <h3>Lục Nguyệt</h3>
+                   <p class="card-price">42.000 VND</p>
+               </div>
+               <div class="shop-card-actions">
+                   <a href="product.html" class="btn-detail">Chi Tiết</a>
+                   <button class="btn-cart" onclick="addToCart('Lục Nguyệt', 42000, 'mochi-5.jpeg', this)">Thêm vào giỏ</button>
+               </div>
+           </div>
+
+           <div class="shop-card" data-category="mochi">
+               <div class="shop-card-img">
+                   <img src="mochi-6.jpeg" alt="Hắc Nguyệt">
+               </div>
+               <div class="shop-card-info">
+                   <p class="card-category">Sweet Mochi</p>
+                   <h3>Hắc Nguyệt</h3>
+                   <p class="card-price">35.000 VND</p>
+               </div>
+               <div class="shop-card-actions">
+                   <a href="product.html" class="btn-detail">Chi Tiết</a>
+                   <button class="btn-cart" onclick="addToCart('Hắc Nguyệt', 35000, 'mochi-6.jpeg', this)">Thêm vào giỏ</button>
+               </div>
+           </div>
+
+           <div class="shop-card" data-category="mochi">
+               <div class="shop-card-img">
+                   <img src="mochi-7.jpeg" alt="Nồng Nguyệt">
+               </div>
+               <div class="shop-card-info">
+                   <p class="card-category">Sweet Mochi</p>
+                   <h3>Nồng Nguyệt</h3>
+                   <p class="card-price">45.000 VND</p>
+               </div>
+               <div class="shop-card-actions">
+                   <a href="product.html" class="btn-detail">Chi Tiết</a>
+                   <button class="btn-cart" onclick="addToCart('Nồng Nguyệt', 45000, 'mochi-7.jpeg', this)">Thêm vào giỏ</button>
+               </div>
+           </div>
+
+           <div class="shop-card" data-category="mochi">
+               <div class="shop-card-img">
+                   <img src="mochi-8.jpeg" alt="Ngọc Nguyệt">
+               </div>
+               <div class="shop-card-info">
+                   <p class="card-category">Sweet Mochi</p>
+                   <h3>Ngọc Nguyệt</h3>
+                   <p class="card-price">38.000 VND</p>
+               </div>
+               <div class="shop-card-actions">
+                   <a href="product.html" class="btn-detail">Chi Tiết</a>
+                   <button class="btn-cart" onclick="addToCart('Ngọc Nguyệt', 38000, 'mochi-8.jpeg', this)">Thêm vào giỏ</button>
+               </div>
+           </div>
+
+           <!-- New Arrivals -->
+           <div class="shop-card" data-category="new">
+               <div class="shop-card-img">
+                   <span class="new-badge">NEW</span>
+                   <img src="mochi-9.jpeg" alt="Matcha Rose">
+               </div>
+               <div class="shop-card-info">
+                   <p class="card-category">New Arrival</p>
+                   <h3>Matcha Rose</h3>
+                   <p class="card-price">52.000 VND</p>
+               </div>
+               <div class="shop-card-actions">
+                   <a href="product.html" class="btn-detail">Chi Tiết</a>
+                   <button class="btn-cart" onclick="addToCart('Matcha Rose', 52000, 'mochi-9.jpeg', this)">Thêm vào giỏ</button>
+               </div>
+           </div>
+
+           <div class="shop-card" data-category="new">
+               <div class="shop-card-img">
+                   <span class="new-badge">NEW</span>
+                   <img src="mochi-10.jpeg" alt="Chocolate Fuwa">
+               </div>
+               <div class="shop-card-info">
+                   <p class="card-category">New Arrival</p>
+                   <h3>Chocolate Fuwa</h3>
+                   <p class="card-price">50.000 VND</p>
+               </div>
+               <div class="shop-card-actions">
+                   <a href="product.html" class="btn-detail">Chi Tiết</a>
+                   <button class="btn-cart" onclick="addToCart('Chocolate Fuwa', 50000, 'mochi-10.jpeg', this)">Thêm vào giỏ</button>
+               </div>
+           </div>
+
+           <!-- Drinks -->
+           <div class="shop-card" data-category="drinks">
+               <div class="shop-card-img">
+                   <img src="drink-1.jpeg" alt="Lục Duyên">
+               </div>
+               <div class="shop-card-info">
+                   <p class="card-category">Thức Uống</p>
+                   <h3>Lục Duyên</h3>
+                   <p class="card-price">55.000 VND</p>
+               </div>
+               <div class="shop-card-actions">
+                   <a href="product.html" class="btn-detail">Chi Tiết</a>
+                   <button class="btn-cart" onclick="addToCart('Lục Duyên', 55000, 'drink-1.jpeg', this)">Thêm vào giỏ</button>
+               </div>
+           </div>
+
+           <div class="shop-card" data-category="drinks">
+               <div class="shop-card-img">
+                   <img src="drink-2.jpeg" alt="Tử Duyên">
+               </div>
+               <div class="shop-card-info">
+                   <p class="card-category">Thức Uống</p>
+                   <h3>Tử Duyên</h3>
+                   <p class="card-price">50.000 VND</p>
+               </div>
+               <div class="shop-card-actions">
+                   <a href="product.html" class="btn-detail">Chi Tiết</a>
+                   <button class="btn-cart" onclick="addToCart('Tử Duyên', 50000, 'drink-2.jpeg', this)">Thêm vào giỏ</button>
+               </div>
+           </div>
+
+           <div class="shop-card" data-category="drinks">
+               <div class="shop-card-img">
+                   <img src="drink-3.jpeg" alt="Trầm Duyên">
+               </div>
+               <div class="shop-card-info">
+                   <p class="card-category">Thức Uống</p>
+                   <h3>Trầm Duyên</h3>
+                   <p class="card-price">55.000 VND</p>
+               </div>
+               <div class="shop-card-actions">
+                   <a href="product.html" class="btn-detail">Chi Tiết</a>
+                   <button class="btn-cart" onclick="addToCart('Trầm Duyên', 55000, 'drink-3.jpeg', this)">Thêm vào giỏ</button>
+               </div>
+           </div>
+
+           <div class="shop-card" data-category="drinks">
+               <div class="shop-card-img">
+                   <img src="drink-4.jpeg" alt="Ngọc Duyên">
+               </div>
+               <div class="shop-card-info">
+                   <p class="card-category">Thức Uống</p>
+                   <h3>Ngọc Duyên</h3>
+                   <p class="card-price">52.000 VND</p>
+               </div>
+               <div class="shop-card-actions">
+                   <a href="product.html" class="btn-detail">Chi Tiết</a>
+                   <button class="btn-cart" onclick="addToCart('Ngọc Duyên', 52000, 'drink-4.jpeg', this)">Thêm vào giỏ</button>
+               </div>
+           </div>
+
+           <div class="shop-card" data-category="drinks">
+               <div class="shop-card-img">
+                   <img src="drink-5.jpeg" alt="Thai Mango Juice">
+               </div>
+               <div class="shop-card-info">
+                   <p class="card-category">Thức Uống</p>
+                   <h3>Thai Mango Juice</h3>
+                   <p class="card-price">48.000 VND</p>
+               </div>
+               <div class="shop-card-actions">
+                   <a href="product.html" class="btn-detail">Chi Tiết</a>
+                   <button class="btn-cart" onclick="addToCart('Thai Mango Juice', 48000, 'drink-5.jpeg', this)">Thêm vào giỏ</button>
+               </div>
+           </div>
+
+           <div class="shop-card" data-category="drinks">
+               <div class="shop-card-img">
+                   <img src="drink-6.jpeg" alt="Matcha Frappe">
+               </div>
+               <div class="shop-card-info">
+                   <p class="card-category">Thức Uống</p>
+                   <h3>Matcha Frappe</h3>
+                   <p class="card-price">58.000 VND</p>
+               </div>
+               <div class="shop-card-actions">
+                   <a href="product.html" class="btn-detail">Chi Tiết</a>
+                   <button class="btn-cart" onclick="addToCart('Matcha Frappe', 58000, 'drink-6.jpeg', this)">Thêm vào giỏ</button>
+               </div>
+           </div>
+
+           <div class="no-results" id="noResults">Không tìm thấy sản phẩm.</div>
+       </div>
+   </section>
+
+   <!-- Floating Cart -->
+   <a href="cart.html" class="floating-cart" id="floatingCart">
+       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+           <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/>
+       </svg>
+       <span class="cart-count" id="cartCount">0</span>
+   </a>
+
+   <footer>
+       <div class="footer-container">
+           <div class="footer-brand">
+               <h2><img src="Gemini_Generated_Image_1439e1439e1439e1.jpeg" alt="Logo" class="footer-logo-flower">mochi.</h2>
+           </div>
+           <div class="footer-info">
+               <h4>HỆ THỐNG CỬA HÀNG</h4>
+               <p>01 Raymondienne, Khu đô thị Phú Mỹ Hưng, Quận 7, TP.HCM</p>
+           </div>
+           <div class="footer-contact">
+               <h4>LIÊN HỆ</h4>
+               <p>Hotline: 090 110 98 80</p>
+               <p>Email: fuwax2.bakery@gmail.com</p>
+           </div>
+           <div class="footer-social">
+               <h4>THEO DÕI</h4>
+               <p>Facebook | Instagram | TikTok</p>
+           </div>
+       </div>
+       <div class="footer-copyright">
+           <p>copyright &copy; 2026. all rights reserved.</p>
+       </div>
+   </footer>
+
+   <script>
+       // Menu overlay
+       const menuBtn = document.getElementById('mochiMenuBtn');
+       const closeBtn = document.getElementById('menuCloseBtn');
+       const overlay = document.getElementById('menuOverlay');
+       const menuLinks = document.querySelectorAll('.menu-link');
+
+       menuBtn.addEventListener('click', () => {
+           overlay.classList.add('active');
+           menuBtn.classList.add('active');
+           document.body.style.overflow = 'hidden';
+       });
+       function closeMenu() {
+           overlay.classList.remove('active');
+           menuBtn.classList.remove('active');
+           document.body.style.overflow = '';
+       }
+       closeBtn.addEventListener('click', closeMenu);
+       menuLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+       const header = document.querySelector('header');
+       window.addEventListener('scroll', () => {
+           header.classList.toggle('scrolled', window.scrollY > 50);
+       });
+
+       // Filter
+       const filterBtns = document.querySelectorAll('.filter-btn');
+       const cards = document.querySelectorAll('.shop-card');
+       const noResults = document.getElementById('noResults');
+
+       filterBtns.forEach(btn => {
+           btn.addEventListener('click', () => {
+               filterBtns.forEach(b => b.classList.remove('active'));
+               btn.classList.add('active');
+               const filter = btn.dataset.filter;
+               let visible = 0;
+               cards.forEach(card => {
+                   const match = filter === 'all' || card.dataset.category === filter;
+                   card.style.display = match ? 'block' : 'none';
+                   if (match) visible++;
+               });
+               noResults.style.display = visible === 0 ? 'block' : 'none';
+           });
+       });
+
+       // Cart
+       function updateCartCount() {
+           const cart = JSON.parse(localStorage.getItem('mochiCart') || '[]');
+           const total = cart.reduce((sum, item) => sum + item.qty, 0);
+           const countEl = document.getElementById('cartCount');
+           countEl.textContent = total;
+           countEl.classList.toggle('show', total > 0);
+       }
+
+       function addToCart(name, price, image, btn) {
+           let cart = JSON.parse(localStorage.getItem('mochiCart') || '[]');
+           const existing = cart.find(i => i.name === name);
+           if (existing) {
+               existing.qty++;
+           } else {
+               cart.push({ name, price, image, qty: 1 });
+           }
+           localStorage.setItem('mochiCart', JSON.stringify(cart));
+           btn.textContent = 'Đã thêm ✓';
+           btn.classList.add('added');
+           setTimeout(() => {
+               btn.textContent = 'Thêm vào giỏ';
+               btn.classList.remove('added');
+           }, 1500);
+           updateCartCount();
+       }
+
+       updateCartCount();
+   </script>
+</body>
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Mochi Fuwa | Blog</title>
+   <link rel="stylesheet" href="style.css?v=52">
+   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+   <style>
+       /* Blog Banner */
+       .blog-banner {
+           width: 100%;
+           padding-top: 80px;
+           background: linear-gradient(135deg, #fdf0f2, #f8c8c8);
+           text-align: center;
+           padding-bottom: 48px;
+       }
+       .blog-banner h1 {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 3.5rem;
+           font-weight: 300;
+           color: #9F0031;
+           letter-spacing: 4px;
+           margin: 40px 0 12px;
+       }
+       .blog-banner p {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 1rem;
+           color: #888;
+           letter-spacing: 0.5px;
+       }
+
+       /* Blog Layout */
+       .blog-section {
+           max-width: 1100px;
+           margin: 0 auto;
+           padding: 60px 24px 80px;
+       }
+
+       /* Featured Post */
+       .featured-post {
+           display: grid;
+           grid-template-columns: 1.2fr 1fr;
+           gap: 48px;
+           align-items: center;
+           margin-bottom: 60px;
+           border-bottom: 1px solid rgba(159, 0, 49, 0.12);
+           padding-bottom: 60px;
+       }
+       .featured-post-img {
+           border-radius: 1.5rem;
+           overflow: hidden;
+           border: 0.5px solid rgba(159, 0, 49, 0.2);
+       }
+       .featured-post-img img {
+           width: 100%;
+           height: 380px;
+           object-fit: cover;
+           display: block;
+           transition: transform 0.5s ease;
+       }
+       .featured-post-img:hover img { transform: scale(1.04); }
+       .featured-post-content {}
+       .post-tag {
+           display: inline-block;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.7rem;
+           font-weight: 700;
+           letter-spacing: 2px;
+           text-transform: uppercase;
+           color: #9F0031;
+           background: #fdf0f2;
+           padding: 4px 12px;
+           border-radius: 20px;
+           margin-bottom: 16px;
+       }
+       .featured-post-content h2 {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 2.4rem;
+           font-weight: 400;
+           color: #9F0031;
+           letter-spacing: 1px;
+           line-height: 1.2;
+           margin: 0 0 16px;
+       }
+       .post-meta {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.8rem;
+           color: #bbb;
+           letter-spacing: 0.5px;
+           margin-bottom: 18px;
+       }
+       .post-excerpt {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.95rem;
+           color: #666;
+           line-height: 1.8;
+           margin-bottom: 24px;
+       }
+       .read-more-btn {
+           display: inline-block;
+           padding: 11px 28px;
+           border: 1.5px solid #9F0031;
+           color: #9F0031;
+           border-radius: 25px;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.85rem;
+           font-weight: 600;
+           text-decoration: none;
+           letter-spacing: 0.5px;
+           transition: all 0.3s ease;
+       }
+       .read-more-btn:hover {
+           background: #9F0031;
+           color: #fff;
+       }
+
+       /* Grid Posts */
+       .blog-grid-title {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 1.8rem;
+           font-weight: 400;
+           color: #9F0031;
+           letter-spacing: 2px;
+           margin-bottom: 8px;
+       }
+       .blog-grid-underline {
+           width: 40px;
+           height: 1px;
+           background: #9F0031;
+           margin-bottom: 32px;
+       }
+       .blog-grid {
+           display: grid;
+           grid-template-columns: repeat(3, 1fr);
+           gap: 28px;
+           margin-bottom: 60px;
+       }
+       .blog-card {
+           border: 0.5px solid rgba(159, 0, 49, 0.3);
+           border-radius: 1.25rem;
+           overflow: hidden;
+           background: #fff;
+           transition: transform 0.3s ease, box-shadow 0.3s ease;
+       }
+       .blog-card:hover {
+           transform: translateY(-5px);
+           box-shadow: 0 12px 30px rgba(159, 0, 49, 0.1);
+       }
+       .blog-card-img {
+           width: 100%;
+           overflow: hidden;
+       }
+       .blog-card-img img {
+           width: 100%;
+           height: 220px;
+           object-fit: cover;
+           display: block;
+           transition: transform 0.4s ease;
+       }
+       .blog-card:hover .blog-card-img img { transform: scale(1.06); }
+       .blog-card-body {
+           padding: 20px 20px 24px;
+       }
+       .blog-card-body .post-tag { margin-bottom: 12px; }
+       .blog-card-body h3 {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 1.4rem;
+           font-weight: 400;
+           color: #9F0031;
+           letter-spacing: 0.5px;
+           line-height: 1.3;
+           margin: 0 0 10px;
+       }
+       .blog-card-body p {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.88rem;
+           color: #777;
+           line-height: 1.7;
+           margin: 0 0 16px;
+       }
+       .blog-card-footer {
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           border-top: 1px solid rgba(159, 0, 49, 0.1);
+           padding-top: 14px;
+           margin-top: 4px;
+       }
+       .blog-card-footer span {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.75rem;
+           color: #bbb;
+       }
+       .blog-card-footer a {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.8rem;
+           font-weight: 600;
+           color: #9F0031;
+           text-decoration: none;
+           transition: opacity 0.2s;
+       }
+       .blog-card-footer a:hover { opacity: 0.7; }
+
+       /* Newsletter */
+       .newsletter-section {
+           background: linear-gradient(135deg, #9F0031, #c0392b);
+           border-radius: 1.5rem;
+           padding: 48px 40px;
+           text-align: center;
+           color: #fff;
+       }
+       .newsletter-section h2 {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 2.2rem;
+           font-weight: 400;
+           letter-spacing: 2px;
+           margin: 0 0 10px;
+       }
+       .newsletter-section p {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.95rem;
+           opacity: 0.85;
+           margin-bottom: 24px;
+       }
+       .newsletter-form {
+           display: flex;
+           gap: 12px;
+           max-width: 480px;
+           margin: 0 auto;
+       }
+       .newsletter-form input {
+           flex: 1;
+           padding: 13px 20px;
+           border: none;
+           border-radius: 30px;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.9rem;
+           outline: none;
+           color: #333;
+       }
+       .newsletter-form button {
+           padding: 13px 28px;
+           background: #fff;
+           color: #9F0031;
+           border: none;
+           border-radius: 30px;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.88rem;
+           font-weight: 700;
+           cursor: pointer;
+           white-space: nowrap;
+           letter-spacing: 0.5px;
+           transition: opacity 0.3s;
+       }
+       .newsletter-form button:hover { opacity: 0.85; }
+
+       /* Responsive */
+       @media (max-width: 992px) {
+           .featured-post { grid-template-columns: 1fr; gap: 28px; }
+           .featured-post-img img { height: 300px; }
+           .blog-grid { grid-template-columns: repeat(2, 1fr); }
+       }
+       @media (max-width: 768px) {
+           .blog-banner h1 { font-size: 2.6rem; }
+           .featured-post-content h2 { font-size: 1.9rem; }
+           .newsletter-section { padding: 36px 24px; }
+           .newsletter-form { flex-direction: column; }
+       }
+       @media (max-width: 576px) {
+           .blog-grid { grid-template-columns: 1fr; }
+           .blog-banner h1 { font-size: 2rem; }
+           .newsletter-section h2 { font-size: 1.7rem; }
+       }
+   </style>
+</head>
+<body>
+
+   <header>
+       <div class="header-content">
+           <a href="index.html" class="logo"><img src="Gemini_Generated_Image_1439e1439e1439e1.jpeg" alt="Logo" class="logo-flower">MOCHI FUWA</a>
+           <button class="mochi-menu-btn" id="mochiMenuBtn" aria-label="Menu">
+               <span class="mochi-menu-line"></span>
+               <span class="mochi-menu-line"></span>
+               <span class="mochi-menu-line"></span>
+           </button>
+       </div>
+   </header>
+
+   <div class="menu-overlay" id="menuOverlay">
+       <button class="menu-close-btn" id="menuCloseBtn" aria-label="Close menu">&times;</button>
+       <nav class="menu-overlay-nav">
+           <ul>
+               <li><a href="index.html" class="menu-link">HOME</a></li>
+               <li><a href="shop.html" class="menu-link">SHOP</a></li>
+               <li><a href="about.html" class="menu-link">ABOUT</a></li>
+               <li><a href="blog.html" class="menu-link">BLOG</a></li>
+               <li><a href="contact.html" class="menu-link">CONTACT</a></li>
+               <li><a href="cart.html" class="menu-link">CART</a></li>
+           </ul>
+       </nav>
+       <div class="menu-overlay-footer">
+           <p>Mochi Fuwa</p>
+       </div>
+   </div>
+
+   <!-- Banner -->
+   <div class="blog-banner">
+       <h1>Blog & Tin Tức</h1>
+       <p>Chuyện kể từ bếp của Mochi Fuwa — công thức, nguồn cảm hứng và những câu chuyện ngọt ngào.</p>
+   </div>
+
+   <div class="marquee-bar">
+       <div class="marquee-track">
+           <span>MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ </span>
+           <span>MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ MOCHI FUWA ✦ </span>
+       </div>
+   </div>
+
+   <div class="blog-section">
+
+       <!-- Featured Post -->
+       <div class="featured-post">
+           <div class="featured-post-img">
+               <img src="mochi-1.jpeg" alt="Mochi Nhật Bản">
+           </div>
+           <div class="featured-post-content">
+               <span class="post-tag">Văn Hóa Ẩm Thực</span>
+               <h2>Mochi Nhật Bản — Nguồn Gốc & Hành Trình Đến Việt Nam</h2>
+               <p class="post-meta">15 Tháng 3, 2026 &nbsp;·&nbsp; Mochi Fuwa Team</p>
+               <p class="post-excerpt">
+                   Bánh mochi (餅) có lịch sử hơn 1.000 năm tại Nhật Bản, từ những nghi lễ thần đạo đến bàn tiệc hoàng gia. Ngày nay, mochi đã vượt qua biên giới để trở thành một trong những loại bánh được yêu thích nhất trên toàn cầu — và Mochi Fuwa tự hào là cầu nối đưa hương vị "fuwa fuwa" ấy đến tận tay người Sài Gòn.
+               </p>
+               <a href="#" class="read-more-btn">Đọc Thêm &rarr;</a>
+           </div>
+       </div>
+
+       <!-- More Posts -->
+       <h2 class="blog-grid-title">Bài Viết Mới Nhất</h2>
+       <div class="blog-grid-underline"></div>
+       <div class="blog-grid">
+
+           <!-- Post 2 -->
+           <div class="blog-card">
+               <div class="blog-card-img">
+                   <img src="mochi-5.jpeg" alt="5 Hương Vị Mochi">
+               </div>
+               <div class="blog-card-body">
+                   <span class="post-tag">Xu Hướng</span>
+                   <h3>5 Hương Vị Mochi Hot Nhất Mùa Hè 2026</h3>
+                   <p>Mùa hè năm nay, Mochi Fuwa ra mắt loạt hương vị mới từ trái cây nhiệt đới và matcha đặc biệt. Cùng khám phá top 5 được đặt hàng nhiều nhất trong tháng qua nhé!</p>
+                   <div class="blog-card-footer">
+                       <span>20 Tháng 3, 2026</span>
+                       <a href="#">Đọc thêm &rarr;</a>
+                   </div>
+               </div>
+           </div>
+
+           <!-- Post 3 -->
+           <div class="blog-card">
+               <div class="blog-card-img">
+                   <img src="mochi-9.jpeg" alt="Cách Bảo Quản Mochi">
+               </div>
+               <div class="blog-card-body">
+                   <span class="post-tag">Mẹo & Thủ Thuật</span>
+                   <h3>Cách Bảo Quản Mochi Tươi Lâu Nhất Tại Nhà</h3>
+                   <p>Mochi Fuwa làm thủ công hàng ngày, không chất bảo quản. Vậy làm thế nào để giữ bánh ngon nhất sau khi nhận? Đây là những bí quyết bảo quản mochi từ chính đội ngũ bếp của chúng tôi.</p>
+                   <div class="blog-card-footer">
+                       <span>22 Tháng 3, 2026</span>
+                       <a href="#">Đọc thêm &rarr;</a>
+                   </div>
+               </div>
+           </div>
+
+           <!-- Post 4 -->
+           <div class="blog-card">
+               <div class="blog-card-img">
+                   <img src="drink-1.jpeg" alt="Kết Hợp Đồ Uống">
+               </div>
+               <div class="blog-card-body">
+                   <span class="post-tag">Ẩm Thực</span>
+                   <h3>Kết Hợp Mochi & Thức Uống — Bộ Đôi Hoàn Hảo</h3>
+                   <p>Mochi ngon hơn rất nhiều khi kết hợp với thức uống phù hợp. Lục Duyên (Matcha Latte) với Hồng Sắc? Tử Duyên (Black Grape Soda) với Hắc Nguyệt? Hãy cùng khám phá những cặp đôi lý tưởng!</p>
+                   <div class="blog-card-footer">
+                       <span>25 Tháng 3, 2026</span>
+                       <a href="#">Đọc thêm &rarr;</a>
+                   </div>
+               </div>
+           </div>
+
+           <!-- Post 5 -->
+           <div class="blog-card">
+               <div class="blog-card-img">
+                   <img src="birthday.jpeg" alt="Mochi Gift">
+               </div>
+               <div class="blog-card-body">
+                   <span class="post-tag">Quà Tặng</span>
+                   <h3>Ý Tưởng Quà Tặng Đặc Biệt Từ Mochi Fuwa</h3>
+                   <p>Một hộp mochi tinh tế, được đóng gói sang trọng — món quà ý nghĩa cho sinh nhật, kỷ niệm hay đơn giản là lời nói "tôi quan tâm bạn". Khám phá các set quà tặng đặc biệt của chúng tôi.</p>
+                   <div class="blog-card-footer">
+                       <span>27 Tháng 3, 2026</span>
+                       <a href="#">Đọc thêm &rarr;</a>
+                   </div>
+               </div>
+           </div>
+
+           <!-- Post 6 -->
+           <div class="blog-card">
+               <div class="blog-card-img">
+                   <img src="mochi-7.jpeg" alt="Nguyên Liệu Sạch">
+               </div>
+               <div class="blog-card-body">
+                   <span class="post-tag">Nguyên Liệu</span>
+                   <h3>Vì Sao Chúng Tôi Chỉ Dùng Nguyên Liệu Nhật Bản?</h3>
+                   <p>Bột gạo nếp Nhật, matcha Uji, trái cây Đà Lạt tươi ngày — Mochi Fuwa không thỏa hiệp về chất lượng. Hành trình tìm kiếm nguyên liệu thuần khiết nhất cho từng chiếc bánh.</p>
+                   <div class="blog-card-footer">
+                       <span>28 Tháng 3, 2026</span>
+                       <a href="#">Đọc thêm &rarr;</a>
+                   </div>
+               </div>
+           </div>
+
+           <!-- Post 7 -->
+           <div class="blog-card">
+               <div class="blog-card-img">
+                   <img src="mochi-6.jpeg" alt="Mochi Mùa Thu">
+               </div>
+               <div class="blog-card-body">
+                   <span class="post-tag">Mùa Vụ</span>
+                   <h3>Mochi Theo Mùa — Sáng Tạo Theo Nhịp Thời Gian</h3>
+                   <p>Mỗi mùa trong năm, Mochi Fuwa lại giới thiệu những hương vị mới lấy cảm hứng từ thiên nhiên. Từ hoa anh đào mùa xuân đến cam quýt mùa đông — mỗi chiếc bánh là một bức tranh của mùa.</p>
+                   <div class="blog-card-footer">
+                       <span>30 Tháng 3, 2026</span>
+                       <a href="#">Đọc thêm &rarr;</a>
+                   </div>
+               </div>
+           </div>
+
+       </div>
+
+       <!-- Newsletter -->
+       <div class="newsletter-section">
+           <h2>Đăng Ký Nhận Tin</h2>
+           <p>Nhận thông báo khi có hương vị mới, khuyến mãi và câu chuyện từ bếp Mochi Fuwa.</p>
+           <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+               <input type="email" placeholder="Nhập email của bạn..." required>
+               <button type="submit">Đăng Ký</button>
+           </form>
+       </div>
+
+   </div>
+
+   <footer>
+       <div class="footer-container">
+           <div class="footer-brand">
+               <h2><img src="Gemini_Generated_Image_1439e1439e1439e1.jpeg" alt="Logo" class="footer-logo-flower">mochi.</h2>
+           </div>
+           <div class="footer-info">
+               <h4>HỆ THỐNG CỬA HÀNG</h4>
+               <p>01 Raymondienne, Khu đô thị Phú Mỹ Hưng, Quận 7, TP.HCM</p>
+           </div>
+           <div class="footer-contact">
+               <h4>LIÊN HỆ</h4>
+               <p>Hotline: 090 110 98 80</p>
+               <p>Email: fuwax2.bakery@gmail.com</p>
+           </div>
+           <div class="footer-social">
+               <h4>THEO DÕI</h4>
+               <p>Facebook | Instagram | TikTok</p>
+           </div>
+       </div>
+       <div class="footer-copyright">
+           <p>copyright &copy; 2026. all rights reserved.</p>
+       </div>
+   </footer>
+
+   <script>
+       const menuBtn = document.getElementById('mochiMenuBtn');
+       const closeBtn = document.getElementById('menuCloseBtn');
+       const overlay = document.getElementById('menuOverlay');
+       const menuLinks = document.querySelectorAll('.menu-link');
+
+       menuBtn.addEventListener('click', () => {
+           overlay.classList.add('active');
+           menuBtn.classList.add('active');
+           document.body.style.overflow = 'hidden';
+       });
+       function closeMenu() {
+           overlay.classList.remove('active');
+           menuBtn.classList.remove('active');
+           document.body.style.overflow = '';
+       }
+       closeBtn.addEventListener('click', closeMenu);
+       menuLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+       const header = document.querySelector('header');
+       window.addEventListener('scroll', () => {
+           header.classList.toggle('scrolled', window.scrollY > 50);
+       });
+
+       function handleNewsletter(e) {
+           e.preventDefault();
+           const btn = e.target.querySelector('button');
+           btn.textContent = 'Đã đăng ký ✓';
+           btn.style.background = '#4a8c5c';
+           btn.style.color = '#fff';
+           setTimeout(() => {
+               btn.textContent = 'Đăng Ký';
+               btn.style.background = '#fff';
+               btn.style.color = '#9F0031';
+               e.target.reset();
+           }, 3000);
+       }
+   </script>
+</body>
+</html>

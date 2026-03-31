@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Mochi Fuwa | Hồng Sắc — Chi Tiết Sản Phẩm</title>
+   <link rel="stylesheet" href="style.css?v=52">
+   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+   <style>
+       .product-page {
+           padding-top: 100px;
+           padding-bottom: 80px;
+           max-width: 1100px;
+           margin: 0 auto;
+           padding-left: 24px;
+           padding-right: 24px;
+       }
+
+       .breadcrumb {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.85rem;
+           color: #aaa;
+           margin-bottom: 32px;
+           letter-spacing: 0.3px;
+       }
+       .breadcrumb a {
+           color: #aaa;
+           text-decoration: none;
+           transition: color 0.2s;
+       }
+       .breadcrumb a:hover { color: #9F0031; }
+       .breadcrumb span { color: #9F0031; }
+
+       /* Main Product Layout */
+       .product-main {
+           display: grid;
+           grid-template-columns: 1fr 1fr;
+           gap: 60px;
+           align-items: start;
+           margin-bottom: 60px;
+       }
+
+       /* Image Gallery */
+       .product-gallery {
+           position: sticky;
+           top: 100px;
+       }
+       .product-main-img {
+           width: 100%;
+           border-radius: 1.5rem;
+           overflow: hidden;
+           border: 0.5px solid rgba(159, 0, 49, 0.3);
+           margin-bottom: 16px;
+       }
+       .product-main-img img {
+           width: 100%;
+           height: 480px;
+           object-fit: cover;
+           display: block;
+           transition: transform 0.5s ease;
+       }
+       .product-main-img:hover img { transform: scale(1.04); }
+       .product-thumbs {
+           display: flex;
+           gap: 12px;
+       }
+       .product-thumb {
+           width: 80px;
+           height: 80px;
+           border-radius: 0.75rem;
+           overflow: hidden;
+           border: 2px solid transparent;
+           cursor: pointer;
+           transition: border-color 0.2s;
+           flex-shrink: 0;
+       }
+       .product-thumb.active { border-color: #9F0031; }
+       .product-thumb img {
+           width: 100%;
+           height: 100%;
+           object-fit: cover;
+           display: block;
+       }
+
+       /* Product Info */
+       .product-info {}
+       .product-category-tag {
+           display: inline-block;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.75rem;
+           font-weight: 600;
+           letter-spacing: 2px;
+           text-transform: uppercase;
+           color: #9F0031;
+           background: #fdf0f2;
+           padding: 5px 14px;
+           border-radius: 20px;
+           margin-bottom: 16px;
+       }
+       .product-info h1 {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 3.2rem;
+           font-weight: 400;
+           color: #9F0031;
+           letter-spacing: 2px;
+           margin: 0 0 8px;
+           line-height: 1.1;
+       }
+       .product-info .product-subtitle {
+           font-family: 'Cormorant Garamond', serif;
+           font-style: italic;
+           font-size: 1.2rem;
+           color: #888;
+           margin-bottom: 20px;
+       }
+       .product-price-tag {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 2.2rem;
+           font-weight: 400;
+           color: #9F0031;
+           margin-bottom: 24px;
+       }
+       .product-divider {
+           width: 40px;
+           height: 1px;
+           background: rgba(159, 0, 49, 0.4);
+           margin-bottom: 24px;
+       }
+       .product-description {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.95rem;
+           color: #555;
+           line-height: 1.8;
+           margin-bottom: 28px;
+       }
+
+       /* Tags */
+       .product-tags {
+           display: flex;
+           flex-wrap: wrap;
+           gap: 8px;
+           margin-bottom: 28px;
+       }
+       .tag {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.75rem;
+           font-weight: 600;
+           color: #9F0031;
+           border: 1px solid rgba(159, 0, 49, 0.4);
+           padding: 5px 14px;
+           border-radius: 20px;
+       }
+
+       /* Quantity & Add to Cart */
+       .product-qty-row {
+           display: flex;
+           align-items: center;
+           gap: 16px;
+           margin-bottom: 20px;
+       }
+       .qty-control {
+           display: flex;
+           align-items: center;
+           gap: 12px;
+           border: 1px solid rgba(159, 0, 49, 0.4);
+           border-radius: 30px;
+           padding: 6px 16px;
+       }
+       .qty-control button {
+           background: none;
+           border: none;
+           color: #9F0031;
+           font-size: 1.3rem;
+           font-family: 'Quicksand', sans-serif;
+           font-weight: 700;
+           cursor: pointer;
+           width: 28px;
+           height: 28px;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           transition: opacity 0.2s;
+       }
+       .qty-control button:hover { opacity: 0.7; }
+       .qty-control span {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 1rem;
+           font-weight: 600;
+           color: #333;
+           min-width: 24px;
+           text-align: center;
+       }
+       .add-to-cart-main {
+           flex: 1;
+           padding: 14px 0;
+           background: #9F0031;
+           color: #fff;
+           border: none;
+           border-radius: 30px;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.95rem;
+           font-weight: 700;
+           cursor: pointer;
+           letter-spacing: 0.5px;
+           transition: all 0.3s ease;
+       }
+       .add-to-cart-main:hover { background: #7a0026; }
+       .add-to-cart-main.added { background: #4a8c5c; }
+
+       .view-cart-btn {
+           display: block;
+           width: 100%;
+           padding: 14px 0;
+           border: 1.5px solid #9F0031;
+           background: transparent;
+           color: #9F0031;
+           border-radius: 30px;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.95rem;
+           font-weight: 600;
+           cursor: pointer;
+           text-align: center;
+           text-decoration: none;
+           transition: all 0.3s ease;
+           margin-bottom: 28px;
+       }
+       .view-cart-btn:hover { background: #fdf0f2; }
+
+       /* Info list */
+       .product-meta {
+           border-top: 1px solid rgba(159, 0, 49, 0.15);
+           padding-top: 24px;
+       }
+       .meta-row {
+           display: flex;
+           gap: 12px;
+           margin-bottom: 10px;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.88rem;
+       }
+       .meta-row .meta-label {
+           color: #aaa;
+           min-width: 100px;
+           font-weight: 500;
+       }
+       .meta-row .meta-value { color: #555; font-weight: 600; }
+
+       /* Details Tabs */
+       .product-details {
+           border-top: 1px solid rgba(159, 0, 49, 0.15);
+           padding-top: 40px;
+           margin-bottom: 60px;
+       }
+       .details-tabs {
+           display: flex;
+           gap: 0;
+           border-bottom: 1px solid rgba(159, 0, 49, 0.2);
+           margin-bottom: 28px;
+       }
+       .tab-btn {
+           padding: 12px 28px;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.9rem;
+           font-weight: 600;
+           color: #aaa;
+           background: none;
+           border: none;
+           cursor: pointer;
+           border-bottom: 2px solid transparent;
+           margin-bottom: -1px;
+           transition: all 0.2s;
+           letter-spacing: 0.3px;
+       }
+       .tab-btn.active {
+           color: #9F0031;
+           border-bottom-color: #9F0031;
+       }
+       .tab-content { display: none; }
+       .tab-content.active { display: block; }
+       .tab-content p {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.95rem;
+           color: #555;
+           line-height: 1.9;
+           margin-bottom: 16px;
+       }
+       .tab-content ul {
+           list-style: none;
+           padding: 0;
+           margin: 0;
+       }
+       .tab-content ul li {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.9rem;
+           color: #555;
+           padding: 8px 0;
+           border-bottom: 1px solid rgba(159, 0, 49, 0.08);
+           display: flex;
+           justify-content: space-between;
+       }
+       .tab-content ul li:last-child { border-bottom: none; }
+       .tab-content ul li span:first-child { color: #888; font-weight: 500; }
+       .tab-content ul li span:last-child { color: #333; font-weight: 600; }
+
+       /* Related Products */
+       .related-section { margin-top: 0; }
+       .related-section h2 {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 2rem;
+           font-weight: 400;
+           color: #9F0031;
+           letter-spacing: 2px;
+           margin-bottom: 8px;
+       }
+       .title-underline { width: 40px; height: 1px; background: #9F0031; margin-bottom: 32px; }
+       .related-grid {
+           display: grid;
+           grid-template-columns: repeat(4, 1fr);
+           gap: 20px;
+       }
+       .related-card {
+           border: 0.5px solid rgba(159, 0, 49, 0.4);
+           border-radius: 1rem;
+           overflow: hidden;
+           background: #fff;
+           text-decoration: none;
+           display: block;
+           transition: transform 0.3s ease;
+       }
+       .related-card:hover { transform: translateY(-4px); }
+       .related-card img {
+           width: 100%;
+           height: 180px;
+           object-fit: cover;
+           display: block;
+       }
+       .related-card-info {
+           padding: 14px;
+           text-align: center;
+       }
+       .related-card-info h4 {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 1.2rem;
+           font-weight: 400;
+           color: #9F0031;
+           margin: 0 0 4px;
+       }
+       .related-card-info p {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.85rem;
+           color: #9F0031;
+           margin: 0;
+           font-weight: 500;
+       }
+
+       /* Responsive */
+       @media (max-width: 992px) {
+           .product-main { grid-template-columns: 1fr; gap: 32px; }
+           .product-gallery { position: static; }
+           .related-grid { grid-template-columns: repeat(2, 1fr); }
+       }
+       @media (max-width: 768px) {
+           .product-info h1 { font-size: 2.4rem; }
+           .product-main-img img { height: 360px; }
+       }
+       @media (max-width: 480px) {
+           .product-page { padding-top: 90px; padding-left: 16px; padding-right: 16px; }
+           .product-info h1 { font-size: 2rem; }
+           .product-main-img img { height: 280px; }
+           .related-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+           .details-tabs { flex-wrap: wrap; }
+           .tab-btn { padding: 10px 16px; font-size: 0.8rem; }
+       }
+   </style>
+</head>
+<body>
+
+   <header>
+       <div class="header-content">
+           <a href="index.html" class="logo"><img src="Gemini_Generated_Image_1439e1439e1439e1.jpeg" alt="Logo" class="logo-flower">MOCHI FUWA</a>
+           <button class="mochi-menu-btn" id="mochiMenuBtn" aria-label="Menu">
+               <span class="mochi-menu-line"></span>
+               <span class="mochi-menu-line"></span>
+               <span class="mochi-menu-line"></span>
+           </button>
+       </div>
+   </header>
+
+   <div class="menu-overlay" id="menuOverlay">
+       <button class="menu-close-btn" id="menuCloseBtn" aria-label="Close menu">&times;</button>
+       <nav class="menu-overlay-nav">
+           <ul>
+               <li><a href="index.html" class="menu-link">HOME</a></li>
+               <li><a href="shop.html" class="menu-link">SHOP</a></li>
+               <li><a href="about.html" class="menu-link">ABOUT</a></li>
+               <li><a href="blog.html" class="menu-link">BLOG</a></li>
+               <li><a href="contact.html" class="menu-link">CONTACT</a></li>
+               <li><a href="cart.html" class="menu-link">CART</a></li>
+           </ul>
+       </nav>
+       <div class="menu-overlay-footer">
+           <p>Mochi Fuwa</p>
+       </div>
+   </div>
+
+   <div class="product-page">
+
+       <!-- Breadcrumb -->
+       <div class="breadcrumb">
+           <a href="index.html">Home</a> &nbsp;/&nbsp;
+           <a href="shop.html">Shop</a> &nbsp;/&nbsp;
+           <span>Hồng Sắc</span>
+       </div>
+
+       <!-- Main Product -->
+       <div class="product-main">
+
+           <!-- Gallery -->
+           <div class="product-gallery">
+               <div class="product-main-img" id="mainImgWrap">
+                   <img src="mochi-1.jpeg" alt="Hồng Sắc" id="mainImg">
+               </div>
+               <div class="product-thumbs">
+                   <div class="product-thumb active" onclick="switchImg('mochi-1.jpeg', this)">
+                       <img src="mochi-1.jpeg" alt="Hồng Sắc">
+                   </div>
+                   <div class="product-thumb" onclick="switchImg('mochi-2.jpeg', this)">
+                       <img src="mochi-2.jpeg" alt="Xích Sắc">
+                   </div>
+                   <div class="product-thumb" onclick="switchImg('mochi-3.jpeg', this)">
+                       <img src="mochi-3.jpeg" alt="Ngọc Sắc">
+                   </div>
+                   <div class="product-thumb" onclick="switchImg('mochi-9.jpeg', this)">
+                       <img src="mochi-9.jpeg" alt="Matcha Rose">
+                   </div>
+               </div>
+           </div>
+
+           <!-- Info -->
+           <div class="product-info">
+               <span class="product-category-tag">Fruit Mochi · Sắc Collection</span>
+               <h1>Hồng Sắc</h1>
+               <p class="product-subtitle">Mochi Dâu Tây Kem Tươi</p>
+               <div class="product-price-tag">45.000 VND</div>
+               <div class="product-divider"></div>
+
+               <p class="product-description">
+                   <strong>Hồng Sắc</strong> là tinh hoa của dòng Fruit Mochi — chiếc bánh mochi vỏ hồng mềm mại bọc lấy lớp kem tươi nguyên chất và trái dâu tây Đà Lạt mọng nước nguyên trái bên trong. Mỗi miếng cắn là sự hòa quyện hoàn hảo giữa vị ngọt thanh của kem và vị chua nhẹ tươi mát của dâu tây — cảm giác "fuwa fuwa" tan chảy trên đầu lưỡi.
+               </p>
+
+               <div class="product-tags">
+                   <span class="tag">Vị Dâu Tây</span>
+                   <span class="tag">Kem Tươi</span>
+                   <span class="tag">Không Gluten</span>
+                   <span class="tag">Làm Thủ Công</span>
+               </div>
+
+               <div class="product-qty-row">
+                   <div class="qty-control">
+                       <button onclick="changeQty(-1)">&#8722;</button>
+                       <span id="qtyDisplay">1</span>
+                       <button onclick="changeQty(1)">+</button>
+                   </div>
+                   <button class="add-to-cart-main" id="addBtn" onclick="addToCartFromPage()">Thêm vào giỏ hàng</button>
+               </div>
+               <a href="cart.html" class="view-cart-btn">Xem Giỏ Hàng</a>
+
+               <div class="product-meta">
+                   <div class="meta-row">
+                       <span class="meta-label">Loại bánh</span>
+                       <span class="meta-value">Mochi Trái Cây Tươi</span>
+                   </div>
+                   <div class="meta-row">
+                       <span class="meta-label">Hương vị</span>
+                       <span class="meta-value">Dâu Tây Đà Lạt</span>
+                   </div>
+                   <div class="meta-row">
+                       <span class="meta-label">Bảo quản</span>
+                       <span class="meta-value">0–5°C, dùng trong 24 giờ</span>
+                   </div>
+                   <div class="meta-row">
+                       <span class="meta-label">Giao hàng</span>
+                       <span class="meta-value">Hỏa tốc 2 giờ TP.HCM</span>
+                   </div>
+               </div>
+           </div>
+       </div>
+
+       <!-- Details Tabs -->
+       <div class="product-details">
+           <div class="details-tabs">
+               <button class="tab-btn active" onclick="switchTab('desc', this)">Mô Tả</button>
+               <button class="tab-btn" onclick="switchTab('ingr', this)">Thành Phần</button>
+               <button class="tab-btn" onclick="switchTab('nutri', this)">Dinh Dưỡng</button>
+           </div>
+
+           <div class="tab-content active" id="tab-desc">
+               <p>
+                   <strong>Hồng Sắc</strong> thuộc dòng <em>Sắc Collection</em> — bộ sưu tập Fruit Mochi đặc biệt của Mochi Fuwa, lấy cảm hứng từ màu sắc rực rỡ của các loại trái cây tươi ngon.
+               </p>
+               <p>
+                   Vỏ bánh được làm từ bột gạo nếp Nhật Bản hảo hạng, nhào nặn kỳ công và hấp cách thủy đúng kỹ thuật truyền thống. Lớp kem bên trong sử dụng whipping cream tươi nguyên chất, đánh bông mượt mà và được phối cùng trái dâu tây Đà Lạt chọn lọc, mọng nước, không thêm chất bảo quản.
+               </p>
+               <p>
+                   Bánh được đặt trong hộp quà sang trọng, thiết kế tinh tế — phù hợp làm quà tặng cho mọi dịp: sinh nhật, kỷ niệm, hoặc đơn giản là một phần thưởng ngọt ngào cho bản thân.
+               </p>
+           </div>
+
+           <div class="tab-content" id="tab-ingr">
+               <p>Tất cả nguyên liệu được chọn lọc kỹ càng từ các nguồn uy tín, không dùng chất bảo quản nhân tạo.</p>
+               <ul>
+                   <li><span>Vỏ mochi</span><span>Bột gạo nếp Nhật, đường, nước tinh khiết</span></li>
+                   <li><span>Nhân kem</span><span>Whipping cream tươi 35% fat, đường mía</span></li>
+                   <li><span>Trái cây</span><span>Dâu tây Đà Lạt nguyên trái, không qua xử lý</span></li>
+                   <li><span>Màu sắc</span><span>Màu thực phẩm tự nhiên từ dâu tây</span></li>
+               </ul>
+           </div>
+
+           <div class="tab-content" id="tab-nutri">
+               <p>Thông tin dinh dưỡng ước tính cho 1 chiếc bánh (khoảng 65g):</p>
+               <ul>
+                   <li><span>Năng lượng</span><span>~180 kcal</span></li>
+                   <li><span>Chất béo</span><span>~8g</span></li>
+                   <li><span>Carbohydrate</span><span>~24g</span></li>
+                   <li><span>Đường</span><span>~14g</span></li>
+                   <li><span>Protein</span><span>~2g</span></li>
+                   <li><span>Natri</span><span>~20mg</span></li>
+               </ul>
+           </div>
+       </div>
+
+       <!-- Related Products -->
+       <div class="related-section">
+           <h2>Sản Phẩm Liên Quan</h2>
+           <div class="title-underline"></div>
+           <div class="related-grid">
+               <a href="product.html" class="related-card">
+                   <img src="mochi-2.jpeg" alt="Xích Sắc">
+                   <div class="related-card-info">
+                       <h4>Xích Sắc</h4>
+                       <p>38.000 VND</p>
+                   </div>
+               </a>
+               <a href="product.html" class="related-card">
+                   <img src="mochi-5.jpeg" alt="Lục Nguyệt">
+                   <div class="related-card-info">
+                       <h4>Lục Nguyệt</h4>
+                       <p>42.000 VND</p>
+                   </div>
+               </a>
+               <a href="product.html" class="related-card">
+                   <img src="mochi-9.jpeg" alt="Matcha Rose">
+                   <div class="related-card-info">
+                       <h4>Matcha Rose</h4>
+                       <p>52.000 VND</p>
+                   </div>
+               </a>
+               <a href="product.html" class="related-card">
+                   <img src="mochi-4.jpeg" alt="Tử Sắc">
+                   <div class="related-card-info">
+                       <h4>Tử Sắc</h4>
+                       <p>46.000 VND</p>
+                   </div>
+               </a>
+           </div>
+       </div>
+
+   </div>
+
+   <footer>
+       <div class="footer-container">
+           <div class="footer-brand">
+               <h2><img src="Gemini_Generated_Image_1439e1439e1439e1.jpeg" alt="Logo" class="footer-logo-flower">mochi.</h2>
+           </div>
+           <div class="footer-info">
+               <h4>HỆ THỐNG CỬA HÀNG</h4>
+               <p>01 Raymondienne, Khu đô thị Phú Mỹ Hưng, Quận 7, TP.HCM</p>
+           </div>
+           <div class="footer-contact">
+               <h4>LIÊN HỆ</h4>
+               <p>Hotline: 090 110 98 80</p>
+               <p>Email: fuwax2.bakery@gmail.com</p>
+           </div>
+           <div class="footer-social">
+               <h4>THEO DÕI</h4>
+               <p>Facebook | Instagram | TikTok</p>
+           </div>
+       </div>
+       <div class="footer-copyright">
+           <p>copyright &copy; 2026. all rights reserved.</p>
+       </div>
+   </footer>
+
+   <script>
+       // Menu
+       const menuBtn = document.getElementById('mochiMenuBtn');
+       const closeBtn = document.getElementById('menuCloseBtn');
+       const overlay = document.getElementById('menuOverlay');
+       const menuLinks = document.querySelectorAll('.menu-link');
+
+       menuBtn.addEventListener('click', () => {
+           overlay.classList.add('active');
+           menuBtn.classList.add('active');
+           document.body.style.overflow = 'hidden';
+       });
+       function closeMenu() {
+           overlay.classList.remove('active');
+           menuBtn.classList.remove('active');
+           document.body.style.overflow = '';
+       }
+       closeBtn.addEventListener('click', closeMenu);
+       menuLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+       const header = document.querySelector('header');
+       window.addEventListener('scroll', () => {
+           header.classList.toggle('scrolled', window.scrollY > 50);
+       });
+
+       // Image gallery
+       function switchImg(src, thumb) {
+           document.getElementById('mainImg').src = src;
+           document.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active'));
+           thumb.classList.add('active');
+       }
+
+       // Quantity
+       let qty = 1;
+       function changeQty(delta) {
+           qty = Math.max(1, qty + delta);
+           document.getElementById('qtyDisplay').textContent = qty;
+       }
+
+       // Add to cart
+       function addToCartFromPage() {
+           let cart = JSON.parse(localStorage.getItem('mochiCart') || '[]');
+           const name = 'Hồng Sắc';
+           const price = 45000;
+           const image = 'mochi-1.jpeg';
+           const existing = cart.find(i => i.name === name);
+           if (existing) {
+               existing.qty += qty;
+           } else {
+               cart.push({ name, price, image, qty });
+           }
+           localStorage.setItem('mochiCart', JSON.stringify(cart));
+           const btn = document.getElementById('addBtn');
+           btn.textContent = 'Đã thêm vào giỏ ✓';
+           btn.classList.add('added');
+           setTimeout(() => {
+               btn.textContent = 'Thêm vào giỏ hàng';
+               btn.classList.remove('added');
+           }, 2000);
+       }
+
+       // Tabs
+       function switchTab(id, btn) {
+           document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+           document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+           document.getElementById('tab-' + id).classList.add('active');
+           btn.classList.add('active');
+       }
+   </script>
+</body>
+</html>

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Mochi Fuwa | Giỏ Hàng</title>
+   <link rel="stylesheet" href="style.css?v=52">
+   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+   <style>
+       .cart-page {
+           padding-top: 120px;
+           padding-bottom: 80px;
+           max-width: 860px;
+           margin: 0 auto;
+           padding-left: 24px;
+           padding-right: 24px;
+       }
+
+       .cart-page-title {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 2.8rem;
+           font-weight: 400;
+           color: #9F0031;
+           text-align: center;
+           margin-bottom: 8px;
+           letter-spacing: 2px;
+       }
+       .cart-page-subtitle {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.9rem;
+           color: #aaa;
+           text-align: center;
+           margin-bottom: 40px;
+           letter-spacing: 0.5px;
+       }
+
+       .back-to-shop {
+           display: inline-flex;
+           align-items: center;
+           gap: 6px;
+           margin-bottom: 28px;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.9rem;
+           color: #9F0031;
+           text-decoration: none;
+           font-weight: 500;
+           transition: opacity 0.2s;
+       }
+       .back-to-shop:hover { opacity: 0.7; }
+
+       /* Cart Table Header */
+       .cart-table-header {
+           display: grid;
+           grid-template-columns: 1fr 120px 100px 40px;
+           gap: 12px;
+           padding: 10px 0;
+           border-bottom: 1px solid rgba(159, 0, 49, 0.2);
+           margin-bottom: 8px;
+       }
+       .cart-table-header span {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.75rem;
+           font-weight: 700;
+           color: #aaa;
+           letter-spacing: 1.5px;
+           text-transform: uppercase;
+       }
+       .cart-table-header span:nth-child(2) { text-align: center; }
+       .cart-table-header span:nth-child(3) { text-align: right; }
+
+       /* Cart Item */
+       .cart-item {
+           display: grid;
+           grid-template-columns: 1fr 120px 100px 40px;
+           gap: 12px;
+           align-items: center;
+           padding: 20px 0;
+           border-bottom: 1px solid rgba(159, 0, 49, 0.1);
+       }
+       .cart-item-left {
+           display: flex;
+           align-items: center;
+           gap: 16px;
+       }
+       .cart-item-img {
+           width: 72px;
+           height: 72px;
+           border-radius: 10px;
+           object-fit: cover;
+           flex-shrink: 0;
+           border: 0.5px solid rgba(159, 0, 49, 0.2);
+       }
+       .cart-item-name {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 1.2rem;
+           font-weight: 400;
+           color: #9F0031;
+           margin: 0 0 4px;
+       }
+       .cart-item-unit {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.8rem;
+           color: #aaa;
+       }
+
+       .cart-item-qty {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           gap: 10px;
+       }
+       .qty-btn {
+           width: 30px;
+           height: 30px;
+           border-radius: 50%;
+           border: 1px solid rgba(159, 0, 49, 0.4);
+           background: #fff;
+           color: #9F0031;
+           font-size: 1rem;
+           cursor: pointer;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           transition: all 0.2s;
+           font-family: 'Quicksand', sans-serif;
+           font-weight: 700;
+       }
+       .qty-btn:hover { background: #9F0031; color: #fff; }
+       .qty-num {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.95rem;
+           font-weight: 600;
+           color: #333;
+           min-width: 20px;
+           text-align: center;
+       }
+
+       .cart-item-subtotal {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.9rem;
+           font-weight: 600;
+           color: #9F0031;
+           text-align: right;
+       }
+
+       .cart-item-remove {
+           background: none;
+           border: none;
+           color: #ccc;
+           font-size: 1.3rem;
+           cursor: pointer;
+           padding: 4px;
+           transition: color 0.2s;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+       }
+       .cart-item-remove:hover { color: #9F0031; }
+
+       /* Summary */
+       .cart-layout {
+           display: grid;
+           grid-template-columns: 1fr 320px;
+           gap: 40px;
+           margin-top: 32px;
+           align-items: start;
+       }
+       .cart-summary-box {
+           background: #fdf0f2;
+           border-radius: 1.25rem;
+           padding: 28px;
+           position: sticky;
+           top: 100px;
+       }
+       .cart-summary-box h3 {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 1.6rem;
+           font-weight: 400;
+           color: #9F0031;
+           margin: 0 0 20px;
+           letter-spacing: 1px;
+       }
+       .summary-row {
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           margin-bottom: 12px;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.9rem;
+           color: #666;
+       }
+       .summary-row.total {
+           border-top: 1px solid rgba(159, 0, 49, 0.2);
+           padding-top: 14px;
+           margin-top: 4px;
+           margin-bottom: 0;
+           font-weight: 700;
+           font-size: 1.05rem;
+           color: #9F0031;
+       }
+
+       .checkout-section { margin-top: 24px; }
+       .checkout-section h4 {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 1.4rem;
+           font-weight: 400;
+           color: #9F0031;
+           margin: 0 0 16px;
+           letter-spacing: 0.5px;
+       }
+       .form-group { margin-bottom: 14px; }
+       .form-group label {
+           display: block;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.8rem;
+           font-weight: 600;
+           color: #555;
+           margin-bottom: 5px;
+           letter-spacing: 0.3px;
+       }
+       .form-group input,
+       .form-group textarea {
+           width: 100%;
+           padding: 11px 14px;
+           border: 1px solid rgba(159, 0, 49, 0.25);
+           border-radius: 10px;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.88rem;
+           outline: none;
+           transition: border-color 0.3s;
+           box-sizing: border-box;
+           color: #333;
+       }
+       .form-group input:focus,
+       .form-group textarea:focus { border-color: #9F0031; }
+       .form-group textarea { resize: vertical; min-height: 70px; }
+
+       .place-order-btn {
+           display: block;
+           width: 100%;
+           padding: 15px;
+           background: #9F0031;
+           color: #fff;
+           border: none;
+           border-radius: 30px;
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.95rem;
+           font-weight: 700;
+           cursor: pointer;
+           transition: background 0.3s;
+           margin-top: 8px;
+           letter-spacing: 0.5px;
+       }
+       .place-order-btn:hover { background: #7a0026; }
+
+       /* Empty Cart */
+       .cart-empty {
+           text-align: center;
+           padding: 80px 20px;
+           display: none;
+       }
+       .cart-empty-icon {
+           font-size: 3rem;
+           margin-bottom: 16px;
+           opacity: 0.3;
+       }
+       .cart-empty p {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 1.05rem;
+           color: #888;
+           margin-bottom: 24px;
+       }
+       .cart-empty a {
+           display: inline-block;
+           padding: 13px 32px;
+           background: #9F0031;
+           color: #fff;
+           text-decoration: none;
+           border-radius: 30px;
+           font-family: 'Quicksand', sans-serif;
+           font-weight: 600;
+           transition: background 0.3s;
+       }
+       .cart-empty a:hover { background: #7a0026; }
+
+       /* Order Success */
+       .order-success {
+           display: none;
+           text-align: center;
+           padding: 80px 20px;
+       }
+       .order-success h2 {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 2.4rem;
+           color: #9F0031;
+           margin-bottom: 16px;
+       }
+       .order-success p {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 1rem;
+           color: #666;
+           margin-bottom: 28px;
+           line-height: 1.7;
+       }
+       .order-success a {
+           display: inline-block;
+           padding: 13px 32px;
+           background: #9F0031;
+           color: #fff;
+           text-decoration: none;
+           border-radius: 30px;
+           font-family: 'Quicksand', sans-serif;
+           font-weight: 600;
+           transition: background 0.3s;
+       }
+       .order-success a:hover { background: #7a0026; }
+
+       /* Responsive */
+       @media (max-width: 768px) {
+           .cart-layout { grid-template-columns: 1fr; gap: 24px; }
+           .cart-summary-box { position: static; }
+           .cart-table-header { display: none; }
+           .cart-item { grid-template-columns: 1fr auto auto; gap: 10px; }
+           .cart-item-subtotal { display: none; }
+           .cart-page-title { font-size: 2.2rem; }
+       }
+       @media (max-width: 480px) {
+           .cart-page { padding-top: 100px; padding-left: 16px; padding-right: 16px; }
+           .cart-item-img { width: 56px; height: 56px; }
+           .cart-item-name { font-size: 1rem; }
+           .cart-page-title { font-size: 1.8rem; }
+       }
+   </style>
+</head>
+<body>
+
+   <header>
+       <div class="header-content">
+           <a href="index.html" class="logo"><img src="Gemini_Generated_Image_1439e1439e1439e1.jpeg" alt="Logo" class="logo-flower">MOCHI FUWA</a>
+           <button class="mochi-menu-btn" id="mochiMenuBtn" aria-label="Menu">
+               <span class="mochi-menu-line"></span>
+               <span class="mochi-menu-line"></span>
+               <span class="mochi-menu-line"></span>
+           </button>
+       </div>
+   </header>
+
+   <div class="menu-overlay" id="menuOverlay">
+       <button class="menu-close-btn" id="menuCloseBtn" aria-label="Close menu">&times;</button>
+       <nav class="menu-overlay-nav">
+           <ul>
+               <li><a href="index.html" class="menu-link">HOME</a></li>
+               <li><a href="shop.html" class="menu-link">SHOP</a></li>
+               <li><a href="about.html" class="menu-link">ABOUT</a></li>
+               <li><a href="blog.html" class="menu-link">BLOG</a></li>
+               <li><a href="contact.html" class="menu-link">CONTACT</a></li>
+               <li><a href="cart.html" class="menu-link">CART</a></li>
+           </ul>
+       </nav>
+       <div class="menu-overlay-footer">
+           <p>Mochi Fuwa</p>
+       </div>
+   </div>
+
+   <div class="cart-page">
+       <h1 class="cart-page-title" id="cartTitle">Giỏ Hàng</h1>
+       <p class="cart-page-subtitle" id="cartSubtitle">Kiểm tra và đặt hàng sản phẩm của bạn</p>
+
+       <a href="shop.html" class="back-to-shop">&larr; Tiếp tục mua sắm</a>
+
+       <!-- Cart Table Header -->
+       <div class="cart-table-header" id="cartTableHeader" style="display:none;">
+           <span>Sản Phẩm</span>
+           <span>Số Lượng</span>
+           <span>Thành Tiền</span>
+           <span></span>
+       </div>
+
+       <!-- Cart Items -->
+       <div id="cartItemsList"></div>
+
+       <!-- Cart Layout (items + summary) -->
+       <div class="cart-layout" id="cartLayout" style="display:none;">
+           <div>
+               <!-- Delivery info placeholder (empty left column since items are above) -->
+           </div>
+           <div class="cart-summary-box">
+               <h3>Tóm Tắt Đơn Hàng</h3>
+               <div class="summary-row">
+                   <span>Tạm tính</span>
+                   <span id="subtotalAmt">0 VND</span>
+               </div>
+               <div class="summary-row">
+                   <span>Phí giao hàng</span>
+                   <span>Miễn phí</span>
+               </div>
+               <div class="summary-row total">
+                   <span>Tổng cộng</span>
+                   <span id="totalAmt">0 VND</span>
+               </div>
+
+               <div class="checkout-section">
+                   <h4>Thông Tin Giao Hàng</h4>
+                   <div class="form-group">
+                       <label>Họ và tên *</label>
+                       <input type="text" id="custName" placeholder="Nguyễn Văn A" required>
+                   </div>
+                   <div class="form-group">
+                       <label>Số điện thoại *</label>
+                       <input type="tel" id="custPhone" placeholder="090 xxx xxxx" required>
+                   </div>
+                   <div class="form-group">
+                       <label>Địa chỉ giao hàng</label>
+                       <input type="text" id="custAddress" placeholder="Số nhà, đường, quận...">
+                   </div>
+                   <div class="form-group">
+                       <label>Ghi chú</label>
+                       <textarea id="custNote" placeholder="Ít đường, nhiều đá... (tuỳ chọn)"></textarea>
+                   </div>
+                   <button class="place-order-btn" onclick="placeOrder()">Đặt Hàng Ngay</button>
+               </div>
+           </div>
+       </div>
+
+       <!-- Empty State -->
+       <div class="cart-empty" id="cartEmpty">
+           <div class="cart-empty-icon">🛒</div>
+           <p>Giỏ hàng của bạn đang trống.<br>Hãy thêm sản phẩm yêu thích vào giỏ nhé!</p>
+           <a href="shop.html">Khám Phá Shop</a>
+       </div>
+
+       <!-- Success State -->
+       <div class="order-success" id="orderSuccess">
+           <h2>Đặt Hàng Thành Công!</h2>
+           <p>Cảm ơn bạn đã tin tưởng Mochi Fuwa.<br>Chúng tôi sẽ liên hệ bạn trong vòng 15 phút để xác nhận đơn hàng.</p>
+           <a href="shop.html">Tiếp Tục Mua Sắm</a>
+       </div>
+   </div>
+
+   <footer>
+       <div class="footer-container">
+           <div class="footer-brand">
+               <h2><img src="Gemini_Generated_Image_1439e1439e1439e1.jpeg" alt="Logo" class="footer-logo-flower">mochi.</h2>
+           </div>
+           <div class="footer-info">
+               <h4>HỆ THỐNG CỬA HÀNG</h4>
+               <p>01 Raymondienne, Khu đô thị Phú Mỹ Hưng, Quận 7, TP.HCM</p>
+           </div>
+           <div class="footer-contact">
+               <h4>LIÊN HỆ</h4>
+               <p>Hotline: 090 110 98 80</p>
+               <p>Email: fuwax2.bakery@gmail.com</p>
+           </div>
+           <div class="footer-social">
+               <h4>THEO DÕI</h4>
+               <p>Facebook | Instagram | TikTok</p>
+           </div>
+       </div>
+       <div class="footer-copyright">
+           <p>copyright &copy; 2026. all rights reserved.</p>
+       </div>
+   </footer>
+
+   <script>
+       // Menu overlay
+       const menuBtn = document.getElementById('mochiMenuBtn');
+       const closeBtn = document.getElementById('menuCloseBtn');
+       const overlay = document.getElementById('menuOverlay');
+       const menuLinks = document.querySelectorAll('.menu-link');
+
+       menuBtn.addEventListener('click', () => {
+           overlay.classList.add('active');
+           menuBtn.classList.add('active');
+           document.body.style.overflow = 'hidden';
+       });
+       function closeMenu() {
+           overlay.classList.remove('active');
+           menuBtn.classList.remove('active');
+           document.body.style.overflow = '';
+       }
+       closeBtn.addEventListener('click', closeMenu);
+       menuLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+       const header = document.querySelector('header');
+       window.addEventListener('scroll', () => {
+           header.classList.toggle('scrolled', window.scrollY > 50);
+       });
+
+       // Cart rendering
+       function formatPrice(num) {
+           return num.toLocaleString('vi-VN') + ' VND';
+       }
+
+       function renderCart() {
+           const cart = JSON.parse(localStorage.getItem('mochiCart') || '[]');
+           const listEl = document.getElementById('cartItemsList');
+           const layoutEl = document.getElementById('cartLayout');
+           const emptyEl = document.getElementById('cartEmpty');
+           const headerEl = document.getElementById('cartTableHeader');
+
+           if (cart.length === 0) {
+               listEl.innerHTML = '';
+               layoutEl.style.display = 'none';
+               headerEl.style.display = 'none';
+               emptyEl.style.display = 'block';
+               return;
+           }
+
+           emptyEl.style.display = 'none';
+           layoutEl.style.display = 'grid';
+           headerEl.style.display = 'grid';
+
+           let html = '';
+           let subtotal = 0;
+
+           cart.forEach((item, index) => {
+               const lineTotal = item.price * item.qty;
+               subtotal += lineTotal;
+               html += `
+                   <div class="cart-item">
+                       <div class="cart-item-left">
+                           <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+                           <div>
+                               <p class="cart-item-name">${item.name}</p>
+                               <span class="cart-item-unit">${formatPrice(item.price)} / cái</span>
+                           </div>
+                       </div>
+                       <div class="cart-item-qty">
+                           <button class="qty-btn" onclick="changeQty(${index}, -1)">&#8722;</button>
+                           <span class="qty-num">${item.qty}</span>
+                           <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+                       </div>
+                       <div class="cart-item-subtotal">${formatPrice(lineTotal)}</div>
+                       <button class="cart-item-remove" onclick="removeItem(${index})" title="Xóa">&times;</button>
+                   </div>
+               `;
+           });
+
+           listEl.innerHTML = html;
+           document.getElementById('subtotalAmt').textContent = formatPrice(subtotal);
+           document.getElementById('totalAmt').textContent = formatPrice(subtotal);
+       }
+
+       function changeQty(index, delta) {
+           let cart = JSON.parse(localStorage.getItem('mochiCart') || '[]');
+           cart[index].qty += delta;
+           if (cart[index].qty <= 0) cart.splice(index, 1);
+           localStorage.setItem('mochiCart', JSON.stringify(cart));
+           renderCart();
+       }
+
+       function removeItem(index) {
+           let cart = JSON.parse(localStorage.getItem('mochiCart') || '[]');
+           cart.splice(index, 1);
+           localStorage.setItem('mochiCart', JSON.stringify(cart));
+           renderCart();
+       }
+
+       function placeOrder() {
+           const name = document.getElementById('custName').value.trim();
+           const phone = document.getElementById('custPhone').value.trim();
+           if (!name || !phone) {
+               alert('Vui lòng nhập họ tên và số điện thoại');
+               return;
+           }
+           localStorage.removeItem('mochiCart');
+           document.getElementById('cartItemsList').style.display = 'none';
+           document.getElementById('cartLayout').style.display = 'none';
+           document.getElementById('cartTableHeader').style.display = 'none';
+           document.getElementById('cartTitle').style.display = 'none';
+           document.getElementById('cartSubtitle').style.display = 'none';
+           document.querySelector('.back-to-shop').style.display = 'none';
+           document.getElementById('orderSuccess').style.display = 'block';
+       }
+
+       renderCart();
+   </script>
+</body>
+</html>
