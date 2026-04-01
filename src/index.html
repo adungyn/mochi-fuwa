@@ -4,11 +4,10 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Mochi Fuwa | Home</title>
-   <link rel="stylesheet" href="../publish/style.css?v=52">
+   <link rel="stylesheet" href="../publish/index.css">
    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
 
    <header>
        <div class="header-content">
@@ -38,7 +37,6 @@
        </div>
    </div>
 
-
    <section class="hero">
        <video class="hero-video" autoplay muted loop playsinline>
            <source src="../assets/img/mochi.mov" type="video/quicktime">
@@ -59,7 +57,6 @@
        </div>
    </div>
 
-
    <section class="about-label-section" id="about">
        <div class="about-label-frame">
            <div class="about-label-content">
@@ -75,14 +72,12 @@
        </div>
    </section>
 
-
    <div class="marquee-flavor">
        <div class="marquee-flavor-track">
            <span>VỊ DÂU TÂY ✦ VỊ TRÀ XANH ✦ VỊ SOCOLA ✦ VỊ ĐẬU ĐỎ ✦ VỊ OREO ✦ VỊ DUBAI ✦ VỊ VIỆT QUẤT ✦ VỊ DÂU TÂY ✦ VỊ TRÀ XANH ✦ VỊ SOCOLA ✦ VỊ ĐẬU ĐỎ ✦ VỊ OREO ✦ VỊ DUBAI ✦ VỊ VIỆT QUẤT ✦</span>
            <span>VỊ DÂU TÂY ✦ VỊ TRÀ XANH ✦ VỊ SOCOLA ✦ VỊ ĐẬU ĐỎ ✦ VỊ OREO ✦ VỊ DUBAI ✦ VỊ VIỆT QUẤT ✦ VỊ DÂU TÂY ✦ VỊ TRÀ XANH ✦ VỊ SOCOLA ✦ VỊ ĐẬU ĐỎ ✦ VỊ OREO ✦ VỊ DUBAI ✦ VỊ VIỆT QUẤT ✦</span>
        </div>
    </div>
-
 
    <section class="mochi-box-section">
        <div class="section-title">
@@ -168,7 +163,6 @@
        </div>
    </section>
 
-
    <footer>
        <div class="footer-container">
            <div class="footer-brand">
@@ -196,30 +190,10 @@
        </div>
    </footer>
 
-
+   <script src="../script/script.js"></script>
    <script>
-       const menuBtn = document.getElementById('mochiMenuBtn');
-       const closeBtn = document.getElementById('menuCloseBtn');
-       const overlay = document.getElementById('menuOverlay');
-       const menuLinks = document.querySelectorAll('.menu-link');
-
-       menuBtn.addEventListener('click', () => {
-           overlay.classList.add('active');
-           menuBtn.classList.add('active');
-           document.body.style.overflow = 'hidden';
-       });
-
-       function closeMenu() {
-           overlay.classList.remove('active');
-           menuBtn.classList.remove('active');
-           document.body.style.overflow = '';
-       }
-
-       closeBtn.addEventListener('click', closeMenu);
-       menuLinks.forEach(link => link.addEventListener('click', closeMenu));
 
        // Header scroll effect
-       const header = document.querySelector('header');
        window.addEventListener('scroll', () => {
            if (window.scrollY > 50) {
                header.classList.add('scrolled');

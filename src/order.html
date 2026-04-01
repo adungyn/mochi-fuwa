@@ -374,25 +374,9 @@
        </div>
    </footer>
 
+   <script src="../script/script.js"></script>
    <script>
        // Menu overlay
-       const menuBtn = document.getElementById('mochiMenuBtn');
-       const closeBtn = document.getElementById('menuCloseBtn');
-       const overlay = document.getElementById('menuOverlay');
-
-       menuBtn.addEventListener('click', () => {
-           overlay.classList.add('active');
-           menuBtn.classList.add('active');
-           document.body.style.overflow = 'hidden';
-       });
-
-       function closeMenu() {
-           overlay.classList.remove('active');
-           menuBtn.classList.remove('active');
-           document.body.style.overflow = '';
-       }
-
-       closeBtn.addEventListener('click', closeMenu);
 
        // Cart rendering
        function formatPrice(num) {

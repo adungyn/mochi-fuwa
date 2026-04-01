@@ -4,7 +4,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Mochi Fuwa | Chi Tiết Sản Phẩm</title>
-   <link rel="stylesheet" href="../publish/style.css?v=55">
+   <link rel="stylesheet" href="../publish/product.css">
    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
    <style>
        .product-page {
@@ -382,6 +382,7 @@
        <div class="footer-copyright"><p>copyright &copy; 2026. all rights reserved.</p></div>
    </footer>
 
+   <script src="../script/script.js"></script>
    <script>
        // ── Product Database ──────────────────────────────────────────────
        const products = {
@@ -725,28 +726,6 @@
        });
 
        // Menu
-       const menuBtn = document.getElementById('mochiMenuBtn');
-       const closeBtn = document.getElementById('menuCloseBtn');
-       const overlay = document.getElementById('menuOverlay');
-       const menuLinks = document.querySelectorAll('.menu-link');
-
-       menuBtn.addEventListener('click', () => {
-           overlay.classList.add('active');
-           menuBtn.classList.add('active');
-           document.body.style.overflow = 'hidden';
-       });
-       function closeMenu() {
-           overlay.classList.remove('active');
-           menuBtn.classList.remove('active');
-           document.body.style.overflow = '';
-       }
-       closeBtn.addEventListener('click', closeMenu);
-       menuLinks.forEach(link => link.addEventListener('click', closeMenu));
-
-       const header = document.querySelector('header');
-       window.addEventListener('scroll', () => {
-           header.classList.toggle('scrolled', window.scrollY > 50);
-       });
    </script>
 </body>
 </html>
