@@ -1,6 +1,6 @@
-// Mochi Fuwa – shared interactions
 
-// ── Mobile menu toggle ────────────────────────────────────────────────────────
+
+
 (function () {
     const menuBtn = document.getElementById('mochiMenuBtn');
     const closeBtn = document.getElementById('menuCloseBtn');
@@ -25,13 +25,13 @@
         link.addEventListener('click', closeMenu);
     });
 
-    // Close on overlay click
+   
     overlay.addEventListener('click', function (e) {
         if (e.target === overlay) closeMenu();
     });
 })();
 
-// ── Header scroll shadow ──────────────────────────────────────────────────────
+
 (function () {
     var header = document.querySelector('header');
     if (!header) return;

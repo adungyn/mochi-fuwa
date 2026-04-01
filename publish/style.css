@@ -1,16 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Quicksand:wght@300;400;500;600;700&display=swap');
 
-/* --- BIẾN MÀU SẮC (THEME) --- */
 :root {
-   --primary-red: #a31d37;  /* Đỏ rượu Soko */
-   --soft-pink: #fdf0f2;    /* Hồng nền nhạt */
-   --accent-orange: #f36f21;/* Cam điểm nhấn */
+   --primary-red: #a31d37;  
+   --soft-pink: #fdf0f2;    
+   --accent-orange: #f36f21;
    --text-dark: #333;
    --white: #ffffff;
 }
 
 
-/* --- CUSTOM HEART CURSOR --- */
 html, body, * {
    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='38' height='38' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='h' x1='0' y1='0' x2='0.5' y2='1'%3E%3Cstop offset='0%25' stop-color='%23f8c8d4'/%3E%3Cstop offset='100%25' stop-color='%23e8a0b4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' fill='url(%23h)' stroke='%23a31d37' stroke-width='0.8'/%3E%3Cellipse cx='8' cy='8' rx='2.5' ry='1.5' fill='white' opacity='0.3' transform='rotate(-30 8 8)'/%3E%3C/svg%3E") 19 19, auto;
 }
@@ -20,7 +18,6 @@ a:hover, button:hover, .btn-cart:hover {
    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='h' x1='0' y1='0' x2='0.5' y2='1'%3E%3Cstop offset='0%25' stop-color='%23e84080'/%3E%3Cstop offset='100%25' stop-color='%23a31d37'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' fill='url(%23h)' stroke='%23801328' stroke-width='0.8'/%3E%3Cellipse cx='8' cy='8' rx='2.5' ry='1.5' fill='white' opacity='0.35' transform='rotate(-30 8 8)'/%3E%3C/svg%3E") 22 22, pointer;
 }
 
-/* --- RESET & BASE --- */
 * {
    margin: 0;
    padding: 0;
@@ -40,7 +37,6 @@ a { text-decoration: none; }
 ul { list-style: none; }
 
 
-/* --- 1. HEADER & MOCHI MENU BUTTON --- */
 header {
    position: fixed;
    top: 0;
@@ -108,7 +104,6 @@ header.scrolled .logo {
    color: var(--primary-red);
 }
 
-/* Mochi-shaped menu button */
 .mochi-menu-btn {
    width: 90px;
    height: 78px;
@@ -144,7 +139,6 @@ header.scrolled .logo {
    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-/* Lines animate to X when active */
 .mochi-menu-btn.active .mochi-menu-line:nth-child(1) {
    transform: translateY(7.5px) rotate(45deg);
 }
@@ -164,7 +158,6 @@ header.scrolled .logo {
    background: var(--primary-red);
 }
 
-/* --- FULLSCREEN MENU OVERLAY --- */
 .menu-overlay {
    position: fixed;
    top: 0;
@@ -255,7 +248,6 @@ header.scrolled .logo {
 }
 
 
-/* --- 2. HERO SECTION (VIDEO) --- */
 .hero {
    position: relative;
    height: 100vh;
@@ -325,7 +317,6 @@ header.scrolled .logo {
 .cta-btn:hover { background: #801328; }
 
 
-/* --- MARQUEE BAR --- */
 .marquee-bar {
    background: var(--primary-red);
    overflow: hidden;
@@ -353,7 +344,6 @@ header.scrolled .logo {
 }
 
 
-/* --- ABOUT SECTION --- */
 .about {
    padding: 100px 10%;
    background: var(--soft-pink);
@@ -420,7 +410,6 @@ header.scrolled .logo {
    color: #555;
 }
 
-/* Cute fade-in animations */
 .bounce-in {
    opacity: 0;
    transform: scale(0.8);
@@ -453,7 +442,6 @@ header.scrolled .logo {
 }
 
 
-/* --- ABOUT LABEL FRAME (Soko-style) --- */
 .about-label-section {
    padding: 100px 5%;
    background-color: #e8a0b4;
@@ -590,8 +578,6 @@ header.scrolled .logo {
 }
 
 
-/* --- 3. SHOWCASE (FLOATING) --- */
-/* --- FLAVOR MARQUEE BAR --- */
 .marquee-flavor {
    background: rgba(255, 255, 255, 0.25);
    backdrop-filter: blur(12px);
@@ -648,7 +634,6 @@ header.scrolled .logo {
    100% { transform: translateX(-50%); }
 }
 
-/* --- CAMPAIGN SOKO-STYLE LAYOUT --- */
 .campaign-hero {
    position: relative;
    width: 100%;
@@ -730,7 +715,6 @@ header.scrolled .logo {
    color: rgba(255,255,255,0.8);
 }
 
-/* --- 4. MOCHI BOX INTERACTIVE SECTION --- */
 .mochi-box-section {
    padding: 80px 5%;
    background-color: var(--soft-pink);
@@ -831,7 +815,6 @@ header.scrolled .logo {
    overflow: hidden;
 }
 
-/* Decorative corner elements for each face */
 .mochi-box-face::before {
    content: '';
    position: absolute;
@@ -905,7 +888,6 @@ header.scrolled .logo {
    text-shadow: 0 2px 10px rgba(0,0,0,0.15);
 }
 
-/* Decorative dot pattern on top face */
 .mochi-box-face.top::before {
    border: none;
    background: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
@@ -914,7 +896,6 @@ header.scrolled .logo {
    border-radius: 20px;
 }
 
-/* Hello Kitty Mochi floating on top of 3D box */
 .mochi-box-container {
    position: relative;
    display: flex;
@@ -937,7 +918,6 @@ header.scrolled .logo {
    50% { transform: translateY(-12px); }
 }
 
-/* Reason cards */
 .mochi-box-reasons {
    display: flex;
    flex-direction: column;
@@ -988,14 +968,12 @@ header.scrolled .logo {
 }
 
 
-/* --- 5. PRODUCTS SECTION WITH CATEGORIES --- */
 .products {
    padding: 80px 5%;
    background: #FDF6EE;
    text-align: center;
 }
 
-/* Category accordion */
 .menu-category {
    max-width: 1200px;
    margin: 0 auto 10px;
@@ -1056,7 +1034,6 @@ header.scrolled .logo {
    transform: rotate(45deg);
 }
 
-/* Category content accordion */
 .category-content {
    max-height: 0;
    overflow: hidden;
@@ -1068,8 +1045,6 @@ header.scrolled .logo {
    padding: 30px 0;
 }
 
-/* Item description */
-/* Tea menu styles */
 .tea-menu-grid {
    max-width: 900px;
    margin: 0 auto;
@@ -1123,7 +1098,6 @@ header.scrolled .logo {
 
 .products-grid {
    display: grid;
-   /* Giữ nguyên 4 cột nhưng giãn cách hợp lý hơn */
    grid-template-columns: repeat(4, 1fr);
    gap: 30px;
 }
@@ -1149,7 +1123,6 @@ header.scrolled .logo {
 }
 
 
-/* --- PHẦN HÌNH ẢNH --- */
 .p-image {
    position: relative;
    overflow: hidden;
@@ -1169,13 +1142,11 @@ header.scrolled .logo {
    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Hiệu ứng zoom mượt mà khi di chuột */
 .product-card:hover .p-image img {
    transform: scale(1.06);
 }
 
 
-/* Nhãn HOT/NEW cũng chỉnh to lên xíu cho cân đối */
 .badge-hot, .badge-new {
    position: absolute;
    top: 15px; left: 15px;
@@ -1191,7 +1162,6 @@ header.scrolled .logo {
 .badge-new { background: #2ed573; }
 
 
-/* --- PHẦN THÔNG TIN --- */
 .product-card h4 {
    font-family: 'Cormorant Garamond', serif;
    font-weight: 400;
@@ -1247,7 +1217,6 @@ header.scrolled .logo {
 }
 
 
-/* --- FLAVOR HOVER EFFECTS (colored backdrop behind card) --- */
 .product-card {
    position: relative;
 }
@@ -1270,7 +1239,6 @@ header.scrolled .logo {
    opacity: 1;
 }
 
-/* Each flavor gets a colored backdrop with slight rotation */
 [data-flavor="strawberry"]::before { background-color: #ffb6c8; }
 [data-flavor="strawberry"]:hover::before { transform: rotate(-3deg); }
 
@@ -1321,7 +1289,6 @@ header.scrolled .logo {
 [data-flavor="caramel-coffee"]::before { background-color: #e8d0b0; }
 [data-flavor="caramel-coffee"]:hover::before { transform: rotate(2deg); }
 
-/* Coquette-style illustrated decorations around card */
 .product-card::after {
    content: '';
    position: absolute;
@@ -1341,7 +1308,6 @@ header.scrolled .logo {
    transform: scale(1);
 }
 
-/* Strawberry with bow */
 [data-flavor="strawberry"]::after {
    width: 70px; height: 80px;
    top: -25px; right: -18px;
@@ -1351,7 +1317,6 @@ header.scrolled .logo {
    transform: scale(1) rotate(-8deg);
 }
 
-/* Matcha tea leaf with ribbon */
 [data-flavor="matcha"]::after {
    width: 75px; height: 70px;
    top: -20px; left: -15px;
@@ -1361,7 +1326,6 @@ header.scrolled .logo {
    transform: scale(1) rotate(10deg);
 }
 
-/* Mango with bow */
 [data-flavor="mango"]::after {
    width: 70px; height: 75px;
    bottom: 35px; right: -18px;
@@ -1371,7 +1335,6 @@ header.scrolled .logo {
    transform: scale(1) rotate(8deg);
 }
 
-/* Peach with heart + bow */
 [data-flavor="peach"]::after {
    width: 72px; height: 78px;
    top: -22px; right: -14px;
@@ -1381,7 +1344,6 @@ header.scrolled .logo {
    transform: scale(1) rotate(-8deg);
 }
 
-/* Oreo cookie with bow */
 [data-flavor="oreo"]::after {
    width: 68px; height: 68px;
    top: -18px; left: -14px;
@@ -1391,7 +1353,6 @@ header.scrolled .logo {
    transform: scale(1) rotate(10deg);
 }
 
-/* Chocolate bar with ribbon */
 [data-flavor="chocolate"]::after {
    width: 65px; height: 75px;
    bottom: 45px; left: -16px;
@@ -1401,7 +1362,6 @@ header.scrolled .logo {
    transform: scale(1) rotate(-10deg);
 }
 
-/* Dubai pistachio with bow */
 [data-flavor="dubai"]::after {
    width: 68px; height: 72px;
    top: -20px; right: -12px;
@@ -1411,7 +1371,6 @@ header.scrolled .logo {
    transform: scale(1) rotate(8deg);
 }
 
-/* Daifuku cherry blossom with ribbon */
 [data-flavor="daifuku"]::after {
    width: 72px; height: 72px;
    top: -18px; left: -12px;
@@ -1421,7 +1380,6 @@ header.scrolled .logo {
    transform: scale(1) rotate(-8deg);
 }
 
-/* Mango Passion with bow */
 [data-flavor="mango-passion"]::after {
    width: 70px; height: 75px;
    top: -22px; right: -16px;
@@ -1431,7 +1389,6 @@ header.scrolled .logo {
    transform: scale(1) rotate(8deg);
 }
 
-/* Peach Lychee with bow */
 [data-flavor="peach-lychee"]::after {
    width: 70px; height: 75px;
    top: -20px; left: -14px;
@@ -1441,7 +1398,6 @@ header.scrolled .logo {
    transform: scale(1) rotate(-8deg);
 }
 
-/* Red bean */
 [data-flavor="red-bean"]::after {
    width: 65px; height: 65px;
    top: -20px; right: -15px;
@@ -1451,7 +1407,6 @@ header.scrolled .logo {
    transform: scale(1) rotate(10deg);
 }
 
-/* Blueberry */
 [data-flavor="blueberry"]::after {
    width: 70px; height: 70px;
    top: -22px; left: -16px;
@@ -1461,7 +1416,6 @@ header.scrolled .logo {
    transform: scale(1) rotate(-12deg);
 }
 
-/* Matcha drink - tea cup */
 [data-flavor="matcha-drink"]::after {
    width: 65px; height: 70px;
    top: -22px; right: -14px;
@@ -1471,7 +1425,6 @@ header.scrolled .logo {
    transform: scale(1) rotate(8deg);
 }
 
-/* Black grape */
 [data-flavor="black-grape"]::after {
    width: 65px; height: 75px;
    top: -25px; left: -14px;
@@ -1481,7 +1434,6 @@ header.scrolled .logo {
    transform: scale(1) rotate(-10deg);
 }
 
-/* Hojicha drink */
 [data-flavor="hojicha-drink"]::after {
    width: 65px; height: 70px;
    top: -20px; right: -16px;
@@ -1491,7 +1443,6 @@ header.scrolled .logo {
    transform: scale(1) rotate(6deg);
 }
 
-/* Bubble tea */
 [data-flavor="bubble-tea"]::after {
    width: 60px; height: 75px;
    top: -24px; left: -12px;
@@ -1501,7 +1452,6 @@ header.scrolled .logo {
    transform: scale(1) rotate(-8deg);
 }
 
-/* Thai mango */
 [data-flavor="thai-mango"]::after {
    width: 70px; height: 70px;
    top: -20px; right: -18px;
@@ -1511,7 +1461,6 @@ header.scrolled .logo {
    transform: scale(1) rotate(10deg);
 }
 
-/* Matcha frappe */
 [data-flavor="matcha-frappe"]::after {
    width: 65px; height: 75px;
    top: -24px; left: -14px;
@@ -1521,7 +1470,6 @@ header.scrolled .logo {
    transform: scale(1) rotate(-10deg);
 }
 
-/* Orange americano */
 [data-flavor="orange-americano"]::after {
    width: 70px; height: 70px;
    top: -22px; right: -16px;
@@ -1531,7 +1479,6 @@ header.scrolled .logo {
    transform: scale(1) rotate(8deg);
 }
 
-/* Caramel coffee frappe */
 [data-flavor="caramel-coffee"]::after {
    width: 65px; height: 75px;
    top: -24px; left: -14px;
@@ -1542,7 +1489,6 @@ header.scrolled .logo {
 }
 
 
-/* --- RESPONSIVE (QUAN TRỌNG VÌ ẢNH TO) --- */
 @media (max-width: 1200px) {
    .products-grid { grid-template-columns: repeat(3, 1fr); }
 }
@@ -1558,9 +1504,6 @@ header.scrolled .logo {
 }
 
 
-
-
-/* --- SOKO-STYLE MENU GRID (sub-pages) --- */
 .soko-menu {
    background: #FDF6EE;
    padding: 0 5% 100px;
@@ -1684,7 +1627,6 @@ header.scrolled .logo {
 }
 
 
-/* --- MENU CATEGORIES PAGE (Soko-style) --- */
 .menu-categories {
    background: #FDF6EE;
    padding: 0;
@@ -1794,7 +1736,6 @@ header.scrolled .logo {
    transform: scale(1.04);
 }
 
-/* Back to menu link */
 .back-to-menu {
    max-width: 1100px;
    margin: 0 auto;
@@ -1840,7 +1781,6 @@ header.scrolled .logo {
 }
 
 
-/* --- CAMPAIGNS SECTION --- */
 .campaigns {
    padding: 80px 10%;
    background: #fdf6ee;
@@ -1954,7 +1894,6 @@ header.scrolled .logo {
 }
 
 
-/* --- PAGE BANNER (subpages) --- */
 .page-banner {
    margin-top: 80px;
    padding: 100px 20px 70px;
@@ -2017,7 +1956,6 @@ header.scrolled .logo {
 }
 
 
-/* --- CONTACT CARDS SECTION --- */
 .contact-cards-section {
    padding: 60px 5% 40px;
    background: #FDF6EE;
@@ -2083,7 +2021,6 @@ header.scrolled .logo {
    margin-bottom: 4px;
 }
 
-/* --- CONTACT CONNECT (MAP + FORM) --- */
 .contact-connect {
    padding: 40px 5% 80px;
    background: #FDF6EE;
@@ -2202,7 +2139,6 @@ header.scrolled .logo {
 }
 
 
-/* --- 6. FOOTER --- */
 footer {
    background: var(--primary-red);
    color: var(--white);
@@ -2231,7 +2167,7 @@ footer {
 }
 
 
-/* --- RESPONSIVE --- */
+
 @media (max-width: 1024px) {
    .features-grid, .products-grid { grid-template-columns: repeat(2, 1fr); }
    .footer-container { grid-template-columns: 1fr 1fr; }
