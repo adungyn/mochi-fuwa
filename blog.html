@@ -4,7 +4,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Mochi Fuwa | Blog</title>
-   <link rel="stylesheet" href="style.css?v=52">
+   <link rel="stylesheet" href="style.css?v=56">
    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
    <style>
        /* Blog Banner */
@@ -255,6 +255,75 @@
        }
        .newsletter-form button:hover { opacity: 0.85; }
 
+       /* Modal */
+       .blog-modal-overlay {
+           display: none;
+           position: fixed;
+           inset: 0;
+           background: rgba(0,0,0,0.55);
+           z-index: 9999;
+           align-items: center;
+           justify-content: center;
+           padding: 20px;
+       }
+       .blog-modal-overlay.active { display: flex; }
+       .blog-modal {
+           background: #fff;
+           border-radius: 1.5rem;
+           max-width: 720px;
+           width: 100%;
+           max-height: 90vh;
+           overflow-y: auto;
+           padding: 48px 44px 44px;
+           position: relative;
+           animation: modalIn 0.3s ease;
+       }
+       @keyframes modalIn {
+           from { opacity: 0; transform: translateY(20px); }
+           to   { opacity: 1; transform: translateY(0); }
+       }
+       .blog-modal-close {
+           position: absolute;
+           top: 18px; right: 22px;
+           font-size: 1.6rem;
+           background: none;
+           border: none;
+           color: #aaa;
+           cursor: pointer;
+           line-height: 1;
+           transition: color 0.2s;
+       }
+       .blog-modal-close:hover { color: #9F0031; }
+       .blog-modal img {
+           width: 100%;
+           height: 280px;
+           object-fit: cover;
+           border-radius: 1rem;
+           margin-bottom: 28px;
+       }
+       .blog-modal .post-tag { margin-bottom: 14px; }
+       .blog-modal h2 {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 2rem;
+           font-weight: 400;
+           color: #9F0031;
+           letter-spacing: 1px;
+           line-height: 1.25;
+           margin: 0 0 12px;
+       }
+       .blog-modal .post-meta { margin-bottom: 22px; }
+       .blog-modal .blog-modal-body {
+           font-family: 'Quicksand', sans-serif;
+           font-size: 0.95rem;
+           color: #555;
+           line-height: 1.9;
+       }
+       .blog-modal .blog-modal-body p { margin-bottom: 16px; }
+       @media (max-width: 600px) {
+           .blog-modal { padding: 36px 22px 30px; }
+           .blog-modal h2 { font-size: 1.5rem; }
+       }
+
        /* Responsive */
        @media (max-width: 992px) {
            .featured-post { grid-template-columns: 1fr; gap: 28px; }
@@ -331,7 +400,7 @@
                <p class="post-excerpt">
                    Bánh mochi (餅) có lịch sử hơn 1.000 năm tại Nhật Bản, từ những nghi lễ thần đạo đến bàn tiệc hoàng gia. Ngày nay, mochi đã vượt qua biên giới để trở thành một trong những loại bánh được yêu thích nhất trên toàn cầu — và Mochi Fuwa tự hào là cầu nối đưa hương vị "fuwa fuwa" ấy đến tận tay người Sài Gòn.
                </p>
-               <a href="#" class="read-more-btn">Đọc Thêm &rarr;</a>
+               <a href="#" class="read-more-btn" data-post="0">Đọc Thêm &rarr;</a>
            </div>
        </div>
 
@@ -351,7 +420,7 @@
                    <p>Mùa hè năm nay, Mochi Fuwa ra mắt loạt hương vị mới từ trái cây nhiệt đới và matcha đặc biệt. Cùng khám phá top 5 được đặt hàng nhiều nhất trong tháng qua nhé!</p>
                    <div class="blog-card-footer">
                        <span>20 Tháng 3, 2026</span>
-                       <a href="#">Đọc thêm &rarr;</a>
+                       <a href="#" data-post="1">Đọc thêm &rarr;</a>
                    </div>
                </div>
            </div>
@@ -367,7 +436,7 @@
                    <p>Mochi Fuwa làm thủ công hàng ngày, không chất bảo quản. Vậy làm thế nào để giữ bánh ngon nhất sau khi nhận? Đây là những bí quyết bảo quản mochi từ chính đội ngũ bếp của chúng tôi.</p>
                    <div class="blog-card-footer">
                        <span>22 Tháng 3, 2026</span>
-                       <a href="#">Đọc thêm &rarr;</a>
+                       <a href="#" data-post="2">Đọc thêm &rarr;</a>
                    </div>
                </div>
            </div>
@@ -383,7 +452,7 @@
                    <p>Mochi ngon hơn rất nhiều khi kết hợp với thức uống phù hợp. Lục Duyên (Matcha Latte) với Hồng Sắc? Tử Duyên (Black Grape Soda) với Hắc Nguyệt? Hãy cùng khám phá những cặp đôi lý tưởng!</p>
                    <div class="blog-card-footer">
                        <span>25 Tháng 3, 2026</span>
-                       <a href="#">Đọc thêm &rarr;</a>
+                       <a href="#" data-post="3">Đọc thêm &rarr;</a>
                    </div>
                </div>
            </div>
@@ -399,7 +468,7 @@
                    <p>Một hộp mochi tinh tế, được đóng gói sang trọng — món quà ý nghĩa cho sinh nhật, kỷ niệm hay đơn giản là lời nói "tôi quan tâm bạn". Khám phá các set quà tặng đặc biệt của chúng tôi.</p>
                    <div class="blog-card-footer">
                        <span>27 Tháng 3, 2026</span>
-                       <a href="#">Đọc thêm &rarr;</a>
+                       <a href="#" data-post="4">Đọc thêm &rarr;</a>
                    </div>
                </div>
            </div>
@@ -415,7 +484,7 @@
                    <p>Bột gạo nếp Nhật, matcha Uji, trái cây Đà Lạt tươi ngày — Mochi Fuwa không thỏa hiệp về chất lượng. Hành trình tìm kiếm nguyên liệu thuần khiết nhất cho từng chiếc bánh.</p>
                    <div class="blog-card-footer">
                        <span>28 Tháng 3, 2026</span>
-                       <a href="#">Đọc thêm &rarr;</a>
+                       <a href="#" data-post="5">Đọc thêm &rarr;</a>
                    </div>
                </div>
            </div>
@@ -431,7 +500,7 @@
                    <p>Mỗi mùa trong năm, Mochi Fuwa lại giới thiệu những hương vị mới lấy cảm hứng từ thiên nhiên. Từ hoa anh đào mùa xuân đến cam quýt mùa đông — mỗi chiếc bánh là một bức tranh của mùa.</p>
                    <div class="blog-card-footer">
                        <span>30 Tháng 3, 2026</span>
-                       <a href="#">Đọc thêm &rarr;</a>
+                       <a href="#" data-post="6">Đọc thêm &rarr;</a>
                    </div>
                </div>
            </div>
@@ -474,6 +543,18 @@
        </div>
    </footer>
 
+   <!-- Blog Post Modal -->
+   <div class="blog-modal-overlay" id="blogModalOverlay">
+       <div class="blog-modal" id="blogModal">
+           <button class="blog-modal-close" id="blogModalClose">&times;</button>
+           <img id="modalImg" src="" alt="">
+           <span class="post-tag" id="modalTag"></span>
+           <h2 id="modalTitle"></h2>
+           <p class="post-meta" id="modalMeta"></p>
+           <div class="blog-modal-body" id="modalBody"></div>
+       </div>
+   </div>
+
    <script>
        const menuBtn = document.getElementById('mochiMenuBtn');
        const closeBtn = document.getElementById('menuCloseBtn');
@@ -496,6 +577,91 @@
        const header = document.querySelector('header');
        window.addEventListener('scroll', () => {
            header.classList.toggle('scrolled', window.scrollY > 50);
+       });
+
+       // Blog posts data
+       const blogPosts = [
+           {
+               img: 'mochi-1.jpeg',
+               tag: 'Văn Hóa Ẩm Thực',
+               title: 'Mochi Nhật Bản — Nguồn Gốc & Hành Trình Đến Việt Nam',
+               meta: '15 Tháng 3, 2026 · Mochi Fuwa Team',
+               body: '<p>Bánh mochi (餅) có lịch sử hơn 1.000 năm tại Nhật Bản. Từ những nghi lễ thần đạo Shinto, mochi xuất hiện như một lễ vật thiêng liêng dâng lên các vị thần vào dịp năm mới. Theo thời gian, nó trở thành món bánh không thể thiếu trong các lễ hội, tiệc cưới và bàn tiệc hoàng gia Nhật Bản.</p><p>Tên gọi "fuwa fuwa" (ふわふわ) trong tiếng Nhật có nghĩa là "nhẹ như bông, bồng bềnh" — đó chính là cảm giác mà Mochi Fuwa muốn mang lại cho từng khách hàng khi thưởng thức bánh của chúng tôi.</p><p>Vào những năm 2010, mochi bắt đầu xuất hiện tại Việt Nam qua các cửa hàng nhập khẩu và quán cà phê Nhật. Đến nay, mochi đã hòa nhập hoàn toàn vào văn hóa ẩm thực Sài Gòn với những hương vị được địa phương hóa như xoài, dứa, tía tô — luôn giữ lớp vỏ gạo nếp mềm mịn đặc trưng.</p><p>Mochi Fuwa ra đời với sứ mệnh bảo tồn kỹ thuật làm mochi truyền thống của Nhật Bản, đồng thời sáng tạo những hương vị phù hợp với khẩu vị người Việt. Mỗi chiếc bánh là kết tinh giữa văn hóa và tình yêu ẩm thực.</p>'
+           },
+           {
+               img: 'mochi-5.jpeg',
+               tag: 'Xu Hướng',
+               title: '5 Hương Vị Mochi Hot Nhất Mùa Hè 2026',
+               meta: '20 Tháng 3, 2026 · Mochi Fuwa Team',
+               body: '<p>Mùa hè năm nay, Mochi Fuwa ra mắt loạt hương vị mới lấy cảm hứng từ trái cây nhiệt đới và những nguyên liệu Nhật Bản đặc biệt. Sau một tháng theo dõi, đây là top 5 được đặt hàng nhiều nhất:</p><p><strong>1. Hồng Sắc (Dâu Tây Matcha)</strong> — Sự kết hợp giữa vị chua nhẹ của dâu tây Đà Lạt và lớp kem matcha Uji đậm đà. Màu hồng rực rỡ, hương thơm cuốn hút.</p><p><strong>2. Hoa Mộc (Xoài Cốt Dừa)</strong> — Xoài chín mọng từ Tiền Giang, hòa quyện với kem cốt dừa béo ngậy. Một cú hit của mùa hè!</p><p><strong>3. Ngọc Nguyệt (Matcha Đậu Đỏ)</strong> — Cổ điển nhưng không bao giờ lỗi mốt. Matcha Uji cấp độ ceremonial, nhân đậu đỏ Hokkaido nấu nhuyễn.</p><p><strong>4. Lam Nguyệt (Blueberry Yogurt)</strong> — Hương vị mới hoàn toàn. Lớp vỏ tím xanh độc đáo, nhân yogurt blueberry tươi mát.</p><p><strong>5. Vân Sắc (Taro Milk Tea)</strong> — Khoai môn Đà Lạt xay mịn, kết hợp cream cheese nhẹ nhàng. Hương vị thu hút cả những người chưa từng ăn mochi.</p>'
+           },
+           {
+               img: 'mochi-9.jpeg',
+               tag: 'Mẹo & Thủ Thuật',
+               title: 'Cách Bảo Quản Mochi Tươi Lâu Nhất Tại Nhà',
+               meta: '22 Tháng 3, 2026 · Mochi Fuwa Team',
+               body: '<p>Mochi Fuwa làm thủ công mỗi ngày, không dùng chất bảo quản. Điều đó có nghĩa là bánh cần được bảo quản đúng cách để giữ được độ mềm và hương vị tốt nhất.</p><p><strong>Ngay sau khi nhận bánh:</strong> Nếu chưa ăn ngay, hãy đặt bánh vào hộp kín và để ngăn mát tủ lạnh. Tránh để ở nhiệt độ phòng quá 2 tiếng, đặc biệt trong thời tiết nóng ẩm của Sài Gòn.</p><p><strong>Bảo quản trong tủ lạnh:</strong> Mochi giữ ngon trong 2–3 ngày ở ngăn mát. Khi lấy ra, để bánh ở nhiệt độ phòng 5–10 phút trước khi ăn để vỏ bánh trở lại độ mềm mịn ban đầu.</p><p><strong>Đông lạnh:</strong> Bạn có thể đông lạnh mochi đến 30 ngày. Bọc từng chiếc riêng bằng màng thực phẩm trước khi cho vào túi zip. Rã đông tự nhiên trong ngăn mát qua đêm — không dùng lò vi sóng vì sẽ làm vỏ bánh cứng và mất độ ẩm.</p><p><strong>Không nên:</strong> Tránh để bánh gần thực phẩm có mùi mạnh (hành, tỏi) vì vỏ gạo nếp dễ hấp thụ mùi. Không để trong ngăn đá trực tiếp mà không bọc kín.</p>'
+           },
+           {
+               img: 'drink-1.jpeg',
+               tag: 'Ẩm Thực',
+               title: 'Kết Hợp Mochi & Thức Uống — Bộ Đôi Hoàn Hảo',
+               meta: '25 Tháng 3, 2026 · Mochi Fuwa Team',
+               body: '<p>Một chiếc mochi ngon luôn ngon hơn khi có bạn đồng hành phù hợp. Đội ngũ Mochi Fuwa đã thử nghiệm hàng chục kết hợp để tìm ra những cặp đôi lý tưởng nhất.</p><p><strong>Hồng Sắc + Lục Duyên (Matcha Latte):</strong> Vị chua ngọt của dâu tây cắt đứt độ béo của matcha latte, tạo nên sự cân bằng hoàn hảo. Đây là combo bán chạy nhất vào buổi sáng.</p><p><strong>Hắc Nguyệt + Tử Duyên (Black Grape Soda):</strong> Nho đen gặp soda nho tím — cùng tông màu, cùng vị ngọt thanh, nhân đôi cảm giác sảng khoái.</p><p><strong>Ngọc Nguyệt + Trầm Duyên (Hojicha Latte):</strong> Matcha đậu đỏ kết hợp trà hojicha rang khói — một combo thuần Nhật đậm chất thiền.</p><p><strong>Vân Sắc + Ngọc Duyên (Bubble Milk Tea):</strong> Khoai môn gặp trà sữa — kết hợp kinh điển của ẩm thực Đài Loan và Nhật Bản, luôn được giới trẻ Sài Gòn yêu thích.</p><p><strong>Hoa Mộc + Fresh Orange Americano:</strong> Xoài nhiệt đới với vị đắng nhẹ của cà phê cam — bất ngờ mà lại rất ăn ý!</p>'
+           },
+           {
+               img: 'birthday.jpeg',
+               tag: 'Quà Tặng',
+               title: 'Ý Tưởng Quà Tặng Đặc Biệt Từ Mochi Fuwa',
+               meta: '27 Tháng 3, 2026 · Mochi Fuwa Team',
+               body: '<p>Một hộp mochi tinh tế không chỉ là món quà — đó là một thông điệp. Mochi Fuwa cung cấp các set quà tặng được đóng gói sang trọng, phù hợp cho mọi dịp đặc biệt.</p><p><strong>Set Sinh Nhật (6 viên):</strong> Gồm 6 hương vị được lựa chọn theo sở thích người nhận. Hộp màu hồng cherry, dây ruy băng vàng, kèm thiệp viết tay. Giá từ 220.000 VND.</p><p><strong>Set Kỷ Niệm (12 viên):</strong> Bộ sưu tập đầy đủ các hương vị trong bộ Hồng Sắc và Nguyệt Cầm. Hộp gỗ tái chế, khắc tên theo yêu cầu. Giá từ 420.000 VND.</p><p><strong>Set Công Ty (24 viên+):</strong> Phù hợp cho quà tặng doanh nghiệp, sự kiện. Thiết kế bao bì theo yêu cầu, in logo. Liên hệ để báo giá.</p><p><strong>Set Fuwa Surprise:</strong> Hộp mù — Mochi Fuwa chọn ngẫu nhiên 8 hương vị tốt nhất trong ngày. Luôn là trải nghiệm thú vị! Giá 280.000 VND.</p><p>Đặt trước 24 giờ để đảm bảo bánh tươi. Giao hàng trong nội thành TP.HCM trong ngày.</p>'
+           },
+           {
+               img: 'mochi-7.jpeg',
+               tag: 'Nguyên Liệu',
+               title: 'Vì Sao Chúng Tôi Chỉ Dùng Nguyên Liệu Nhật Bản?',
+               meta: '28 Tháng 3, 2026 · Mochi Fuwa Team',
+               body: '<p>Ngay từ ngày đầu thành lập, Mochi Fuwa đã đưa ra một cam kết: không thỏa hiệp về chất lượng nguyên liệu. Đây là hành trình tìm kiếm những nguyên liệu tốt nhất cho từng chiếc bánh.</p><p><strong>Bột gạo nếp Nhật (Mochiko):</strong> Khác hoàn toàn với bột gạo nếp thông thường. Mochiko có độ dẻo và độ co giãn đặc trưng, tạo nên lớp vỏ bánh "fuwa fuwa" — mềm mịn như lụa, đàn hồi tự nhiên mà không cần phụ gia.</p><p><strong>Matcha Uji Ceremonial Grade:</strong> Uji, Kyoto là vùng trồng chè matcha danh tiếng nhất Nhật Bản. Loại matcha ceremonial grade (cấp độ nghi lễ trà đạo) có màu xanh tươi rực, hương thơm sâu và vị đắng nhẹ cân bằng — không gắt, không nhạt.</p><p><strong>Đậu đỏ Hokkaido (Azuki):</strong> Đậu đỏ Hokkaido nhỏ hơn, ngọt hơn và ít bột hơn so với đậu đỏ thông thường. Nấu nhuyễn theo công thức truyền thống Nhật, không thêm chất tạo màu.</p><p><strong>Trái cây tươi Đà Lạt:</strong> Dâu tây, xoài, khoai môn — chúng tôi hợp tác trực tiếp với các nông trại Đà Lạt để đảm bảo độ tươi ngon mỗi ngày. Không đông lạnh, không nhập khẩu.</p>'
+           },
+           {
+               img: 'mochi-6.jpeg',
+               tag: 'Mùa Vụ',
+               title: 'Mochi Theo Mùa — Sáng Tạo Theo Nhịp Thời Gian',
+               meta: '30 Tháng 3, 2026 · Mochi Fuwa Team',
+               body: '<p>Ở Nhật Bản, mochi luôn gắn liền với từng mùa trong năm. Hanami mochi mùa xuân với hoa anh đào, Tsukimi mochi mùa thu ngắm trăng rằm — đó là triết lý "shun" (旬), trân trọng những gì tươi ngon nhất của từng thời điểm.</p><p><strong>Mùa Xuân (Tháng 1–3):</strong> Hương vị Sakura (hoa anh đào muối), dâu tây Đà Lạt đầu mùa, matcha trắng (shiro matcha) nhẹ nhàng và thanh khiết.</p><p><strong>Mùa Hè (Tháng 4–6):</strong> Xoài chín mọng, dứa Ninh Thuận, chanh leo — những vị trái cây nhiệt đới tươi mát cho ngày nóng Sài Gòn.</p><p><strong>Mùa Thu (Tháng 7–9):</strong> Khoai lang tím Nhật (Murasaki Imo), chestnut (hạt dẻ), hồng (kaki) — những hương vị ấm áp của mùa lá vàng.</p><p><strong>Mùa Đông (Tháng 10–12):</strong> Cam quýt Đà Lạt, quế, gừng ấm, chocolate đen — bộ sưu tập mùa lễ hội đặc biệt cho Giáng Sinh và Tết.</p><p>Mỗi bộ sưu tập theo mùa chỉ có trong thời gian giới hạn. Theo dõi Instagram của Mochi Fuwa để không bỏ lỡ!</p>'
+           }
+       ];
+
+       // Modal logic
+       const modalOverlay = document.getElementById('blogModalOverlay');
+       const modalClose = document.getElementById('blogModalClose');
+
+       document.body.addEventListener('click', function(e) {
+           const btn = e.target.closest('[data-post]');
+           if (!btn) return;
+           e.preventDefault();
+           const idx = parseInt(btn.dataset.post);
+           const post = blogPosts[idx];
+           document.getElementById('modalImg').src = post.img;
+           document.getElementById('modalImg').alt = post.title;
+           document.getElementById('modalTag').textContent = post.tag;
+           document.getElementById('modalTitle').textContent = post.title;
+           document.getElementById('modalMeta').textContent = post.meta;
+           document.getElementById('modalBody').innerHTML = post.body;
+           modalOverlay.classList.add('active');
+           document.body.style.overflow = 'hidden';
+       });
+
+       function closeModal() {
+           modalOverlay.classList.remove('active');
+           document.body.style.overflow = '';
+       }
+       modalClose.addEventListener('click', closeModal);
+       modalOverlay.addEventListener('click', function(e) {
+           if (e.target === modalOverlay) closeModal();
+       });
+       document.addEventListener('keydown', function(e) {
+           if (e.key === 'Escape') closeModal();
        });
 
        function handleNewsletter(e) {
